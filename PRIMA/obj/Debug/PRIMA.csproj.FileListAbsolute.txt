@@ -12,3 +12,17 @@ C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA\PRIMA\obj\Debug\PRIMA.pdb
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA\PRIMA\obj\Debug\PRIMA.FormApplication.resources
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.exe.config
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.exe
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.pdb
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\bin\Debug\MaterialSkin.dll
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.AssemblyReference.cache
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormApplication.resources
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormLogin.resources
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormRegister.resources
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.Properties.Resources.resources
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.GenerateResource.cache
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.CoreCompileInputs.cache
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
