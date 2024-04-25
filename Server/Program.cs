@@ -104,9 +104,8 @@ namespace Server
                                     }
                                     else
                                     {
-                                        string data = user.Username + "|" + user.Name + "|" + user.Email + "|" + user.HashedPassword + "|" + user.DateCreated;
                                         byte[] ack;
-                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, data);
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
                                         networkStream.Write(ack, 0, ack.Length);
                                     }
                                 }
