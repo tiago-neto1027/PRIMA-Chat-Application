@@ -36,7 +36,9 @@ namespace PRIMA
         }
 
         /*
-         * 
+         * This events compacts the entire data in a message from the type DATA.login and sends it to the server
+         * The server treats the content and sends back an ACK signal, the ACK signal is read and, according
+         * to the server response either a message is shown to the user with what must be fixed or the user is logged in
         */ 
         private void btnLogin_Click(object sender, EventArgs e)
         {
