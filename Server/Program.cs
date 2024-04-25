@@ -84,12 +84,34 @@ namespace Server
                         {
                             string password = splited[2];
 
-                            //TODO Check if the credentials are correct and put the content below inside the verification
-                            Console.WriteLine(username + "logged in.");
+                            using(var db = new UserContext())
+                            {
+                                if(!db.UsernameExists(username))
+                                {
+                                    byte[] ack;
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "The username doesn't exist!");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                                else
+                                {
+                                    var user = db.Users.First(u => u.Username == username);
 
-                            byte[] ack;
-                            ack = protocolSI.Make(ProtocolSICmdType.ACK);
-                            networkStream.Write(ack, 0, ack.Length);
+                                    if(password != user.HashedPassword)
+                                    {
+                                        byte[] ack;
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, "The credentials are incorrect!");
+                                        networkStream.Write(ack, 0, ack.Length);
+                                    }
+                                    else
+                                    {
+                                        string data = user.Username + "|" + user.Name + "|" + user.Email + "|" + user.HashedPassword + "|" + user.DateCreated;
+                                        byte[] ack;
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, data);
+                                        networkStream.Write(ack, 0, ack.Length);
+                                    }
+                                }
+
+                            }
                         }
 
                         if (splited[0] == "register")

@@ -15,6 +15,12 @@ namespace Server
         public string Email { get; set; }
         public DateTime DateCreated { get; set; }
 
+        //Parameterless Constructor (Required by EntityFramework
+        public User ()
+        {
+
+        }
+
         public User (string username, string name, string hashedPassword, string email)
         {
             this.Username = username;
