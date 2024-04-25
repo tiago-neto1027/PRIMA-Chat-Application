@@ -35,7 +35,7 @@
             this.labelPassword = new MaterialSkin.Controls.MaterialLabel();
             this.labelEmail = new MaterialSkin.Controls.MaterialLabel();
             this.labelUserName = new MaterialSkin.Controls.MaterialLabel();
-            this.loginTBoxPassword = new MaterialSkin.Controls.MaterialTextBox();
+            this.registryTBoxPassword = new MaterialSkin.Controls.MaterialTextBox();
             this.registryTBoxEmail = new MaterialSkin.Controls.MaterialTextBox();
             this.registryTBoxUserName = new MaterialSkin.Controls.MaterialTextBox();
             this.SuspendLayout();
@@ -53,7 +53,7 @@
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnLogin.Size = new System.Drawing.Size(64, 36);
-            this.btnLogin.TabIndex = 21;
+            this.btnLogin.TabIndex = 18;
             this.btnLogin.Text = "Login";
             this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLogin.UseAccentColor = false;
@@ -87,7 +87,7 @@
             this.registryTBoxName.Multiline = false;
             this.registryTBoxName.Name = "registryTBoxName";
             this.registryTBoxName.Size = new System.Drawing.Size(392, 50);
-            this.registryTBoxName.TabIndex = 19;
+            this.registryTBoxName.TabIndex = 14;
             this.registryTBoxName.Text = "";
             this.registryTBoxName.TrailingIcon = null;
             // 
@@ -104,11 +104,12 @@
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnRegister.Size = new System.Drawing.Size(89, 36);
-            this.btnRegister.TabIndex = 18;
+            this.btnRegister.TabIndex = 17;
             this.btnRegister.Text = "Register";
             this.btnRegister.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnRegister.UseAccentColor = false;
             this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // labelPassword
             // 
@@ -149,24 +150,24 @@
             this.labelUserName.TabIndex = 16;
             this.labelUserName.Text = "User Name:";
             // 
-            // loginTBoxPassword
+            // registryTBoxPassword
             // 
-            this.loginTBoxPassword.AnimateReadOnly = false;
-            this.loginTBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.loginTBoxPassword.Depth = 0;
-            this.loginTBoxPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.loginTBoxPassword.LeadingIcon = null;
-            this.loginTBoxPassword.Location = new System.Drawing.Point(204, 381);
-            this.loginTBoxPassword.Margin = new System.Windows.Forms.Padding(2);
-            this.loginTBoxPassword.MaxLength = 50;
-            this.loginTBoxPassword.MouseState = MaterialSkin.MouseState.OUT;
-            this.loginTBoxPassword.Multiline = false;
-            this.loginTBoxPassword.Name = "loginTBoxPassword";
-            this.loginTBoxPassword.Password = true;
-            this.loginTBoxPassword.Size = new System.Drawing.Size(392, 50);
-            this.loginTBoxPassword.TabIndex = 14;
-            this.loginTBoxPassword.Text = "";
-            this.loginTBoxPassword.TrailingIcon = null;
+            this.registryTBoxPassword.AnimateReadOnly = false;
+            this.registryTBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.registryTBoxPassword.Depth = 0;
+            this.registryTBoxPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.registryTBoxPassword.LeadingIcon = null;
+            this.registryTBoxPassword.Location = new System.Drawing.Point(204, 381);
+            this.registryTBoxPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.registryTBoxPassword.MaxLength = 50;
+            this.registryTBoxPassword.MouseState = MaterialSkin.MouseState.OUT;
+            this.registryTBoxPassword.Multiline = false;
+            this.registryTBoxPassword.Name = "registryTBoxPassword";
+            this.registryTBoxPassword.Password = true;
+            this.registryTBoxPassword.Size = new System.Drawing.Size(392, 50);
+            this.registryTBoxPassword.TabIndex = 16;
+            this.registryTBoxPassword.Text = "";
+            this.registryTBoxPassword.TrailingIcon = null;
             // 
             // registryTBoxEmail
             // 
@@ -182,7 +183,7 @@
             this.registryTBoxEmail.Multiline = false;
             this.registryTBoxEmail.Name = "registryTBoxEmail";
             this.registryTBoxEmail.Size = new System.Drawing.Size(392, 50);
-            this.registryTBoxEmail.TabIndex = 12;
+            this.registryTBoxEmail.TabIndex = 15;
             this.registryTBoxEmail.Text = "";
             this.registryTBoxEmail.TrailingIcon = null;
             // 
@@ -216,7 +217,7 @@
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelEmail);
             this.Controls.Add(this.labelUserName);
-            this.Controls.Add(this.loginTBoxPassword);
+            this.Controls.Add(this.registryTBoxPassword);
             this.Controls.Add(this.registryTBoxEmail);
             this.Controls.Add(this.registryTBoxUserName);
             this.Name = "FormRegister";
@@ -235,7 +236,7 @@
         private MaterialSkin.Controls.MaterialLabel labelPassword;
         private MaterialSkin.Controls.MaterialLabel labelEmail;
         private MaterialSkin.Controls.MaterialLabel labelUserName;
-        private MaterialSkin.Controls.MaterialTextBox loginTBoxPassword;
+        private MaterialSkin.Controls.MaterialTextBox registryTBoxPassword;
         private MaterialSkin.Controls.MaterialTextBox registryTBoxEmail;
         private MaterialSkin.Controls.MaterialTextBox registryTBoxUserName;
     }
