@@ -11,18 +11,21 @@ using System.Windows.Forms;
 
 namespace PRIMA
 {
-    public partial class FormLogin : MaterialForm
+    public partial class FormLogin : BaseForm
     {
         //Turns this text box public in order to be accessed in the other forms
         public MaterialTextBox loginTextBoxUser => loginTBoxUser;
         public FormLogin()
         {
             InitializeComponent();
+            InitializeClient();
         }
 
+        //The 'Register' Button simply sends the user to the login page and closes the thread.
         private void btnRegistry_Click(object sender, EventArgs e)
         {
             this.Hide();
+            CloseClient();
 
             FormRegister formRegister = new FormRegister();
             formRegister.ShowDialog();
@@ -35,6 +38,7 @@ namespace PRIMA
         private void btnLogin_Click(object sender, EventArgs e)
         {
             this.Hide();
+            CloseClient();
 
             FormApplication formApplication = new FormApplication();
             formApplication.ShowDialog();

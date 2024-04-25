@@ -30,6 +30,7 @@ C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.exe
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.pdb
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\bin\Debug\MaterialSkin.dll
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\bin\Debug\ProtocolSI.dll
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.AssemblyReference.cache
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormApplication.resources
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormLogin.resources
@@ -40,4 +41,3 @@ C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
-C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\bin\Debug\ProtocolSI.dll

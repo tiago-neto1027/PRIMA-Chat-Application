@@ -14,23 +14,12 @@ using System.Windows.Forms;
 
 namespace PRIMA
 {
-    public partial class FormApplication : MaterialForm
+    public partial class FormApplication : BaseForm
     {
-        private const int PORT = 4500;
-        NetworkStream networkStream;
-        TcpClient tcpClient;
-        ProtocolSI protocolSI;
-
         public FormApplication()
         {
             InitializeComponent();
-
-            //Connects to the server
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, PORT);
-            tcpClient = new TcpClient();
-            tcpClient.Connect(endPoint);
-            networkStream = tcpClient.GetStream();
-            protocolSI = new ProtocolSI();
+            InitializeClient();
         }
 
         /*
@@ -51,24 +40,6 @@ namespace PRIMA
             {
                 networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
             }
-        }
-
-        /*
-         * The following Function closes a client.
-         * 
-         * The function sends an EOT signal through the stream signalizing the end of transmission
-         * It waits for the signal to be acknowledged by the server and then closes the stream and the client
-        */
-        private void CloseClient()
-        {         
-            byte[] eot = protocolSI.Make(ProtocolSICmdType.EOT);
-            networkStream.Write(eot, 0, eot.Length);
-            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
-            {
-                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-            }
-            networkStream.Close();
-            tcpClient.Close();
         }
 
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
