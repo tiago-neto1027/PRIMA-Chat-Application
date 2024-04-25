@@ -49,7 +49,7 @@
             this.btnRegistry.Name = "btnRegistry";
             this.btnRegistry.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnRegistry.Size = new System.Drawing.Size(89, 36);
-            this.btnRegistry.TabIndex = 11;
+            this.btnRegistry.TabIndex = 9;
             this.btnRegistry.Text = "Register";
             this.btnRegistry.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnRegistry.UseAccentColor = false;
@@ -69,7 +69,7 @@
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnLogin.Size = new System.Drawing.Size(64, 36);
-            this.btnLogin.TabIndex = 10;
+            this.btnLogin.TabIndex = 8;
             this.btnLogin.Text = "Login";
             this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLogin.UseAccentColor = false;

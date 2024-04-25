@@ -1,10 +1,12 @@
-﻿using MaterialSkin.Controls;
+﻿using EI.SI;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,17 +35,38 @@ namespace PRIMA
             this.Close();
         }
 
-        // TODO enviar login para o servidor
-        // TODO verificar, no lado do servidor se foi possível logar
+        /*
+         * 
+        */ 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            CloseClient();
+            string data = "login|" + loginTBoxUser.Text + "|" + loginTBoxPassword.Text;
 
-            FormApplication formApplication = new FormApplication();
-            formApplication.ShowDialog();
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, data);
+            networkStream.Write(packet, 0, packet.Length);
 
-            this.Close();
+            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
+            {
+                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            }
+
+            string response = protocolSI.GetStringFromData();
+            Array.Clear(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+
+            if(response == "The username doesn't exist!" || response == "The credentials are incorrect!")
+            {
+                MessageBox.Show(response);
+            }
+            else
+            {
+                this.Hide();
+                CloseClient();
+
+                FormApplication formApplication = new FormApplication();
+                formApplication.ShowDialog();
+
+                this.Close();
+            }
         }
     }
 }
