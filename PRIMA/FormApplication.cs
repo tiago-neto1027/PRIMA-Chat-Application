@@ -46,5 +46,20 @@ namespace PRIMA
         {
             CloseClient();
         }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            FormSettings formSetting = new FormSettings();
+            formSetting.ShowDialog();
+        }
+
+        private void messageTBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSend_Click(sender, e);
+            }
+           
+        }
     }
 }

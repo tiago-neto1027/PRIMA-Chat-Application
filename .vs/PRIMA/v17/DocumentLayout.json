@@ -1,37 +1,49 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\",
+  "WorkspaceRootPath": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|c:\\users\\yoich\\onedrive - ipleiria\\desktop\\dados\\faculdade\\topicos de seguranca\\prima-chat-application\\prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|c:\\users\\pmsso\\desktop\\tesp psi\\1o ano\\2\u00BA semestre\\t\u00F3picos seguran\u00E7a\\projecto\\prima-chat-application\\prima\\formsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|c:\\users\\pmsso\\desktop\\tesp psi\\1o ano\\2\u00BA semestre\\t\u00F3picos seguran\u00E7a\\projecto\\prima-chat-application\\prima\\formsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|c:\\users\\pmsso\\desktop\\tesp psi\\1o ano\\2\u00BA semestre\\t\u00F3picos seguran\u00E7a\\projecto\\prima-chat-application\\prima\\formsettings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formsettings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\prima\\formapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\prima\\formapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|c:\\users\\yoich\\onedrive - ipleiria\\desktop\\dados\\faculdade\\topicos de seguranca\\prima-chat-application\\server\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|solutionrelative:server\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\prima\\formapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\prima\\formapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\server\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83DF0D80-625C-4B18-9D43-92C2AEC0088A}|Server\\Server.csproj|solutionrelative:server\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|c:\\users\\pmsso\\desktop\\tesp psi\\1o ano\\2\u00BA semestre\\t\u00F3picos seguran\u00E7a\\projecto\\prima-chat-application\\prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{1F34DE5C-0923-4664-8549-137F6CD0F05D}|PRIMA\\PRIMA.csproj|solutionrelative:prima\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -42,17 +54,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 217,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "FormApplication.cs",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs",
               "RelativeDocumentMoniker": "PRIMA\\FormApplication.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs",
               "RelativeToolTip": "PRIMA\\FormApplication.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAwC8AAAAJAAAA",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAQwDwAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-18T12:28:04.091Z",
               "IsPinned": true,
@@ -60,13 +72,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "FormRegister.cs",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs",
               "RelativeDocumentMoniker": "PRIMA\\FormRegister.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs",
               "RelativeToolTip": "PRIMA\\FormRegister.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAwwFYAAAB3AAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAwwDkAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-18T12:24:05.793Z",
               "IsPinned": true,
@@ -74,13 +86,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "FormLogin.cs",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs",
               "RelativeDocumentMoniker": "PRIMA\\FormLogin.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs",
               "RelativeToolTip": "PRIMA\\FormLogin.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABsAAAAaAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAA1wB0AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-25T14:46:00.364Z",
               "IsPinned": true,
@@ -88,16 +100,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\Server\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Server\\Program.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\Server\\Program.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\Server\\Program.cs",
               "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AQIAAFIAAAAAAAAAAAAAAGIAAAA5AAAA",
+              "ViewState": "AQIAAIcAAAAAAAAAAAAlwJEAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-25T15:12:57.887Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormSettings.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormSettings.Designer.cs",
+              "RelativeDocumentMoniker": "PRIMA\\FormSettings.Designer.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormSettings.Designer.cs",
+              "RelativeToolTip": "PRIMA\\FormSettings.Designer.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAgwCUAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T22:37:23.548Z",
               "EditorCaption": ""
             },
             {
@@ -117,16 +142,49 @@
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormSettings.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormSettings.cs",
+              "RelativeDocumentMoniker": "PRIMA\\FormSettings.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormSettings.cs [Design]",
+              "RelativeToolTip": "PRIMA\\FormSettings.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T22:07:35.004Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "FormSettings.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormSettings.cs",
+              "RelativeDocumentMoniker": "PRIMA\\FormSettings.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormSettings.cs",
+              "RelativeToolTip": "PRIMA\\FormSettings.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAgwBAAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T22:08:15.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FormApplication.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs",
+              "RelativeDocumentMoniker": "PRIMA\\FormApplication.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs [Design]",
+              "RelativeToolTip": "PRIMA\\FormApplication.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T12:27:38.369Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\Server\\User.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\Server\\User.cs",
               "RelativeDocumentMoniker": "Server\\User.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\Server\\User.cs",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\Server\\User.cs",
               "RelativeToolTip": "Server\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -135,11 +193,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "FormRegister.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs",
               "RelativeDocumentMoniker": "PRIMA\\FormRegister.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs [Design]",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormRegister.cs [Design]",
               "RelativeToolTip": "PRIMA\\FormRegister.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-20T19:57:04.551Z",
@@ -147,23 +205,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FormApplication.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs",
-              "RelativeDocumentMoniker": "PRIMA\\FormApplication.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormApplication.cs [Design]",
-              "RelativeToolTip": "PRIMA\\FormApplication.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T12:27:38.369Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "FormLogin.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs",
+              "DocumentMoniker": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs",
               "RelativeDocumentMoniker": "PRIMA\\FormLogin.cs",
-              "ToolTip": "C:\\Users\\yoich\\OneDrive - IPLeiria\\Desktop\\Dados\\Faculdade\\Topicos de Seguranca\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs [Design]",
+              "ToolTip": "C:\\Users\\PmsSo\\Desktop\\TESP PSI\\1o Ano\\2\u00BA Semestre\\T\u00F3picos Seguran\u00E7a\\PROJECTO\\PRIMA-Chat-Application\\PRIMA\\FormLogin.cs [Design]",
               "RelativeToolTip": "PRIMA\\FormLogin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-20T19:58:44.266Z",

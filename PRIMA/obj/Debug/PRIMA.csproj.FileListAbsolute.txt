@@ -41,3 +41,5 @@ C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\bin\Debug\ProtocolSI.dll
+C:\Users\PmsSo\Desktop\TESP PSI\1o Ano\2º Semestre\Tópicos Segurança\PROJECTO\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormSettings.resources

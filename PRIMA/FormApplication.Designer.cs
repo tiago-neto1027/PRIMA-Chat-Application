@@ -33,20 +33,8 @@
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.ChatListBox = new MaterialSkin.Controls.MaterialListBox();
             this.btnWhisper = new MaterialSkin.Controls.MaterialButton();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toggleLightDarkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usernameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.passwordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chatRoomListView = new MaterialSkin.Controls.MaterialListView();
-            this.messageComboBox = new MaterialSkin.Controls.MaterialComboBox();
-            this.menuStrip1.SuspendLayout();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSend
@@ -86,6 +74,7 @@
             this.messageTBox.TabIndex = 1;
             this.messageTBox.Text = "";
             this.messageTBox.TrailingIcon = null;
+            this.messageTBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageTBox_KeyDown);
             // 
             // materialDivider1
             // 
@@ -120,102 +109,17 @@
             this.btnWhisper.Depth = 0;
             this.btnWhisper.HighEmphasis = true;
             this.btnWhisper.Icon = null;
-            this.btnWhisper.Location = new System.Drawing.Point(7, 393);
+            this.btnWhisper.Location = new System.Drawing.Point(145, 70);
             this.btnWhisper.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnWhisper.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnWhisper.Name = "btnWhisper";
             this.btnWhisper.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnWhisper.Size = new System.Drawing.Size(228, 45);
+            this.btnWhisper.Size = new System.Drawing.Size(90, 35);
             this.btnWhisper.TabIndex = 5;
-            this.btnWhisper.Text = "Whisper";
+            this.btnWhisper.Text = "Add";
             this.btnWhisper.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnWhisper.UseAccentColor = false;
             this.btnWhisper.UseVisualStyleBackColor = true;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem,
-            this.accountToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 64);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(794, 33);
-            this.menuStrip1.TabIndex = 7;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toggleLightDarkModeToolStripMenuItem,
-            this.logoutToolStripMenuItem,
-            this.disconnectToolStripMenuItem});
-            this.optionsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(90, 29);
-            this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // toggleLightDarkModeToolStripMenuItem
-            // 
-            this.toggleLightDarkModeToolStripMenuItem.Name = "toggleLightDarkModeToolStripMenuItem";
-            this.toggleLightDarkModeToolStripMenuItem.Size = new System.Drawing.Size(285, 30);
-            this.toggleLightDarkModeToolStripMenuItem.Text = "Toggle Light/Dark Mode";
-            // 
-            // logoutToolStripMenuItem
-            // 
-            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(285, 30);
-            this.logoutToolStripMenuItem.Text = "Logout";
-            // 
-            // disconnectToolStripMenuItem
-            // 
-            this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(285, 30);
-            this.disconnectToolStripMenuItem.Text = "Exit";
-            // 
-            // accountToolStripMenuItem
-            // 
-            this.accountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.updateInfoToolStripMenuItem});
-            this.accountToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            this.accountToolStripMenuItem.Size = new System.Drawing.Size(91, 29);
-            this.accountToolStripMenuItem.Text = "Account";
-            // 
-            // updateInfoToolStripMenuItem
-            // 
-            this.updateInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usernameToolStripMenuItem,
-            this.nameToolStripMenuItem,
-            this.passwordToolStripMenuItem,
-            this.emailToolStripMenuItem});
-            this.updateInfoToolStripMenuItem.Name = "updateInfoToolStripMenuItem";
-            this.updateInfoToolStripMenuItem.Size = new System.Drawing.Size(187, 30);
-            this.updateInfoToolStripMenuItem.Text = "Update Info";
-            // 
-            // usernameToolStripMenuItem
-            // 
-            this.usernameToolStripMenuItem.Name = "usernameToolStripMenuItem";
-            this.usernameToolStripMenuItem.Size = new System.Drawing.Size(171, 30);
-            this.usernameToolStripMenuItem.Text = "Username";
-            // 
-            // nameToolStripMenuItem
-            // 
-            this.nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            this.nameToolStripMenuItem.Size = new System.Drawing.Size(171, 30);
-            this.nameToolStripMenuItem.Text = "Name";
-            // 
-            // passwordToolStripMenuItem
-            // 
-            this.passwordToolStripMenuItem.Name = "passwordToolStripMenuItem";
-            this.passwordToolStripMenuItem.Size = new System.Drawing.Size(171, 30);
-            this.passwordToolStripMenuItem.Text = "Password";
-            // 
-            // emailToolStripMenuItem
-            // 
-            this.emailToolStripMenuItem.Name = "emailToolStripMenuItem";
-            this.emailToolStripMenuItem.Size = new System.Drawing.Size(171, 30);
-            this.emailToolStripMenuItem.Text = "Email";
             // 
             // chatRoomListView
             // 
@@ -225,60 +129,47 @@
             this.chatRoomListView.Depth = 0;
             this.chatRoomListView.FullRowSelect = true;
             this.chatRoomListView.HideSelection = false;
-            this.chatRoomListView.Location = new System.Drawing.Point(3, 155);
+            this.chatRoomListView.Location = new System.Drawing.Point(6, 114);
             this.chatRoomListView.MinimumSize = new System.Drawing.Size(200, 100);
             this.chatRoomListView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chatRoomListView.MouseState = MaterialSkin.MouseState.OUT;
             this.chatRoomListView.Name = "chatRoomListView";
             this.chatRoomListView.OwnerDraw = true;
-            this.chatRoomListView.Size = new System.Drawing.Size(232, 232);
+            this.chatRoomListView.Size = new System.Drawing.Size(232, 327);
             this.chatRoomListView.TabIndex = 8;
             this.chatRoomListView.UseCompatibleStateImageBehavior = false;
             this.chatRoomListView.View = System.Windows.Forms.View.Details;
             // 
-            // messageComboBox
+            // btnSettings
             // 
-            this.messageComboBox.AutoResize = false;
-            this.messageComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.messageComboBox.Depth = 0;
-            this.messageComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.messageComboBox.DropDownHeight = 174;
-            this.messageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.messageComboBox.DropDownWidth = 121;
-            this.messageComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.messageComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.messageComboBox.FormattingEnabled = true;
-            this.messageComboBox.IntegralHeight = false;
-            this.messageComboBox.ItemHeight = 43;
-            this.messageComboBox.Location = new System.Drawing.Point(7, 100);
-            this.messageComboBox.MaxDropDownItems = 4;
-            this.messageComboBox.MouseState = MaterialSkin.MouseState.OUT;
-            this.messageComboBox.Name = "messageComboBox";
-            this.messageComboBox.Size = new System.Drawing.Size(228, 49);
-            this.messageComboBox.StartIndex = 0;
-            this.messageComboBox.TabIndex = 4;
+            this.btnSettings.BackColor = System.Drawing.Color.Transparent;
+            this.btnSettings.BackgroundImage = global::PRIMA.Properties.Resources.cog_35;
+            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.Location = new System.Drawing.Point(6, 70);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(35, 35);
+            this.btnSettings.TabIndex = 9;
+            this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // FormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.chatRoomListView);
             this.Controls.Add(this.btnWhisper);
-            this.Controls.Add(this.messageComboBox);
             this.Controls.Add(this.ChatListBox);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.messageTBox);
             this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormApplication";
             this.Text = "PRIMA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormApplication_FormClosing);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -289,18 +180,7 @@
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialListBox ChatListBox;
         private MaterialSkin.Controls.MaterialButton btnWhisper;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toggleLightDarkModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
         private MaterialSkin.Controls.MaterialListView chatRoomListView;
-        private MaterialSkin.Controls.MaterialComboBox messageComboBox;
-        private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateInfoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usernameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem passwordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem emailToolStripMenuItem;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
