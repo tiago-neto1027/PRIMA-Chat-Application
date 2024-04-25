@@ -59,6 +59,7 @@ namespace Server
          * The DATA recieved here always comes with a type through the stream that is used to check the type of the message
          * If the message is from the login type we then proceed to verify the user's information and log the user in
          * If the message is from the message type we then proceed to send the message to whoever it may concern
+         * If the message is from the register type, we check if the username already exists, if not it registers, if it already exists a message is sent to the client
          * 
          * TODO proper documentation is to be added here as the application is developed
         */
@@ -89,6 +90,33 @@ namespace Server
                             byte[] ack;
                             ack = protocolSI.Make(ProtocolSICmdType.ACK);
                             networkStream.Write(ack, 0, ack.Length);
+                        }
+
+                        if (splited[0] == "register")
+                        {
+                            string name = splited[2];
+                            string email = splited[3];
+                            string password = splited[4];
+                            
+                            using(var db = new UserContext())
+                            {
+                                if(db.UsernameExists(username))
+                                {
+                                    byte[] ack;
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "This username is already registered.");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                                else
+                                {
+                                    var user = new User(username, name, password, email);
+                                    db.Users.Add(user);
+                                    db.SaveChanges();
+
+                                    byte[] ack;
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                            }
                         }
 
                         if (splited[0] == "message")
