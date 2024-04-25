@@ -1,0 +1,9 @@
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\bin\Debug\Server.exe.config
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\bin\Debug\Server.exe
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\bin\Debug\Server.pdb
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\bin\Debug\ProtocolSI.dll
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.csproj.Up2Date
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.exe
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.pdb

@@ -13,6 +13,8 @@ namespace PRIMA
 {
     public partial class FormLogin : MaterialForm
     {
+        //Turns this text box public in order to be accessed in the other forms
+        public MaterialTextBox loginTextBoxUser => loginTBoxUser;
         public FormLogin()
         {
             InitializeComponent();
