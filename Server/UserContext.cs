@@ -10,6 +10,8 @@ namespace Server
     internal class UserContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<GeneralChatMessage> GeneralChatMessages { get; set; }
+
 
         //Simply verifies if a username is in the database
         public bool UsernameExists(string username)
