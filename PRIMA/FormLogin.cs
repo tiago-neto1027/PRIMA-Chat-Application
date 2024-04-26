@@ -49,11 +49,7 @@ namespace PRIMA
             string response = protocolSI.GetStringFromData();
             Array.Clear(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
 
-            if(response == "The username doesn't exist!" || response == "The credentials are incorrect!")
-            {
-                MessageBox.Show(response);
-            }
-            else
+            if(response == "Success")
             {
                 this.Hide();
                 CloseClient();
@@ -62,6 +58,11 @@ namespace PRIMA
                 formApplication.ShowDialog();
 
                 this.Close();
+            }
+
+            if(response != "Success")
+            {
+                MessageBox.Show(response);
             }
         }
     }
