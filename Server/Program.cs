@@ -142,6 +142,18 @@ namespace Server
                         {
                             string message = splited[2];
 
+                            using(var db = new UserContext())
+                            {
+                                var user = db.Users.First(u => u.Username == username);
+
+                                if(user != null)
+                                {
+                                    var generalChatMessage = new GeneralChatMessage(message, user.ID);
+                                    db.GeneralChatMessages.Add(generalChatMessage);
+                                    db.SaveChanges();
+                                }
+                            }
+
                             Console.WriteLine(username + ": " + message);
 
                             byte[] ack;

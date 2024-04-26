@@ -11,3 +11,6 @@ C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.csproj.Up2Date
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.exe
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.pdb
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.InitialCreate.resources
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.csproj.GenerateResource.cache
+C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.AddedGeneralChatMessages.resources

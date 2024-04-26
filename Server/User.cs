@@ -15,7 +15,7 @@ namespace Server
         public string Email { get; set; }
         public DateTime DateCreated { get; set; }
 
-        //Parameterless Constructor (Required by EntityFramework
+        //Parameterless Constructor (Required by EntityFramework)
         public User ()
         {
 
