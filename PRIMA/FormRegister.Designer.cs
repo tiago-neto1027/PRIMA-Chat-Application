@@ -168,6 +168,7 @@
             this.registryTBoxPassword.TabIndex = 16;
             this.registryTBoxPassword.Text = "";
             this.registryTBoxPassword.TrailingIcon = null;
+            this.registryTBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.registryTBoxPassword_KeyDown);
             // 
             // registryTBoxEmail
             // 

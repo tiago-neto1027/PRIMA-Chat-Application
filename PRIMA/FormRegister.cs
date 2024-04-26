@@ -96,5 +96,16 @@ namespace PRIMA
                 MessageBox.Show(response);
             }
         }
+
+        //This allows the user to Register by pressing the "Enter" Key
+        private void registryTBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                btnRegister_Click(sender, e);
+            }
+        }
     }
 }

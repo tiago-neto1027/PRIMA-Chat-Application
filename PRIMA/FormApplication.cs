@@ -42,5 +42,16 @@ namespace PRIMA
         {
             CloseClient();
         }
+
+        //This allows the user to send a message with the "Enter" key instead of pressing the button
+        private void messageTBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                btnSend_Click(sender, e);
+            }
+        }
     }
 }
