@@ -65,5 +65,16 @@ namespace PRIMA
                 MessageBox.Show(response);
             }
         }
+
+        //This allows the user to log in by pressing the "Enter" Key
+        private void loginTBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                btnLogin_Click(sender, e);
+            }
+        }
     }
 }

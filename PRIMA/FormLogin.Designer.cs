@@ -120,6 +120,7 @@
             this.loginTBoxPassword.TabIndex = 7;
             this.loginTBoxPassword.Text = "";
             this.loginTBoxPassword.TrailingIcon = null;
+            this.loginTBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loginTBoxPassword_KeyDown);
             // 
             // loginTBoxUser
             // 
