@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,6 +23,11 @@ namespace PRIMA
         {
             InitializeComponent();
             InitializeClient();
+
+            //Start a separate Thread to continuosly receive messages
+            Thread receiveThread = new Thread(ReceiveMessages);
+            receiveThread.IsBackground = true;
+            receiveThread.Start();
         }
 
         /*
@@ -51,6 +59,30 @@ namespace PRIMA
                 e.SuppressKeyPress = true;
 
                 btnSend_Click(sender, e);
+            }
+        }
+
+        /*
+         * This function is a background thread that continuosly listens to the server for messages
+         * Everytime it receives a message from the server the message is displayed on the screen
+         * The thread then is put to sleep with a small delay in order to reduce cpu usage
+        */ 
+        private void ReceiveMessages()
+        {
+            while (true)
+            {
+                if (networkStream.DataAvailable)
+                {
+                    networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+
+                    if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
+                    {
+                        string receivedMessage = protocolSI.GetStringFromData();
+
+                        ChatListBox.AddItem(receivedMessage);
+                    }
+                }
+                Thread.Sleep(100);
             }
         }
     }

@@ -22,13 +22,17 @@ namespace Server
             listener.Start();
             Console.WriteLine("SERVER READY");
 
-            while(true)
+            List<TcpClient> clients = new List<TcpClient>();
+
+            while (true)
             {
                 //Accepts the client connection and gets its stream
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine("New application connected");
 
-                ClientHandler clientHandler = new ClientHandler(client);
+                clients.Add(client);
+
+                ClientHandler clientHandler = new ClientHandler(client, clients);
                 clientHandler.Handle();
             }
         }
@@ -37,10 +41,12 @@ namespace Server
     class ClientHandler
     {
         private TcpClient client;
+        private List<TcpClient> clients;
         
-        public ClientHandler(TcpClient client)
+        public ClientHandler(TcpClient client, List<TcpClient> clients)
         {
             this.client = client;
+            this.clients = clients;
         }
 
         public void Handle()
@@ -159,6 +165,9 @@ namespace Server
                             byte[] ack;
                             ack = protocolSI.Make(ProtocolSICmdType.ACK);
                             networkStream.Write(ack, 0, ack.Length);
+
+                            message = username + ": " + message;
+                            SendMessageToAllClients(message);
                         }
                         break;
                 }
@@ -173,7 +182,21 @@ namespace Server
                 ack = protocolSI.Make(ProtocolSICmdType.ACK);
                 networkStream.Write(ack, 0, ack.Length);
                 networkStream.Close();
+                clients.Remove(client);
                 client.Close();
+            }
+        }
+
+        //This functions sends the message received to all the clients connected to the database
+        private void SendMessageToAllClients(string message)
+        {
+            ProtocolSI protocolSI = new ProtocolSI();
+            byte[] data = protocolSI.Make(ProtocolSICmdType.DATA, message);
+
+            foreach (var client in clients)
+            {
+                NetworkStream stream = client.GetStream();
+                stream.Write(data, 0, data.Length);
             }
         }
     }
