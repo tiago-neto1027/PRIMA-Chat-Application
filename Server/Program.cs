@@ -146,27 +146,33 @@ namespace Server
 
                         if (splited[0] == "message")
                         {
-                            string message = splited[2];
+                            string chatUsed = splited[2];
+                            string message = splited[3];
 
-                            using(var db = new UserContext())
+                            if(chatUsed == "General")
                             {
-                                var user = db.Users.First(u => u.Username == username);
-
-                                if(user != null)
+                                using (var db = new UserContext())
                                 {
-                                    var generalChatMessage = new GeneralChatMessage(message, user.ID);
-                                    db.GeneralChatMessages.Add(generalChatMessage);
-                                    db.SaveChanges();
+                                    var user = db.Users.First(u => u.Username == username);
+
+                                    if (user != null)
+                                    {
+                                        var generalChatMessage = new GeneralChatMessage(message, user.ID);
+                                        db.GeneralChatMessages.Add(generalChatMessage);
+                                        db.SaveChanges();
+                                    }
                                 }
                             }
 
+                            Console.WriteLine("");
+                            Console.WriteLine("Chat: " + chatUsed);
                             Console.WriteLine(username + ": " + message);
 
                             byte[] ack;
                             ack = protocolSI.Make(ProtocolSICmdType.ACK);
                             networkStream.Write(ack, 0, ack.Length);
 
-                            message = username + ": " + message;
+                            message = chatUsed + "|" + username + ": " + message;
                             SendMessageToAllClients(message);
                         }
                         break;
