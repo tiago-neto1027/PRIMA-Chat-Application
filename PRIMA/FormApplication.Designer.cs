@@ -31,10 +31,10 @@
             this.btnSend = new MaterialSkin.Controls.MaterialButton();
             this.messageTBox = new MaterialSkin.Controls.MaterialTextBox();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
-            this.ChatListBox = new MaterialSkin.Controls.MaterialListBox();
+            this.messagesListBox = new MaterialSkin.Controls.MaterialListBox();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.chatRoomListView = new MaterialSkin.Controls.MaterialListView();
             this.btnWhisper = new MaterialSkin.Controls.MaterialButton();
+            this.chatsListBox = new MaterialSkin.Controls.MaterialListBox();
             this.SuspendLayout();
             // 
             // btnSend
@@ -87,19 +87,19 @@
             this.materialDivider1.TabIndex = 2;
             this.materialDivider1.Text = "materialDivider1";
             // 
-            // ChatListBox
+            // messagesListBox
             // 
-            this.ChatListBox.BackColor = System.Drawing.Color.White;
-            this.ChatListBox.BorderColor = System.Drawing.Color.LightGray;
-            this.ChatListBox.Depth = 0;
-            this.ChatListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.ChatListBox.Location = new System.Drawing.Point(259, 67);
-            this.ChatListBox.MouseState = MaterialSkin.MouseState.HOVER;
-            this.ChatListBox.Name = "ChatListBox";
-            this.ChatListBox.SelectedIndex = -1;
-            this.ChatListBox.SelectedItem = null;
-            this.ChatListBox.Size = new System.Drawing.Size(534, 320);
-            this.ChatListBox.TabIndex = 3;
+            this.messagesListBox.BackColor = System.Drawing.Color.White;
+            this.messagesListBox.BorderColor = System.Drawing.Color.LightGray;
+            this.messagesListBox.Depth = 0;
+            this.messagesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.messagesListBox.Location = new System.Drawing.Point(259, 67);
+            this.messagesListBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.messagesListBox.Name = "messagesListBox";
+            this.messagesListBox.SelectedIndex = -1;
+            this.messagesListBox.SelectedItem = null;
+            this.messagesListBox.Size = new System.Drawing.Size(534, 320);
+            this.messagesListBox.TabIndex = 3;
             // 
             // btnSettings
             // 
@@ -113,25 +113,6 @@
             this.btnSettings.Size = new System.Drawing.Size(35, 35);
             this.btnSettings.TabIndex = 12;
             this.btnSettings.UseVisualStyleBackColor = false;
-            // 
-            // chatRoomListView
-            // 
-            this.chatRoomListView.AutoSizeTable = false;
-            this.chatRoomListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.chatRoomListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatRoomListView.Depth = 0;
-            this.chatRoomListView.FullRowSelect = true;
-            this.chatRoomListView.HideSelection = false;
-            this.chatRoomListView.Location = new System.Drawing.Point(6, 111);
-            this.chatRoomListView.MinimumSize = new System.Drawing.Size(200, 100);
-            this.chatRoomListView.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chatRoomListView.MouseState = MaterialSkin.MouseState.OUT;
-            this.chatRoomListView.Name = "chatRoomListView";
-            this.chatRoomListView.OwnerDraw = true;
-            this.chatRoomListView.Size = new System.Drawing.Size(232, 327);
-            this.chatRoomListView.TabIndex = 11;
-            this.chatRoomListView.UseCompatibleStateImageBehavior = false;
-            this.chatRoomListView.View = System.Windows.Forms.View.Details;
             // 
             // btnWhisper
             // 
@@ -153,15 +134,30 @@
             this.btnWhisper.UseAccentColor = false;
             this.btnWhisper.UseVisualStyleBackColor = true;
             // 
+            // chatsListBox
+            // 
+            this.chatsListBox.BackColor = System.Drawing.Color.White;
+            this.chatsListBox.BorderColor = System.Drawing.Color.LightGray;
+            this.chatsListBox.Depth = 0;
+            this.chatsListBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.chatsListBox.Location = new System.Drawing.Point(6, 108);
+            this.chatsListBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chatsListBox.Name = "chatsListBox";
+            this.chatsListBox.SelectedIndex = -1;
+            this.chatsListBox.SelectedItem = null;
+            this.chatsListBox.Size = new System.Drawing.Size(228, 332);
+            this.chatsListBox.TabIndex = 13;
+            this.chatsListBox.SelectedIndexChanged += new MaterialSkin.Controls.MaterialListBox.SelectedIndexChangedEventHandler(this.chatsListBox_SelectedIndexChanged);
+            // 
             // FormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chatsListBox);
             this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.chatRoomListView);
             this.Controls.Add(this.btnWhisper);
-            this.Controls.Add(this.ChatListBox);
+            this.Controls.Add(this.messagesListBox);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.messageTBox);
             this.Controls.Add(this.btnSend);
@@ -177,9 +173,9 @@
         private MaterialSkin.Controls.MaterialButton btnSend;
         private MaterialSkin.Controls.MaterialTextBox messageTBox;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
-        private MaterialSkin.Controls.MaterialListBox ChatListBox;
+        private MaterialSkin.Controls.MaterialListBox messagesListBox;
         private System.Windows.Forms.Button btnSettings;
-        private MaterialSkin.Controls.MaterialListView chatRoomListView;
         private MaterialSkin.Controls.MaterialButton btnWhisper;
+        private MaterialSkin.Controls.MaterialListBox chatsListBox;
     }
 }
