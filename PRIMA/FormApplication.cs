@@ -32,14 +32,10 @@ namespace PRIMA
         private void btnSend_Click(object sender, EventArgs e)
         {
             string usernameFromLogin = ((FormLogin)Application.OpenForms["FormLogin"]).loginTextBoxUser.Text;
-            string msg = "message|" + usernameFromLogin + "|" + messageTBox.Text;
+            string data = usernameFromLogin + "|" + messageTBox.Text;
             messageTBox.Clear();
-            byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, msg);
-            networkStream.Write(packet, 0, packet.Length);
-            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
-            {
-                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-            }
+
+            SendDATA("message", data);
         }
 
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)

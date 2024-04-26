@@ -61,7 +61,6 @@ namespace Server
          * If the message is from the message type we then proceed to send the message to whoever it may concern
          * If the message is from the register type, we check if the username already exists, if not it registers, if it already exists a message is sent to the client
          * 
-         * TODO proper documentation is to be added here as the application is developed
         */
         private void threadHandler()
         {
@@ -79,7 +78,6 @@ namespace Server
                         string[] splited = msg.Split('|');
                         string username = splited[1];
 
-                        //Yes, I am aware that this if structure is not the best solution performance wise but makes the code much cleaner
                         if (splited[0] == "login")
                         {
                             string password = splited[2];

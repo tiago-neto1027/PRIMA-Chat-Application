@@ -53,15 +53,9 @@ namespace PRIMA
                 if(Regex.IsMatch(registryTBoxPassword.Text, pattern))
                 {
                     // TODO the password must be encrypted
-                    string data = "register|" + registryTBoxUserName.Text + "|" + registryTBoxName.Text + "|" + registryTBoxEmail.Text + "|" + registryTBoxPassword.Text;
+                    string data = registryTBoxUserName.Text + "|" + registryTBoxName.Text + "|" + registryTBoxEmail.Text + "|" + registryTBoxPassword.Text;
 
-                    byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, data);
-                    networkStream.Write(packet, 0, packet.Length);
-
-                    while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
-                    {
-                        networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-                    }
+                    SendDATA("register", data);
 
                     string response = protocolSI.GetStringFromData();
                     Array.Clear(protocolSI.Buffer, 0, protocolSI.Buffer.Length);

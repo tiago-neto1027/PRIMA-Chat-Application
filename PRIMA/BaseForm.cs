@@ -21,7 +21,7 @@ namespace PRIMA
         protected TcpClient tcpClient;
         protected ProtocolSI protocolSI;
 
-        //Initializes a new client and connects it to the server
+        //The following method initializes a new client and connects it to the server
         protected void InitializeClient()
         {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, PORT);
@@ -32,9 +32,9 @@ namespace PRIMA
         }
 
         /*
-         * The following Function closes a client.
+         * The following Method closes a client.
          * 
-         * The function sends an EOT signal through the stream signalizing the end of transmission
+         * The method sends an EOT signal through the stream signalizing the end of transmission
          * It waits for the signal to be acknowledged by the server and then closes the stream and the client
         */
         protected void CloseClient()
@@ -47,6 +47,23 @@ namespace PRIMA
             }
             networkStream.Close();
             tcpClient.Close();
+        }
+
+        /*
+         * This method recieves 2 string type parameters, one with the type of the message(login, message, register...) and the other one with the data contained in it
+         * 
+         * The data is concatenated and sent via the stream then an ACK signal is awaited before proceeding
+        */ 
+        protected void SendDATA(string type, string data)
+        {
+            data = type + "|" + data;
+            byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, data);
+            networkStream.Write(packet, 0, packet.Length);
+
+            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
+            {
+                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            }
         }
     }
 }
