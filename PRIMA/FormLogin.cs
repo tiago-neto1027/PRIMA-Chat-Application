@@ -42,24 +42,14 @@ namespace PRIMA
         */ 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string data = "login|" + loginTBoxUser.Text + "|" + loginTBoxPassword.Text;
+            string data = loginTBoxUser.Text + "|" + loginTBoxPassword.Text;
 
-            byte[] packet = protocolSI.Make(ProtocolSICmdType.DATA, data);
-            networkStream.Write(packet, 0, packet.Length);
-
-            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
-            {
-                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-            }
+            SendDATA("login", data);
 
             string response = protocolSI.GetStringFromData();
             Array.Clear(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
 
-            if(response == "The username doesn't exist!" || response == "The credentials are incorrect!")
-            {
-                MessageBox.Show(response);
-            }
-            else
+            if(response == "Success")
             {
                 this.Hide();
                 CloseClient();
@@ -68,6 +58,11 @@ namespace PRIMA
                 formApplication.ShowDialog();
 
                 this.Close();
+            }
+
+            if(response != "Success")
+            {
+                MessageBox.Show(response);
             }
         }
     }
