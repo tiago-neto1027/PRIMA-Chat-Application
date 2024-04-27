@@ -115,5 +115,14 @@
   <ItemGroup>
     <None Include="Resources\cog_35.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hamburger_icon.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-menu-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-settings-50.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
