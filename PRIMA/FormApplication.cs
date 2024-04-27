@@ -35,7 +35,7 @@ namespace PRIMA
 
             //When initializing the app it always creates a General Chat that is the default chat of the application and selects it
             Chats.Add("General", new List<string>());
-            Chats.Add("Teste", new List<string>());
+            Chats.Add("Teste", new List<string>()); // TODO Remove this
             UpdateChatsList();
             chatsListBox.SelectedIndex = 0;
         }
@@ -123,7 +123,17 @@ namespace PRIMA
 
                         if(chatUsed == selectedChat)
                         {
-                            UpdateMessagesList();
+                            /*Why is this written this way???
+                             * 
+                             * In Windows Forms, UI Controls or elements should only be updated from the main thread, or the thread where the form is 
+                             * created, if this isn't done this way it may lead to unexpected problems
+                             * 
+                             * Since the UpdateMessageList() method affects a UI control directly (a listBox) we use the invoke method
+                            */
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                UpdateMessagesList();
+                            });
                         }
                     }
                 }
@@ -157,11 +167,5 @@ namespace PRIMA
                 }
             }
         }
-        /*
-         *         private void LoadChat()
-        {
-            
-        }
-        */
     }
 }
