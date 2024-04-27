@@ -20,6 +20,7 @@ namespace PRIMA
 {
     public partial class FormApplication : BaseForm
     {
+        bool settingsExpand;
         //This creates a dictionary to store all the chats the user has open
         Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
         private string selectedChat = "General";
@@ -166,6 +167,53 @@ namespace PRIMA
                     messagesListBox.Items.Add(item);
                 }
             }
+        }
+
+        //Settings Menu
+        private void settingsMenuTimer_Tick(object sender, EventArgs e)
+        {
+            if (settingsExpand)
+            {
+                settingsPanel.Width -= 10;
+                if(settingsPanel.Width <= settingsPanel.MinimumSize.Width)
+                {
+                    settingsExpand = false;
+                    settingsMenuTimer.Stop();
+                }
+            }
+            else
+            {
+                settingsPanel.Width += 10;
+                if(settingsPanel.Width >= settingsPanel.MaximumSize.Width)
+                {
+                    settingsExpand = true;
+                    settingsMenuTimer.Stop();
+                }
+            }
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            settingsMenuTimer.Start();
+        }
+
+        //Light/Dark mode
+        private void darkModeSwitch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (materialSkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            }
+            else
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            }
+
+            Invalidate(true);
+            Update();
+
+            // TODO move this to the other form
+            settingsPanel.BackColor = Color.Gray;
         }
     }
 }

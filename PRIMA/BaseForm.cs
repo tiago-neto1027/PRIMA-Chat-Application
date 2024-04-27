@@ -11,15 +11,24 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
 
 namespace PRIMA
 {
     public partial class BaseForm : MaterialForm
     {
+        protected MaterialSkinManager materialSkinManager;
         protected const int PORT = 4500;
         protected NetworkStream networkStream;
         protected TcpClient tcpClient;
         protected ProtocolSI protocolSI;
+
+        public BaseForm()
+        {
+            InitializeComponent();
+
+            materialSkinManager = MaterialSkinManager.Instance;
+        }
 
         //The following method initializes a new client and connects it to the server
         protected void InitializeClient()
