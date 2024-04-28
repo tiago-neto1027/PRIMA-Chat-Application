@@ -30,8 +30,6 @@ namespace PRIMA
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
             materialSkinManager.AddFormToManage(this);
-
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
         }
 
         //The following method initializes a new client and connects it to the server
