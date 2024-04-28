@@ -28,6 +28,7 @@ namespace PRIMA
         {
             InitializeComponent();
             InitializeClient();
+            CheckTheme();
 
             //Start a separate Thread to continuosly receive messages
             Thread receiveThread = new Thread(ReceiveMessages);
@@ -203,17 +204,34 @@ namespace PRIMA
             if (materialSkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+                settingsPanel.BackColor = Color.Gray;
             }
             else
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                settingsPanel.BackColor = Color.White;
             }
 
             Invalidate(true);
             Update();
+        }
 
-            // TODO move this to the other form
-            settingsPanel.BackColor = Color.Gray;
+        //This function checks the Theme and enforces that the correct theme is being applied
+        private void CheckTheme()
+        {
+            if (materialSkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                settingsPanel.BackColor = Color.White;
+            }
+            else
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+                settingsPanel.BackColor = Color.Gray;
+            }
+
+            Invalidate(true);
+            Update();
         }
     }
 }
