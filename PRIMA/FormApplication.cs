@@ -1,6 +1,7 @@
 ﻿using EI.SI;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using PRIMA.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,52 +16,77 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PRIMA.MessageService;
 
 namespace PRIMA
 {
     public partial class FormApplication : BaseForm
     {
+        protected readonly MessageService messageService;
+        protected readonly ClientService clientService;
+
         bool settingsExpand;
+
         //This creates a dictionary to store all the chats the user has open
         Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
         private string selectedChat = "General";
-        public FormApplication()
+
+        public FormApplication(MessageService messageServerInstance, ClientService clientServiceInstance)
         {
             InitializeComponent();
-            InitializeClient();
             CheckTheme();
 
-            //Start a separate Thread to continuosly receive messages
-            Thread receiveThread = new Thread(ReceiveMessages);
-            receiveThread.IsBackground = true;
-            receiveThread.Start();
+            clientService = clientServiceInstance;
+            messageService = messageServerInstance;
+            messageService.MessageReceived += MessageService_MessageReceived; //subscribes to an event in the MessageService
+            messageService.StartReceivingMessages();
 
             //When initializing the app it always creates a General Chat that is the default chat of the application and selects it
             Chats.Add("General", new List<string>());
-            Chats.Add("Teste", new List<string>()); // TODO Remove this
             UpdateChatsList();
             chatsListBox.SelectedIndex = 0;
         }
 
         /*
-         * The following event happens when the user clicks on the "Send" Button
+         * When a message is received the vent is activated
          * 
-         * Everytime the event is triggered the username is fetched from the Login form previously filled
-         * A message is created in the following format: 'type|username|message'
-         * Then the message is written to the stream and awaits the ack signal from the server before moving on
+         * The forms retrieves the arguments from the event and
+         * Checks if the chat dictionary contains the chat, if it does
+         * A new message is added to the chat, if it does not
+         * A new chat is added with the message received
+         * 
+         * Finally, If the chatUsed is the same as the selected, it is updated
         */ 
-        private void btnSend_Click(object sender, EventArgs e)
+        private void MessageService_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-            string usernameFromLogin = ((FormLogin)Application.OpenForms["FormLogin"]).loginTextBoxUser.Text;
-            string data = usernameFromLogin + "|" + selectedChat + "|" + messageTBox.Text;
-            messageTBox.Clear();
+            string chatUsed = e.Chat;
+            string receivedMessage = e.Message;
 
-            SendDATA("message", data);
+            // Add the message to the dictionary in the correct chat
+            if (Chats.ContainsKey(chatUsed))
+            {
+                Chats[chatUsed].Add(receivedMessage);
+            }
+            else
+            {
+                Chats.Add(chatUsed, new List<string>());
+                Chats[chatUsed].Add(receivedMessage);
+            }
+
+            // Updates the form only if the received message is for the currently selected chat
+            if (chatUsed == selectedChat)
+            {
+                UpdateMessagesList();
+            }
         }
 
-        private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
+        // When the send button is pressed the message is sent declaring the content of the message and the chat used and the text box is cleared
+        private void btnSend_Click(object sender, EventArgs e)
         {
-            CloseClient();
+            string message = messageTBox.Text;
+            string chat = selectedChat;
+            messageService.SendMessage(chat, message);
+            messageTBox.Clear();
         }
 
         /*
@@ -74,72 +100,6 @@ namespace PRIMA
             {
                 selectedChat = selectedItem.Text;
                 UpdateMessagesList();
-            }
-        }
-
-        //This allows the user to send a message with the "Enter" key instead of pressing the button
-        private void messageTBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-
-                btnSend_Click(sender, e);
-            }
-        }
-
-        /*
-         * This function is a background thread that continuosly listens to the server for messages
-         * Everytime it receives a message from the server it checks the chat that was used
-         * The message is then added to the usedChat message list
-         * If the usedChat is the same as the selected then the message list is updated, since a new message was added
-         * The thread then is put to sleep with a small delay in order to reduce cpu usage
-        */ 
-        private void ReceiveMessages()
-        {
-            while (true)
-            {
-                // TODO Arranjar o erro aqui
-                if (networkStream.DataAvailable)
-                {
-                    networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-
-                    if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
-                    {
-                        string receivedMessage = protocolSI.GetStringFromData();
-                        string[] splited = receivedMessage.Split('|');
-
-                        string chatUsed = splited[0];
-                        receivedMessage = splited[1];
-
-                        //Adds the message to the dictionary in the correct chat
-                        if (Chats.ContainsKey(chatUsed))
-                        {
-                            Chats[chatUsed].Add(receivedMessage);
-                        }
-                        else
-                        {
-                            Chats.Add(chatUsed, new List<string>());
-                            Chats[chatUsed].Add(receivedMessage);
-                        }
-
-                        if(chatUsed == selectedChat)
-                        {
-                            /*Why is this written this way???
-                             * 
-                             * In Windows Forms, UI Controls or elements should only be updated from the main thread, or the thread where the form is 
-                             * created, if this isn't done this way it may lead to unexpected problems
-                             * 
-                             * Since the UpdateMessageList() method affects a UI control directly (a listBox) we use the invoke method
-                            */
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                UpdateMessagesList();
-                            });
-                        }
-                    }
-                }
-                Thread.Sleep(100);
             }
         }
 
@@ -232,6 +192,23 @@ namespace PRIMA
 
             Invalidate(true);
             Update();
+        }
+
+        //This allows the user to send a message with the "Enter" key instead of pressing the button
+        private void messageTBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                btnSend_Click(sender, e);
+            }
+        }
+
+        // When the application is closed it closes the client
+        private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            clientService.CloseClient();
         }
     }
 }

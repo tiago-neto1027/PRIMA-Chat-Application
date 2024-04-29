@@ -1,5 +1,6 @@
 ﻿using EI.SI;
 using MaterialSkin.Controls;
+using PRIMA.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,46 +16,44 @@ namespace PRIMA
 {
     public partial class FormLogin : BaseForm
     {
-        //Turns this text box public in order to be accessed in the other forms
-        public MaterialTextBox loginTextBoxUser => loginTBoxUser;
-        public FormLogin()
+        protected readonly UserService userService;
+        private readonly MessageService messageService;
+        private readonly ClientService clientService;
+
+        public FormLogin(UserService userServiceInstance, MessageService messageServiceInstance, ClientService clientServiceInstance)
         {
             InitializeComponent();
-            InitializeClient();
+            userService = userServiceInstance;
+            messageService = messageServiceInstance;
+            clientService = clientServiceInstance;
         }
 
-        //The 'Register' Button simply sends the user to the login page and closes the thread.
+        /* This closes the form and opens the FormRegister */
         private void btnRegistry_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CloseClient();
 
-            FormRegister formRegister = new FormRegister();
+            FormRegister formRegister = new FormRegister(userService, messageService, clientService);
             formRegister.ShowDialog();
 
             this.Close();
         }
 
-        /*
-         * This events compacts the entire data in a message from the type DATA.login and sends it to the server
-         * The server treats the content and sends back an ACK signal, the ACK signal is read and, according
-         * to the server response either a message is shown to the user with what must be fixed or the user is logged in
-        */ 
+        /* Tries to Log In the User
+         * If the user was Logged In, it closes the Form and opens the Application
+         * If the Log In fails, it shows the user why it failed */
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string data = loginTBoxUser.Text + "|" + loginTBoxPassword.Text;
+            string username = loginTBoxUser.Text;
+            string password = loginTBoxPassword.Text;
 
-            SendDATA("login", data);
-
-            string response = protocolSI.GetStringFromData();
-            Array.Clear(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+            string response = userService.LogInUser(username, password);
 
             if(response == "Success")
             {
                 this.Hide();
-                CloseClient();
 
-                FormApplication formApplication = new FormApplication();
+                FormApplication formApplication = new FormApplication(messageService, clientService);
                 formApplication.ShowDialog();
 
                 this.Close();
@@ -66,7 +65,7 @@ namespace PRIMA
             }
         }
 
-        //This allows the user to log in by pressing the "Enter" Key
+        /* This allows the user to log in by pressing the "Enter" Key */
         private void loginTBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

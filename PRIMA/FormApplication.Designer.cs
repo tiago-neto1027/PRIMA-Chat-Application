@@ -37,13 +37,13 @@
             this.chatsListBox = new MaterialSkin.Controls.MaterialListBox();
             this.settingsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.settingsButton = new System.Windows.Forms.PictureBox();
-            this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.darkModeSwitch = new MaterialSkin.Controls.MaterialSwitch();
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonChangeEmail = new System.Windows.Forms.Button();
+            this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).BeginInit();
             this.panel1.SuspendLayout();
@@ -55,8 +55,10 @@
             // 
             this.btnSend.AutoSize = false;
             this.btnSend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnSend.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnSend.Depth = 0;
+            this.btnSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSend.HighEmphasis = true;
             this.btnSend.Icon = null;
             this.btnSend.Location = new System.Drawing.Point(721, 393);
@@ -69,15 +71,17 @@
             this.btnSend.Text = "Send";
             this.btnSend.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSend.UseAccentColor = false;
-            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // messageTBox
             // 
             this.messageTBox.AnimateReadOnly = false;
+            this.messageTBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.messageTBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.messageTBox.Depth = 0;
             this.messageTBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.messageTBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.messageTBox.LeadingIcon = null;
             this.messageTBox.Location = new System.Drawing.Point(258, 393);
             this.messageTBox.MaxLength = 50;
@@ -103,7 +107,7 @@
             // 
             // messagesListBox
             // 
-            this.messagesListBox.BackColor = System.Drawing.Color.White;
+            this.messagesListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.messagesListBox.BorderColor = System.Drawing.Color.LightGray;
             this.messagesListBox.Depth = 0;
             this.messagesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -119,8 +123,10 @@
             // 
             this.btnWhisper.AutoSize = false;
             this.btnWhisper.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnWhisper.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnWhisper.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnWhisper.Depth = 0;
+            this.btnWhisper.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnWhisper.HighEmphasis = true;
             this.btnWhisper.Icon = null;
             this.btnWhisper.Location = new System.Drawing.Point(55, 408);
@@ -133,11 +139,11 @@
             this.btnWhisper.Text = "Add Chat";
             this.btnWhisper.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnWhisper.UseAccentColor = false;
-            this.btnWhisper.UseVisualStyleBackColor = true;
+            this.btnWhisper.UseVisualStyleBackColor = false;
             // 
             // chatsListBox
             // 
-            this.chatsListBox.BackColor = System.Drawing.Color.White;
+            this.chatsListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.chatsListBox.BorderColor = System.Drawing.Color.LightGray;
             this.chatsListBox.Depth = 0;
             this.chatsListBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -177,11 +183,6 @@
             this.settingsButton.TabStop = false;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
-            // settingsMenuTimer
-            // 
-            this.settingsMenuTimer.Interval = 10;
-            this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.darkModeSwitch);
@@ -193,7 +194,9 @@
             // darkModeSwitch
             // 
             this.darkModeSwitch.AutoSize = true;
+            this.darkModeSwitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.darkModeSwitch.Depth = 0;
+            this.darkModeSwitch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.darkModeSwitch.Location = new System.Drawing.Point(48, 2);
             this.darkModeSwitch.Margin = new System.Windows.Forms.Padding(0);
             this.darkModeSwitch.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -203,7 +206,7 @@
             this.darkModeSwitch.Size = new System.Drawing.Size(178, 37);
             this.darkModeSwitch.TabIndex = 0;
             this.darkModeSwitch.Text = "Light/Dark Mode";
-            this.darkModeSwitch.UseVisualStyleBackColor = true;
+            this.darkModeSwitch.UseVisualStyleBackColor = false;
             this.darkModeSwitch.CheckedChanged += new System.EventHandler(this.darkModeSwitch_CheckedChanged);
             // 
             // panel2
@@ -249,6 +252,11 @@
             this.buttonChangeEmail.Text = "Change Email";
             this.buttonChangeEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonChangeEmail.UseVisualStyleBackColor = false;
+            // 
+            // settingsMenuTimer
+            // 
+            this.settingsMenuTimer.Interval = 10;
+            this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
             // 
             // FormApplication
             // 

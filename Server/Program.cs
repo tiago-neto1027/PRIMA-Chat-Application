@@ -22,7 +22,7 @@ namespace Server
             listener.Start();
             Console.WriteLine("SERVER READY");
 
-            List<TcpClient> clients = new List<TcpClient>();
+            Dictionary<TcpClient, string> clients = new Dictionary<TcpClient, string>();
 
             while (true)
             {
@@ -30,9 +30,7 @@ namespace Server
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine("New application connected");
 
-                clients.Add(client);
-
-                ClientHandler clientHandler = new ClientHandler(client, clients);
+                ClientHandler clientHandler = new ClientHandler(client, clients, null);
                 clientHandler.Handle();
             }
         }
@@ -41,12 +39,14 @@ namespace Server
     class ClientHandler
     {
         private TcpClient client;
-        private List<TcpClient> clients;
-        
-        public ClientHandler(TcpClient client, List<TcpClient> clients)
+        private Dictionary<TcpClient, string> clients;
+        private string username;
+
+        public ClientHandler(TcpClient client, Dictionary<TcpClient, string> clients, string username)
         {
             this.client = client;
             this.clients = clients;
+            this.username = username;
         }
 
         public void Handle()
@@ -75,106 +75,111 @@ namespace Server
 
             while (protocolSI.GetCmdType() != ProtocolSICmdType.EOT)
             {
-                int bytesRead = networkStream.Read(protocolSI.Buffer,0, protocolSI.Buffer.Length);
+                int bytesRead = networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+
+                string msg = protocolSI.GetStringFromData();
+                string[] splited = msg.Split('|');
 
                 switch (protocolSI.GetCmdType())
                 {
+                    case ProtocolSICmdType.USER_OPTION_1: //USER_OPTION_1 == Login
+
+                        string usernameLogin = splited[0];
+                        string passwordLogin = splited[1];
+
+                        using (var db = new UserContext())
+                        {
+                            if (!db.UsernameExists(usernameLogin))
+                            {
+                                byte[] ackLogin;
+                                ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The username doesn't exist!");
+                                networkStream.Write(ackLogin, 0, ackLogin.Length);
+                            }
+                            else
+                            {
+                                var user = db.Users.First(u => u.Username == usernameLogin);
+
+                                if (passwordLogin != user.HashedPassword)
+                                {
+                                    byte[] ackLogin;
+                                    ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The credentials are incorrect!");
+                                    networkStream.Write(ackLogin, 0, ackLogin.Length);
+                                }
+                                else
+                                {
+                                    this.username = usernameLogin;
+                                    clients[client] = usernameLogin;
+
+                                    byte[] ackLogin;
+                                    ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
+                                    networkStream.Write(ackLogin, 0, ackLogin.Length);
+                                }
+                            }
+                        }
+                        break;
+
+                    case ProtocolSICmdType.USER_OPTION_2: //USER_OPTION_2 == Register
+
+                        string usernameRegister = splited[0];
+                        string name = splited[1];
+                        string email = splited[2];
+                        string passwordRegister = splited[3];
+
+                        using (var db = new UserContext())
+                        {
+                            if (db.UsernameExists(usernameRegister))
+                            {
+                                byte[] ackRegister;
+                                ackRegister = protocolSI.Make(ProtocolSICmdType.ACK, "This username is already registered.");
+                                networkStream.Write(ackRegister, 0, ackRegister.Length);
+                            }
+                            else
+                            {
+                                var user = new User(usernameRegister, name, passwordRegister, email);
+                                db.Users.Add(user);
+                                db.SaveChanges();
+
+                                byte[] ackRegister;
+                                ackRegister = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
+                                networkStream.Write(ackRegister, 0, ackRegister.Length);
+                            }
+                        }
+
+                        break;
+
                     case ProtocolSICmdType.DATA:
-                        string msg = protocolSI.GetStringFromData();
-                        string[] splited = msg.Split('|');
-                        string username = splited[1];
 
-                        if (splited[0] == "login")
+                        string chatUsed = splited[0];
+                        string message = splited[1];
+                        string senderUsername = clients[client];
+
+                        if (chatUsed == "General")
                         {
-                            string password = splited[2];
-
-                            using(var db = new UserContext())
+                            using (var db = new UserContext())
                             {
-                                if(!db.UsernameExists(username))
-                                {
-                                    byte[] ack;
-                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "The username doesn't exist!");
-                                    networkStream.Write(ack, 0, ack.Length);
-                                }
-                                else
-                                {
-                                    var user = db.Users.First(u => u.Username == username);
+                                var user = db.Users.First(u => u.Username == senderUsername);
 
-                                    if(password != user.HashedPassword)
-                                    {
-                                        byte[] ack;
-                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, "The credentials are incorrect!");
-                                        networkStream.Write(ack, 0, ack.Length);
-                                    }
-                                    else
-                                    {
-                                        byte[] ack;
-                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
-                                        networkStream.Write(ack, 0, ack.Length);
-                                    }
-                                }
-
-                            }
-                        }
-
-                        if (splited[0] == "register")
-                        {
-                            string name = splited[2];
-                            string email = splited[3];
-                            string password = splited[4];
-                            
-                            using(var db = new UserContext())
-                            {
-                                if(db.UsernameExists(username))
+                                if(user != null)
                                 {
-                                    byte[] ack;
-                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "This username is already registered.");
-                                    networkStream.Write(ack, 0, ack.Length);
-                                }
-                                else
-                                {
-                                    var user = new User(username, name, password, email);
-                                    db.Users.Add(user);
+                                    var generalChatMessage = new GeneralChatMessage(message, user.ID);
+                                    db.GeneralChatMessages.Add(generalChatMessage);
                                     db.SaveChanges();
-
-                                    byte[] ack;
-                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
-                                    networkStream.Write(ack, 0, ack.Length);
                                 }
                             }
                         }
 
-                        if (splited[0] == "message")
-                        {
-                            string chatUsed = splited[2];
-                            string message = splited[3];
+                        Console.WriteLine("");
+                        Console.WriteLine("Chat: " + chatUsed);
+                        Console.WriteLine(username + ": " + message);
 
-                            if(chatUsed == "General")
-                            {
-                                using (var db = new UserContext())
-                                {
-                                    var user = db.Users.First(u => u.Username == username);
+                        byte[] ackMessage;
+                        ackMessage = protocolSI.Make(ProtocolSICmdType.ACK);
+                        networkStream.Write(ackMessage, 0, ackMessage.Length);
 
-                                    if (user != null)
-                                    {
-                                        var generalChatMessage = new GeneralChatMessage(message, user.ID);
-                                        db.GeneralChatMessages.Add(generalChatMessage);
-                                        db.SaveChanges();
-                                    }
-                                }
-                            }
+                        message = chatUsed + "|" + username + ": " + message;
+                        //This shouldnt send the message to all the clients, instead to just the clients that are supposed to receive it
+                        SendMessageToAllClients(message);
 
-                            Console.WriteLine("");
-                            Console.WriteLine("Chat: " + chatUsed);
-                            Console.WriteLine(username + ": " + message);
-
-                            byte[] ack;
-                            ack = protocolSI.Make(ProtocolSICmdType.ACK);
-                            networkStream.Write(ack, 0, ack.Length);
-
-                            message = chatUsed + "|" + username + ": " + message;
-                            SendMessageToAllClients(message);
-                        }
                         break;
                 }
             }
@@ -184,9 +189,9 @@ namespace Server
             {
                 Console.WriteLine("Ending Thread from Client");
 
-                byte[] ack;
-                ack = protocolSI.Make(ProtocolSICmdType.ACK);
-                networkStream.Write(ack, 0, ack.Length);
+                byte[] ackEOT;
+                ackEOT = protocolSI.Make(ProtocolSICmdType.ACK);
+                networkStream.Write(ackEOT, 0, ackEOT.Length);
                 networkStream.Close();
                 clients.Remove(client);
                 client.Close();
@@ -199,8 +204,9 @@ namespace Server
             ProtocolSI protocolSI = new ProtocolSI();
             byte[] data = protocolSI.Make(ProtocolSICmdType.DATA, message);
 
-            foreach (var client in clients)
+            foreach (var entry in clients)
             {
+                TcpClient client = entry.Key;
                 NetworkStream stream = client.GetStream();
                 stream.Write(data, 0, data.Length);
             }

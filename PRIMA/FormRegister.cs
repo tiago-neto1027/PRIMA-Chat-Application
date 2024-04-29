@@ -1,5 +1,6 @@
 ﻿using EI.SI;
 using MaterialSkin.Controls;
+using PRIMA.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,19 +18,24 @@ namespace PRIMA
 {
     public partial class FormRegister : BaseForm
     {
-        public FormRegister()
+        protected readonly UserService userService;
+        protected readonly MessageService messageService;
+        private readonly ClientService clientService;
+
+        public FormRegister(UserService userServiceInstance, MessageService messageServiceInstance, ClientService clientServiceInstance)
         {
             InitializeComponent();
-            InitializeClient();
+            userService = userServiceInstance;
+            messageService = messageServiceInstance;
+            clientService = clientServiceInstance;
         }
 
-        //The 'Login' Button simply sends the user to the login page and closes the thread.
+        /* Sends the user back to the FormLogin */
         private void btnLogin_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CloseClient();
 
-            FormLogin formLogin = new FormLogin();
+            FormLogin formLogin = new FormLogin(userService, messageService, clientService);
             formLogin.ShowDialog();
 
             this.Close();
@@ -51,9 +57,8 @@ namespace PRIMA
          * to the log in screen
         */
         private void RegisterUser()
-        {
-            //Change the password parameters here
-            string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";
+        {            
+            string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";  //Change the password parameters here
 
             if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text) ||
                 string.IsNullOrWhiteSpace(registryTBoxName.Text) ||
@@ -70,23 +75,20 @@ namespace PRIMA
                 return;
             }
 
-            // TODO: Implement password encryption
+            string username = registryTBoxUserName.Text;
+            string name = registryTBoxName.Text;
+            string email = registryTBoxEmail.Text;
+            string password = registryTBoxPassword.Text;
 
-            string data = $"{registryTBoxUserName.Text}|{registryTBoxName.Text}|{registryTBoxEmail.Text}|{registryTBoxPassword.Text}";
-            SendDATA("register", data);
-
-            string response = protocolSI.GetStringFromData();
-            Array.Clear(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
-
+            string response = userService.RegisterUser(username, name, email, password);
 
             if(response == "Success")
             {
                 MessageBox.Show("User registered successfully");
 
                 this.Hide();
-                CloseClient();
 
-                FormLogin formLogin = new FormLogin();
+                FormLogin formLogin = new FormLogin(userService, messageService, clientService);
                 formLogin.ShowDialog();
                 this.Close();
             }
@@ -97,7 +99,7 @@ namespace PRIMA
             }
         }
 
-        //This allows the user to Register by pressing the "Enter" Key
+        /* This allows the user to Register by pressing the "Enter" Key */
         private void registryTBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
