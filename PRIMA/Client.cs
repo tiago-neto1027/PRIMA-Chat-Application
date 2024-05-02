@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using PRIMA.Interfaces;
 
 namespace PRIMA
 {
@@ -15,7 +16,7 @@ namespace PRIMA
      * The class manages everything a client can and must do
      * The class is a Singleton, meaning that can only be one instance of a Client running per application.
      */
-    public class Client
+    public class Client : IClient
     {
         protected const int PORT = 4500;
         private static Client instance;
@@ -35,7 +36,6 @@ namespace PRIMA
             }
         }
 
-        //Initializes the Client class connecting it to the server
         private Client()
         {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, PORT);

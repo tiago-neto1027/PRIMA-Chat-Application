@@ -1,4 +1,5 @@
 ﻿using EI.SI;
+using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PRIMA
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly Client client;
+        private readonly IClient client;
 
-        public UserService(Client clientInstance)
+        public UserService(IClient clientInstance)
         {
             client = clientInstance;
         }

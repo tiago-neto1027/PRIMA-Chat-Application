@@ -1,5 +1,6 @@
 ﻿using EI.SI;
 using System;
+using PRIMA.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace PRIMA
 {
-    public class MessageService
+    public class MessageService : IMessageService
     {
-        private readonly Client client;
+        private readonly IClient client;
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
-        public MessageService(Client clientInstance)
+        public MessageService(IClient clientInstance)
         {
             client = clientInstance;
         }

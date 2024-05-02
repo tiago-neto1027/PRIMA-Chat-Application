@@ -20,10 +20,8 @@ namespace PRIMA
 
             Client clientInstance = Client.Instance;
             UserService userServiceInstance = new UserService(clientInstance);
-            MessageService messageServiceInstance = new MessageService(clientInstance);
-            ClientService clientServiceInstance = new ClientService(clientInstance);
 
-            Application.Run(new FormLogin(userServiceInstance, messageServiceInstance, clientServiceInstance));
+            Application.Run(new FormLogin(userServiceInstance));
         }
     }
 }

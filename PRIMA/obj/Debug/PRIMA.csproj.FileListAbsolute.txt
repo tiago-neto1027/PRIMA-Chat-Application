@@ -56,3 +56,13 @@ C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Protoco
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.Properties.Resources.resources
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.CoreCompileInputs.cache
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Threading.Tasks.Extensions.xml

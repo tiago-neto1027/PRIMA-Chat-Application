@@ -2,6 +2,7 @@
 using MaterialSkin;
 using MaterialSkin.Controls;
 using PRIMA.Services;
+using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,8 +23,8 @@ namespace PRIMA
 {
     public partial class FormApplication : BaseForm
     {
-        protected readonly MessageService messageService;
-        protected readonly ClientService clientService;
+        protected readonly IMessageService messageService;
+        protected readonly IClientService clientService;
 
         bool settingsExpand;
 
@@ -31,7 +32,7 @@ namespace PRIMA
         Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
         private string selectedChat = "General";
 
-        public FormApplication(MessageService messageServerInstance, ClientService clientServiceInstance)
+        public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance)
         {
             InitializeComponent();
             CheckTheme();

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EI.SI;
+using PRIMA.Interfaces;
 
 namespace PRIMA.Services
 {
-    public class ClientService
+    public class ClientService : IClientService
     {
-        private readonly Client client;
+        private readonly IClient client;
 
-        public ClientService(Client clientInstance)
+        public ClientService(IClient clientInstance)
         {
             client = clientInstance;
         }

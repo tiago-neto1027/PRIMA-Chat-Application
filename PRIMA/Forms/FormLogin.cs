@@ -1,6 +1,7 @@
 ﻿using EI.SI;
 using MaterialSkin.Controls;
 using PRIMA.Services;
+using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,26 +17,19 @@ namespace PRIMA
 {
     public partial class FormLogin : BaseForm
     {
-        protected readonly UserService userService;
-        private readonly MessageService messageService;
-        private readonly ClientService clientService;
+        private readonly IUserService userService;
 
-        public FormLogin(UserService userServiceInstance, MessageService messageServiceInstance, ClientService clientServiceInstance)
+        public FormLogin(IUserService userServiceInstance)
         {
             InitializeComponent();
             userService = userServiceInstance;
-            messageService = messageServiceInstance;
-            clientService = clientServiceInstance;
         }
 
         /* This closes the form and opens the FormRegister */
         private void btnRegistry_Click(object sender, EventArgs e)
         {
             this.Hide();
-
-            FormRegister formRegister = new FormRegister(userService, messageService, clientService);
-            formRegister.ShowDialog();
-
+            OpenFormRegister();
             this.Close();
         }
 
@@ -52,10 +46,7 @@ namespace PRIMA
             if(response == "Success")
             {
                 this.Hide();
-
-                FormApplication formApplication = new FormApplication(messageService, clientService);
-                formApplication.ShowDialog();
-
+                OpenFormApplication();
                 this.Close();
             }
 
