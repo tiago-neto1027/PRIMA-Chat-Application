@@ -39,8 +39,10 @@
             // btnRegistry
             // 
             this.btnRegistry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRegistry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnRegistry.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnRegistry.Depth = 0;
+            this.btnRegistry.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRegistry.HighEmphasis = true;
             this.btnRegistry.Icon = null;
             this.btnRegistry.Location = new System.Drawing.Point(507, 305);
@@ -53,14 +55,16 @@
             this.btnRegistry.Text = "Register";
             this.btnRegistry.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnRegistry.UseAccentColor = false;
-            this.btnRegistry.UseVisualStyleBackColor = true;
+            this.btnRegistry.UseVisualStyleBackColor = false;
             this.btnRegistry.Click += new System.EventHandler(this.btnRegistry_Click);
             // 
             // btnLogin
             // 
             this.btnLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnLogin.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnLogin.Depth = 0;
+            this.btnLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = null;
             this.btnLogin.Location = new System.Drawing.Point(205, 305);
@@ -73,14 +77,16 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLogin.UseAccentColor = false;
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
+            this.labelPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.labelPassword.Depth = 0;
             this.labelPassword.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelPassword.Location = new System.Drawing.Point(203, 207);
             this.labelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPassword.MouseState = MaterialSkin.MouseState.HOVER;
@@ -92,8 +98,10 @@
             // labelUserName
             // 
             this.labelUserName.AutoSize = true;
+            this.labelUserName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.labelUserName.Depth = 0;
             this.labelUserName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelUserName.Location = new System.Drawing.Point(203, 110);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUserName.MouseState = MaterialSkin.MouseState.HOVER;
@@ -105,9 +113,11 @@
             // loginTBoxPassword
             // 
             this.loginTBoxPassword.AnimateReadOnly = false;
+            this.loginTBoxPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.loginTBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.loginTBoxPassword.Depth = 0;
             this.loginTBoxPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.loginTBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.loginTBoxPassword.LeadingIcon = null;
             this.loginTBoxPassword.Location = new System.Drawing.Point(205, 232);
             this.loginTBoxPassword.Margin = new System.Windows.Forms.Padding(2);
@@ -125,9 +135,11 @@
             // loginTBoxUser
             // 
             this.loginTBoxUser.AnimateReadOnly = false;
+            this.loginTBoxUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.loginTBoxUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.loginTBoxUser.Depth = 0;
             this.loginTBoxUser.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.loginTBoxUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.loginTBoxUser.LeadingIcon = null;
             this.loginTBoxUser.Location = new System.Drawing.Point(205, 135);
             this.loginTBoxUser.Margin = new System.Windows.Forms.Padding(2);

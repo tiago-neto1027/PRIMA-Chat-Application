@@ -18,6 +18,7 @@ namespace PRIMA
     public partial class FormLogin : BaseForm
     {
         private readonly IUserService userService;
+        FormFactory formFactory = new FormFactory();
 
         public FormLogin(IUserService userServiceInstance)
         {
@@ -29,7 +30,7 @@ namespace PRIMA
         private void btnRegistry_Click(object sender, EventArgs e)
         {
             this.Hide();
-            OpenFormRegister();
+            formFactory.OpenFormRegister();
             this.Close();
         }
 
@@ -46,7 +47,7 @@ namespace PRIMA
             if(response == "Success")
             {
                 this.Hide();
-                OpenFormApplication();
+                formFactory.OpenFormApplication();
                 this.Close();
             }
 

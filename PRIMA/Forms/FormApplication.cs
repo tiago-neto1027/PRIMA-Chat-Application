@@ -32,7 +32,11 @@ namespace PRIMA
         Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
         private string selectedChat = "General";
 
-        public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance)
+        public FormApplication()
+        {
+        }
+
+        public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance) : base()
         {
             InitializeComponent();
             CheckTheme();

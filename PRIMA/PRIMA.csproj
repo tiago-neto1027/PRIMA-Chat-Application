@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormFactory.cs" />
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +98,7 @@
     <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IMessageService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Program.cs" />
