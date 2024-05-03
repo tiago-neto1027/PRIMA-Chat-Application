@@ -41,3 +41,28 @@ C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\yoich\OneDrive - IPLeiria\Desktop\Dados\Faculdade\Topicos de Seguranca\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.exe.config
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.exe
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\PRIMA.pdb
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\MaterialSkin.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\ProtocolSI.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.AssemblyReference.cache
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormApplication.resources
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormLogin.resources
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.FormRegister.resources
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.Properties.Resources.resources
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.GenerateResource.cache
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.CoreCompileInputs.cache
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb

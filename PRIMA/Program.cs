@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRIMA.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,11 @@ namespace PRIMA
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLogin());
+
+            Client clientInstance = Client.Instance;
+            UserService userServiceInstance = new UserService(clientInstance);
+
+            Application.Run(new FormLogin(userServiceInstance));
         }
     }
 }
