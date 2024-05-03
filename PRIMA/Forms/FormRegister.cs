@@ -53,19 +53,38 @@ namespace PRIMA
         private void RegisterUser()
         {            
             string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";  //Change the password parameters here
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|pt)$"; //Change the email parameters here
 
-            if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text) ||
-                string.IsNullOrWhiteSpace(registryTBoxName.Text) ||
-                string.IsNullOrWhiteSpace(registryTBoxEmail.Text) ||
-                string.IsNullOrWhiteSpace(registryTBoxPassword.Text))
+            if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text))
             {
-                MessageBox.Show("Please fill in all fields");
+                MessageBox.Show("Username is empty!");
+                return;
+            }
+            if(string.IsNullOrWhiteSpace(registryTBoxName.Text))
+            {
+                MessageBox.Show("Name is empty!");
+                return;
+            }
+            if(string.IsNullOrWhiteSpace(registryTBoxEmail.Text))
+            {
+                MessageBox.Show("Email is empty!");
+                return;
+            }
+            if(string.IsNullOrWhiteSpace(registryTBoxPassword.Text))
+            {
+                MessageBox.Show("Password is empty!");
                 return;
             }
 
             if (!Regex.IsMatch(registryTBoxPassword.Text, passwordPattern))
             {
                 MessageBox.Show("The password must be 8 to 20 characters long and contain only letters and numbers");
+                return;
+            }
+
+            if(!Regex.IsMatch(registryTBoxEmail.Text, emailPattern))
+            {
+                MessageBox.Show("The email is not valid");
                 return;
             }
 
