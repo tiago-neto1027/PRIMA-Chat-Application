@@ -12,5 +12,6 @@ namespace PRIMA.Interfaces
         event EventHandler<MessageReceivedEventArgs> MessageReceived;
         void SendMessage(string chat, string message);
         void StartReceivingMessages();
+        void StopReceivingMessages();
     }
 }

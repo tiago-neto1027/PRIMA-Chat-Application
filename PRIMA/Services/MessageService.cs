@@ -14,6 +14,8 @@ namespace PRIMA
         private readonly IClient client;
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
+        private bool stopReceivingMessages;
+
         public MessageService(IClient clientInstance)
         {
             client = clientInstance;
@@ -33,9 +35,15 @@ namespace PRIMA
             receiveThread.Start();
         }
 
+        // This is necessary in order for the Forms subscribing the event to turn off the ReceiveMessages Method
+        public void StopReceivingMessages()
+        {
+            stopReceivingMessages = true;
+        }
+
         private void ReceiveMessages()
         {
-            while (true)
+            while (!stopReceivingMessages)
             {
                 string receivedData = client.ReceiveDATA();
 
