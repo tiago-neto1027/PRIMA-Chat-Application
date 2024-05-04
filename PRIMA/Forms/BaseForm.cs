@@ -21,15 +21,21 @@ namespace PRIMA
     public partial class BaseForm : MaterialForm
     {
         protected MaterialSkinManager materialSkinManager;
+        protected Config config;
 
         public BaseForm()
         {
             InitializeComponent();
+            config = ConfigManager.LoadConfig();
 
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.EnforceBackcolorOnAllComponents = false;
             materialSkinManager.AddFormToManage(this);
 
+            if (config.Theme == "Dark")
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            }
         }
     }
 }

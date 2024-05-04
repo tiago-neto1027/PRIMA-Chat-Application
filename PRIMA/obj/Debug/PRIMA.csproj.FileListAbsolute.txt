@@ -66,3 +66,4 @@ C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.c
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.BaseForm.resources

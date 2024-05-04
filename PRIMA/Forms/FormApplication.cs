@@ -32,14 +32,10 @@ namespace PRIMA
         Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
         private string selectedChat = "General";
 
-        public FormApplication()
-        {
-        }
-
         public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance) : base()
         {
             InitializeComponent();
-            CheckTheme();
+            SetComponentColors(config.Theme);
 
             clientService = clientServiceInstance;
             messageService = messageServerInstance;
@@ -166,37 +162,30 @@ namespace PRIMA
         //Light/Dark mode
         private void darkModeSwitch_CheckedChanged(object sender, EventArgs e)
         {
-            if (materialSkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
+            if (config.Theme=="Light")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
                 settingsPanel.BackColor = Color.Gray;
+                config.Theme = "Dark";
             }
             else
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
                 settingsPanel.BackColor = Color.White;
+                config.Theme = "Light";
             }
 
+            ConfigManager.SaveConfig(config);
             Invalidate(true);
             Update();
         }
-
-        //This function checks the Theme and enforces that the correct theme is being applied
-        private void CheckTheme()
+        // This method merely sets the component colors to the right colors depending on the theme
+        private void SetComponentColors(string theme)
         {
-            if (materialSkinManager.Theme == MaterialSkinManager.Themes.LIGHT)
+            if (theme == "Dark")
             {
-                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                settingsPanel.BackColor = Color.White;
-            }
-            else
-            {
-                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
                 settingsPanel.BackColor = Color.Gray;
             }
-
-            Invalidate(true);
-            Update();
         }
 
         //This allows the user to send a message with the "Enter" key instead of pressing the button
@@ -210,11 +199,12 @@ namespace PRIMA
             }
         }
 
-        // When the application is closed it closes the client
+        // When the application is closed it closes the client and saves the .cfg file
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
         {
             messageService.StopReceivingMessages();
             clientService.CloseClient();
+            ConfigManager.SaveConfig(config);
         }
     }
 }
