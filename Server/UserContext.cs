@@ -21,6 +21,16 @@ namespace Server
         public void InitializeDatabase()
         {
             Database.Connection.Open();
+
+            // Unfortunately, before using a random query the database wasn't really being initialized
+            // The code is messy just untill I find a better approach to initialize the database
+            try
+            {
+                Users.Any(u => u.ID == 0);
+            } catch (Exception ex)
+            {
+
+            }
         }
     }
 }
