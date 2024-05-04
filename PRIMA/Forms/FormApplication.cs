@@ -213,6 +213,7 @@ namespace PRIMA
         // When the application is closed it closes the client
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
         {
+            messageService.StopReceivingMessages();
             clientService.CloseClient();
         }
     }
