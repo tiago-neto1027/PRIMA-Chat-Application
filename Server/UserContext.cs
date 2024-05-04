@@ -18,5 +18,9 @@ namespace Server
         {
             return Users.Any(u => u.Username == username);
         }
+        public void InitializeDatabase()
+        {
+            Database.Connection.Open();
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EI.SI;
 using System.Threading;
+using System.Data.Entity;
 
 namespace Server
 {
@@ -20,6 +21,15 @@ namespace Server
             TcpListener listener = new TcpListener(endPoint);
 
             listener.Start();
+
+            // This simply opens the database when the server is started
+            // The database is initializer here so that the user experiences less or none waiting time
+            // when performing the first action using the database
+            using (var db = new UserContext())
+            {
+                db.InitializeDatabase();
+            }
+            Console.WriteLine("Database open");
             Console.WriteLine("SERVER READY");
 
             Dictionary<TcpClient, string> clients = new Dictionary<TcpClient, string>();
