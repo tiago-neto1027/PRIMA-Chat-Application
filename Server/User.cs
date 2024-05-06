@@ -14,6 +14,7 @@ namespace Server
         public string HashedPassword { get; set; }
         public string Email { get; set; }
         public DateTime DateCreated { get; set; }
+        public byte[] ProfilePic { get; set; }
 
         //Parameterless Constructor (Required by EntityFramework)
         public User ()

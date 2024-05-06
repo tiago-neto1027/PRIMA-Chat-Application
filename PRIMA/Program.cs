@@ -1,4 +1,5 @@
-﻿using PRIMA.Services;
+﻿using PRIMA.Interfaces;
+using PRIMA.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,6 @@ namespace PRIMA
 
             Application.Run(new FormLogin(userServiceInstance));
 
-            // Closes the client when the application is closed
             clientServiceInstance.CloseClient();
         }
     }
