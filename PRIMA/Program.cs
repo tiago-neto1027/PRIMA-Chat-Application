@@ -1,4 +1,5 @@
-﻿using PRIMA.Services;
+﻿using PRIMA.Interfaces;
+using PRIMA.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,11 @@ namespace PRIMA
 
             Client clientInstance = Client.Instance;
             UserService userServiceInstance = new UserService(clientInstance);
+            ClientService clientServiceInstance = new ClientService(clientInstance);
 
             Application.Run(new FormLogin(userServiceInstance));
+
+            clientServiceInstance.CloseClient();
         }
     }
 }

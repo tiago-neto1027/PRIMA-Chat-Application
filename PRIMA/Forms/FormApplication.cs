@@ -203,6 +203,7 @@ namespace PRIMA
         // When the application is closed it closes the client and saves the .cfg file
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
         {
+            clientService.CloseClient();
             messageService.StopReceivingMessages();
             ConfigManager.SaveConfig(config);
         }
