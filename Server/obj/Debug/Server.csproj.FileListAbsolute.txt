@@ -30,3 +30,4 @@ C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\Server\obj\Debug\Server
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\Server\obj\Debug\Server.csproj.Up2Date
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\Server\obj\Debug\Server.exe
 C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\Server\obj\Debug\Server.pdb
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.AddedImagesToUsers.resources

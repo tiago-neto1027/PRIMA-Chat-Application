@@ -44,6 +44,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonChangeEmail = new System.Windows.Forms.Button();
             this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
+            this.buttonChangeImage = new System.Windows.Forms.Button();
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).BeginInit();
             this.panel1.SuspendLayout();
@@ -163,6 +164,7 @@
             this.settingsPanel.Controls.Add(this.panel1);
             this.settingsPanel.Controls.Add(this.panel2);
             this.settingsPanel.Controls.Add(this.panel3);
+            this.settingsPanel.Controls.Add(this.buttonChangeImage);
             this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.settingsPanel.Location = new System.Drawing.Point(3, 64);
             this.settingsPanel.MaximumSize = new System.Drawing.Size(235, 0);
@@ -258,6 +260,22 @@
             this.settingsMenuTimer.Interval = 10;
             this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
             // 
+            // buttonChangeImage
+            // 
+            this.buttonChangeImage.BackColor = System.Drawing.Color.Transparent;
+            this.buttonChangeImage.FlatAppearance.BorderSize = 0;
+            this.buttonChangeImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonChangeImage.Font = new System.Drawing.Font("Arial", 11.12727F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonChangeImage.Location = new System.Drawing.Point(3, 227);
+            this.buttonChangeImage.Name = "buttonChangeImage";
+            this.buttonChangeImage.Padding = new System.Windows.Forms.Padding(66, 0, 0, 0);
+            this.buttonChangeImage.Size = new System.Drawing.Size(247, 83);
+            this.buttonChangeImage.TabIndex = 15;
+            this.buttonChangeImage.Text = "Change Image";
+            this.buttonChangeImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChangeImage.UseVisualStyleBackColor = false;
+            this.buttonChangeImage.Click += new System.EventHandler(this.buttonChangeImage_Click);
+            // 
             // FormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,5 +318,6 @@
         private System.Windows.Forms.Button buttonChangePassword;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buttonChangeEmail;
+        private System.Windows.Forms.Button buttonChangeImage;
     }
 }

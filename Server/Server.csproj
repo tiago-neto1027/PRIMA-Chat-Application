@@ -65,6 +65,10 @@
     <Compile Include="Migrations\202404261602541_AddedGeneralChatMessages.Designer.cs">
       <DependentUpon>202404261602541_AddedGeneralChatMessages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405060142350_AddedImagesToUsers.cs" />
+    <Compile Include="Migrations\202405060142350_AddedImagesToUsers.Designer.cs">
+      <DependentUpon>202405060142350_AddedImagesToUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404261602541_AddedGeneralChatMessages.resx">
       <DependentUpon>202404261602541_AddedGeneralChatMessages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405060142350_AddedImagesToUsers.resx">
+      <DependentUpon>202405060142350_AddedImagesToUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

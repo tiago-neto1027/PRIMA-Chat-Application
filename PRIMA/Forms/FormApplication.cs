@@ -206,5 +206,11 @@ namespace PRIMA
             messageService.StopReceivingMessages();
             ConfigManager.SaveConfig(config);
         }
+
+        // Changes the user Image
+        private void buttonChangeImage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

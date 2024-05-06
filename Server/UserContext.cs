@@ -13,15 +13,20 @@ namespace Server
         public DbSet<GeneralChatMessage> GeneralChatMessages { get; set; }
 
 
-        //Simply verifies if a username is in the database
-        public bool UsernameExists(string username)
+        public bool FindUserByUsername(string username)
         {
             return Users.Any(u => u.Username == username);
         }
+
+        public void UpdateUserProfilePic(string username, byte[] newProfilePic)
+        {
+            var user = Users.FirstOrDefault(u => u.Username == username);
+            user.ProfilePic = newProfilePic;
+            SaveChanges();
+        }
+
         public void InitializeDatabase()
         {
-            Database.Connection.Open();
-
             // Unfortunately, before using a random query the database wasn't really being initialized
             // The code is messy just untill I find a better approach to initialize the database
             try
