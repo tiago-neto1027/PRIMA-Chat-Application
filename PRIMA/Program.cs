@@ -20,8 +20,12 @@ namespace PRIMA
 
             Client clientInstance = Client.Instance;
             UserService userServiceInstance = new UserService(clientInstance);
+            ClientService clientServiceInstance = new ClientService(clientInstance);
 
             Application.Run(new FormLogin(userServiceInstance));
+
+            // Closes the client when the application is closed
+            clientServiceInstance.CloseClient();
         }
     }
 }

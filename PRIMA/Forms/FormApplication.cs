@@ -48,6 +48,14 @@ namespace PRIMA
             chatsListBox.SelectedIndex = 0;
         }
 
+        // This method merely sets the component colors to the right colors depending on the theme
+        private void SetComponentColors(string theme)
+        {
+            if (theme == "Dark")
+            {
+                settingsPanel.BackColor = Color.Gray;
+            }
+        }
         /*
          * When a message is received the vent is activated
          * 
@@ -57,7 +65,7 @@ namespace PRIMA
          * A new chat is added with the message received
          * 
          * Finally, If the chatUsed is the same as the selected, it is updated
-        */ 
+        */
         private void MessageService_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
             string chatUsed = e.Chat;
@@ -179,14 +187,7 @@ namespace PRIMA
             Invalidate(true);
             Update();
         }
-        // This method merely sets the component colors to the right colors depending on the theme
-        private void SetComponentColors(string theme)
-        {
-            if (theme == "Dark")
-            {
-                settingsPanel.BackColor = Color.Gray;
-            }
-        }
+
 
         //This allows the user to send a message with the "Enter" key instead of pressing the button
         private void messageTBox_KeyDown(object sender, KeyEventArgs e)
@@ -203,7 +204,6 @@ namespace PRIMA
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
         {
             messageService.StopReceivingMessages();
-            clientService.CloseClient();
             ConfigManager.SaveConfig(config);
         }
     }
