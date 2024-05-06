@@ -13,7 +13,12 @@ namespace Server
         public DbSet<GeneralChatMessage> GeneralChatMessages { get; set; }
 
 
-        public bool FindUserByUsername(string username)
+        public User FindUserByUsername(string username)
+        {
+            return Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public bool IfUserExists(string username)
         {
             return Users.Any(u => u.Username == username);
         }

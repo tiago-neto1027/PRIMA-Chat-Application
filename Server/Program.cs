@@ -99,7 +99,7 @@ namespace Server
 
                         using (var db = new UserContext())
                         {
-                            if (!db.FindUserByUsername(usernameLogin))
+                            if (!db.IfUserExists(usernameLogin))
                             {
                                 byte[] ackLogin;
                                 ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The username doesn't exist!");
@@ -137,7 +137,7 @@ namespace Server
 
                         using (var db = new UserContext())
                         {
-                            if (db.FindUserByUsername(usernameRegister))
+                            if (db.IfUserExists(usernameRegister))
                             {
                                 byte[] ackRegister;
                                 ackRegister = protocolSI.Make(ProtocolSICmdType.ACK, "This username is already registered.");
@@ -167,7 +167,7 @@ namespace Server
                         {
                             using (var db = new UserContext())
                             {
-                                var user = db.Users.First(u => u.Username == senderUsername);
+                                var user = db.FindUserByUsername(senderUsername);
 
                                 if(user != null)
                                 {
