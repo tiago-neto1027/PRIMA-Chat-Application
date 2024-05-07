@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EI.SI;
 using System.Threading;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 
 namespace Server
 {
@@ -157,6 +158,35 @@ namespace Server
 
                         break;
 
+                    case ProtocolSICmdType.USER_OPTION_3: //USER_OPTION_3 == Change Email
+                        
+                        string password = splited[0];
+                        string newEmail = splited[1];
+                        string username = clients[client];
+                        using (var db = new UserContext())
+                        {
+
+                            if (db.IfUserExists(username))
+                            {
+                                var user = db.FindUserByUsername(username);
+                                if (db.PasswordConfirmed(user, password))
+                                {
+                                    db.UpdateUserEmail(username, newEmail);
+                                    byte[] ack;
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Email changed successfully");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                                else
+                                {
+                                    byte[] ack;
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Invalid Password");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                            }
+                        }
+                        break;
+
+
                     case ProtocolSICmdType.DATA:
 
                         string chatUsed = splited[0];
@@ -180,13 +210,13 @@ namespace Server
 
                         Console.WriteLine("");
                         Console.WriteLine("Chat: " + chatUsed);
-                        Console.WriteLine(username + ": " + message);
+                        Console.WriteLine(senderUsername + ": " + message);
 
                         byte[] ackMessage;
                         ackMessage = protocolSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ackMessage, 0, ackMessage.Length);
 
-                        message = chatUsed + "|" + username + ": " + message;
+                        message = chatUsed + "|" + senderUsername + ": " + message;
                         // TODO: This shouldnt send the message to all the clients, instead to just the clients that are supposed to receive it
                         SendMessageToAllClients(message);
 

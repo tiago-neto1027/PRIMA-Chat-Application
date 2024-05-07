@@ -43,8 +43,8 @@
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonChangeEmail = new System.Windows.Forms.Button();
-            this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
             this.buttonChangeImage = new System.Windows.Forms.Button();
+            this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).BeginInit();
             this.panel1.SuspendLayout();
@@ -147,7 +147,7 @@
             this.chatsListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.chatsListBox.BorderColor = System.Drawing.Color.LightGray;
             this.chatsListBox.Depth = 0;
-            this.chatsListBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.chatsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.chatsListBox.Location = new System.Drawing.Point(54, 67);
             this.chatsListBox.MouseState = MaterialSkin.MouseState.HOVER;
             this.chatsListBox.Name = "chatsListBox";
@@ -232,6 +232,7 @@
             this.buttonChangePassword.Text = "Change Password";
             this.buttonChangePassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonChangePassword.UseVisualStyleBackColor = false;
+            this.buttonChangePassword.Click += new System.EventHandler(this.buttonChangePassword_Click);
             // 
             // panel3
             // 
@@ -254,11 +255,7 @@
             this.buttonChangeEmail.Text = "Change Email";
             this.buttonChangeEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonChangeEmail.UseVisualStyleBackColor = false;
-            // 
-            // settingsMenuTimer
-            // 
-            this.settingsMenuTimer.Interval = 10;
-            this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
+            this.buttonChangeEmail.Click += new System.EventHandler(this.buttonChangeEmail_Click);
             // 
             // buttonChangeImage
             // 
@@ -275,6 +272,11 @@
             this.buttonChangeImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonChangeImage.UseVisualStyleBackColor = false;
             this.buttonChangeImage.Click += new System.EventHandler(this.buttonChangeImage_Click);
+            // 
+            // settingsMenuTimer
+            // 
+            this.settingsMenuTimer.Interval = 10;
+            this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
             // 
             // FormApplication
             // 

@@ -30,6 +30,22 @@ namespace Server
             SaveChanges();
         }
 
+        public bool PasswordConfirmed(User user,string password)
+        {
+            if(user.HashedPassword == password)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void UpdateUserEmail(string username,  string newemail)
+        {
+            var user = FindUserByUsername(username);
+            user.Email = newemail;
+            SaveChanges();
+        }
+
         public void InitializeDatabase()
         {
             // Unfortunately, before using a random query the database wasn't really being initialized

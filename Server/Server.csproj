@@ -61,10 +61,6 @@
     <Compile Include="Migrations\202404251947046_InitialCreate.Designer.cs">
       <DependentUpon>202404251947046_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202404261602541_AddedGeneralChatMessages.cs" />
-    <Compile Include="Migrations\202404261602541_AddedGeneralChatMessages.Designer.cs">
-      <DependentUpon>202404261602541_AddedGeneralChatMessages.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202405060142350_AddedImagesToUsers.cs" />
     <Compile Include="Migrations\202405060142350_AddedImagesToUsers.Designer.cs">
       <DependentUpon>202405060142350_AddedImagesToUsers.cs</DependentUpon>
@@ -82,9 +78,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202404251947046_InitialCreate.resx">
       <DependentUpon>202404251947046_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404261602541_AddedGeneralChatMessages.resx">
-      <DependentUpon>202404261602541_AddedGeneralChatMessages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405060142350_AddedImagesToUsers.resx">
       <DependentUpon>202405060142350_AddedImagesToUsers.cs</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using PRIMA.Interfaces;
+﻿using PRIMA.Forms;
+using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,17 @@ namespace PRIMA
         {
             FormApplication formApplication = new FormApplication(messageServiceInstance, clientServiceInstance);
             formApplication.ShowDialog();
+        }
+        public void OpenFormChangeEmail()
+        {
+            FormEmailChange formEmailChange = new FormEmailChange(userServiceInstance);
+            formEmailChange.Show();
+        }
+        public void RefreshFormApplication()
+        {
+            FormApplication formApplication = new FormApplication(messageServiceInstance, clientServiceInstance);
+            formApplication.Activate();
+            formApplication.Refresh();
         }
     }
 }

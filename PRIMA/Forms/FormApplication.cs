@@ -18,6 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static PRIMA.MessageService;
+using PRIMA.Forms;
 
 namespace PRIMA
 {
@@ -25,6 +26,7 @@ namespace PRIMA
     {
         protected readonly IMessageService messageService;
         protected readonly IClientService clientService;
+        FormFactory formFactory = new FormFactory();
 
         bool settingsExpand;
 
@@ -212,6 +214,17 @@ namespace PRIMA
         private void buttonChangeImage_Click(object sender, EventArgs e)
         {
 
+        }
+        // Changes the user email
+
+        private void buttonChangeEmail_Click(object sender, EventArgs e)
+        {
+            formFactory.OpenFormChangeEmail();
+        }
+        // Changes the user password
+        private void buttonChangePassword_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -43,8 +43,10 @@
             // btnLogin
             // 
             this.btnLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnLogin.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnLogin.Depth = 0;
+            this.btnLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = null;
             this.btnLogin.Location = new System.Drawing.Point(538, 451);
@@ -57,14 +59,16 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLogin.UseAccentColor = false;
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
+            this.labelName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.labelName.Depth = 0;
             this.labelName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelName.Location = new System.Drawing.Point(202, 190);
             this.labelName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelName.MouseState = MaterialSkin.MouseState.HOVER;
@@ -76,9 +80,11 @@
             // registryTBoxName
             // 
             this.registryTBoxName.AnimateReadOnly = false;
+            this.registryTBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.registryTBoxName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.registryTBoxName.Depth = 0;
             this.registryTBoxName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.registryTBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.registryTBoxName.LeadingIcon = null;
             this.registryTBoxName.Location = new System.Drawing.Point(204, 215);
             this.registryTBoxName.Margin = new System.Windows.Forms.Padding(2);
@@ -94,8 +100,10 @@
             // btnRegister
             // 
             this.btnRegister.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnRegister.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnRegister.Depth = 0;
+            this.btnRegister.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRegister.HighEmphasis = true;
             this.btnRegister.Icon = null;
             this.btnRegister.Location = new System.Drawing.Point(204, 451);
@@ -108,14 +116,16 @@
             this.btnRegister.Text = "Register";
             this.btnRegister.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnRegister.UseAccentColor = false;
-            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
+            this.labelPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.labelPassword.Depth = 0;
             this.labelPassword.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelPassword.Location = new System.Drawing.Point(202, 356);
             this.labelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPassword.MouseState = MaterialSkin.MouseState.HOVER;
@@ -127,8 +137,10 @@
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
+            this.labelEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.labelEmail.Depth = 0;
             this.labelEmail.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelEmail.Location = new System.Drawing.Point(202, 273);
             this.labelEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelEmail.MouseState = MaterialSkin.MouseState.HOVER;
@@ -140,8 +152,10 @@
             // labelUserName
             // 
             this.labelUserName.AutoSize = true;
+            this.labelUserName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.labelUserName.Depth = 0;
             this.labelUserName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelUserName.Location = new System.Drawing.Point(202, 104);
             this.labelUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUserName.MouseState = MaterialSkin.MouseState.HOVER;
@@ -153,9 +167,11 @@
             // registryTBoxPassword
             // 
             this.registryTBoxPassword.AnimateReadOnly = false;
+            this.registryTBoxPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.registryTBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.registryTBoxPassword.Depth = 0;
             this.registryTBoxPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.registryTBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.registryTBoxPassword.LeadingIcon = null;
             this.registryTBoxPassword.Location = new System.Drawing.Point(204, 381);
             this.registryTBoxPassword.Margin = new System.Windows.Forms.Padding(2);
@@ -173,9 +189,11 @@
             // registryTBoxEmail
             // 
             this.registryTBoxEmail.AnimateReadOnly = false;
+            this.registryTBoxEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.registryTBoxEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.registryTBoxEmail.Depth = 0;
             this.registryTBoxEmail.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.registryTBoxEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.registryTBoxEmail.LeadingIcon = null;
             this.registryTBoxEmail.Location = new System.Drawing.Point(204, 298);
             this.registryTBoxEmail.Margin = new System.Windows.Forms.Padding(2);
@@ -191,9 +209,11 @@
             // registryTBoxUserName
             // 
             this.registryTBoxUserName.AnimateReadOnly = false;
+            this.registryTBoxUserName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.registryTBoxUserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.registryTBoxUserName.Depth = 0;
             this.registryTBoxUserName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.registryTBoxUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.registryTBoxUserName.LeadingIcon = null;
             this.registryTBoxUserName.Location = new System.Drawing.Point(204, 129);
             this.registryTBoxUserName.Margin = new System.Windows.Forms.Padding(2);
