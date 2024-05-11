@@ -94,3 +94,4 @@ C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\bin\Debug\System
 C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
 C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
+C:\Users\yoich\Documents\Projects\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.Forms.FormEmailChange.resources

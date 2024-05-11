@@ -42,11 +42,5 @@ namespace PRIMA
             FormEmailChange formEmailChange = new FormEmailChange(userServiceInstance);
             formEmailChange.Show();
         }
-        public void RefreshFormApplication()
-        {
-            FormApplication formApplication = new FormApplication(messageServiceInstance, clientServiceInstance);
-            formApplication.Activate();
-            formApplication.Refresh();
-        }
     }
 }

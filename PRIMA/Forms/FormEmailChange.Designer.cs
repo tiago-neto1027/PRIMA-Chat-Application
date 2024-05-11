@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.ChangeEmailButton = new MaterialSkin.Controls.MaterialButton();
-            this.PasswordTextBox = new MaterialSkin.Controls.MaterialTextBox();
-            this.NewEmailTextBox = new MaterialSkin.Controls.MaterialTextBox();
             this.PasswordLabel = new MaterialSkin.Controls.MaterialLabel();
             this.NewEmailLabel = new MaterialSkin.Controls.MaterialLabel();
             this.OldEmailLabel = new MaterialSkin.Controls.MaterialLabel();
             this.OldEmailLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.PasswordTextBox = new MaterialSkin.Controls.MaterialTextBox2();
+            this.NewEmailTextBox = new MaterialSkin.Controls.MaterialTextBox2();
             this.SuspendLayout();
             // 
             // ChangeEmailButton
@@ -58,45 +58,6 @@
             this.ChangeEmailButton.UseAccentColor = false;
             this.ChangeEmailButton.UseVisualStyleBackColor = false;
             this.ChangeEmailButton.Click += new System.EventHandler(this.ChangeEmailButton_Click);
-            // 
-            // PasswordTextBox
-            // 
-            this.PasswordTextBox.AnimateReadOnly = false;
-            this.PasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.PasswordTextBox.Depth = 0;
-            this.PasswordTextBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.PasswordTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.PasswordTextBox.LeadingIcon = null;
-            this.PasswordTextBox.Location = new System.Drawing.Point(86, 189);
-            this.PasswordTextBox.MaxLength = 50;
-            this.PasswordTextBox.MouseState = MaterialSkin.MouseState.OUT;
-            this.PasswordTextBox.Multiline = false;
-            this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Password = true;
-            this.PasswordTextBox.Size = new System.Drawing.Size(189, 50);
-            this.PasswordTextBox.TabIndex = 1;
-            this.PasswordTextBox.Text = "";
-            this.PasswordTextBox.TrailingIcon = null;
-            // 
-            // NewEmailTextBox
-            // 
-            this.NewEmailTextBox.AnimateReadOnly = false;
-            this.NewEmailTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.NewEmailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NewEmailTextBox.Depth = 0;
-            this.NewEmailTextBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.NewEmailTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NewEmailTextBox.LeadingIcon = null;
-            this.NewEmailTextBox.Location = new System.Drawing.Point(86, 277);
-            this.NewEmailTextBox.MaxLength = 50;
-            this.NewEmailTextBox.MouseState = MaterialSkin.MouseState.OUT;
-            this.NewEmailTextBox.Multiline = false;
-            this.NewEmailTextBox.Name = "NewEmailTextBox";
-            this.NewEmailTextBox.Size = new System.Drawing.Size(189, 50);
-            this.NewEmailTextBox.TabIndex = 2;
-            this.NewEmailTextBox.Text = "";
-            this.NewEmailTextBox.TrailingIcon = null;
             // 
             // PasswordLabel
             // 
@@ -154,17 +115,75 @@
             this.OldEmailLabel2.TabIndex = 6;
             this.OldEmailLabel2.Text = "Old Email";
             // 
+            // PasswordTextBox
+            // 
+            this.PasswordTextBox.AnimateReadOnly = false;
+            this.PasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.PasswordTextBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PasswordTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.PasswordTextBox.Depth = 0;
+            this.PasswordTextBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.PasswordTextBox.HideSelection = true;
+            this.PasswordTextBox.LeadingIcon = null;
+            this.PasswordTextBox.Location = new System.Drawing.Point(86, 189);
+            this.PasswordTextBox.MaxLength = 32767;
+            this.PasswordTextBox.MouseState = MaterialSkin.MouseState.OUT;
+            this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.PasswordChar = '●';
+            this.PasswordTextBox.PrefixSuffixText = null;
+            this.PasswordTextBox.ReadOnly = false;
+            this.PasswordTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PasswordTextBox.SelectedText = "";
+            this.PasswordTextBox.SelectionLength = 0;
+            this.PasswordTextBox.SelectionStart = 0;
+            this.PasswordTextBox.ShortcutsEnabled = true;
+            this.PasswordTextBox.Size = new System.Drawing.Size(189, 48);
+            this.PasswordTextBox.TabIndex = 7;
+            this.PasswordTextBox.TabStop = false;
+            this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.PasswordTextBox.TrailingIcon = null;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
+            // 
+            // NewEmailTextBox
+            // 
+            this.NewEmailTextBox.AnimateReadOnly = false;
+            this.NewEmailTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.NewEmailTextBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.NewEmailTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.NewEmailTextBox.Depth = 0;
+            this.NewEmailTextBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.NewEmailTextBox.HideSelection = true;
+            this.NewEmailTextBox.LeadingIcon = null;
+            this.NewEmailTextBox.Location = new System.Drawing.Point(86, 278);
+            this.NewEmailTextBox.MaxLength = 32767;
+            this.NewEmailTextBox.MouseState = MaterialSkin.MouseState.OUT;
+            this.NewEmailTextBox.Name = "NewEmailTextBox";
+            this.NewEmailTextBox.PasswordChar = '\0';
+            this.NewEmailTextBox.PrefixSuffixText = null;
+            this.NewEmailTextBox.ReadOnly = false;
+            this.NewEmailTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.NewEmailTextBox.SelectedText = "";
+            this.NewEmailTextBox.SelectionLength = 0;
+            this.NewEmailTextBox.SelectionStart = 0;
+            this.NewEmailTextBox.ShortcutsEnabled = true;
+            this.NewEmailTextBox.Size = new System.Drawing.Size(189, 48);
+            this.NewEmailTextBox.TabIndex = 8;
+            this.NewEmailTextBox.TabStop = false;
+            this.NewEmailTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.NewEmailTextBox.TrailingIcon = null;
+            this.NewEmailTextBox.UseSystemPasswordChar = false;
+            // 
             // FormEmailChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 414);
+            this.Controls.Add(this.NewEmailTextBox);
+            this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.OldEmailLabel2);
             this.Controls.Add(this.OldEmailLabel);
             this.Controls.Add(this.NewEmailLabel);
             this.Controls.Add(this.PasswordLabel);
-            this.Controls.Add(this.NewEmailTextBox);
-            this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.ChangeEmailButton);
             this.Name = "FormEmailChange";
             this.Text = "Email Change";
@@ -176,11 +195,11 @@
         #endregion
 
         private MaterialSkin.Controls.MaterialButton ChangeEmailButton;
-        private MaterialSkin.Controls.MaterialTextBox PasswordTextBox;
-        private MaterialSkin.Controls.MaterialTextBox NewEmailTextBox;
         private MaterialSkin.Controls.MaterialLabel PasswordLabel;
         private MaterialSkin.Controls.MaterialLabel NewEmailLabel;
         private MaterialSkin.Controls.MaterialLabel OldEmailLabel;
         private MaterialSkin.Controls.MaterialLabel OldEmailLabel2;
+        private MaterialSkin.Controls.MaterialTextBox2 PasswordTextBox;
+        private MaterialSkin.Controls.MaterialTextBox2 NewEmailTextBox;
     }
 }

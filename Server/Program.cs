@@ -169,17 +169,16 @@ namespace Server
                             if (db.IfUserExists(username))
                             {
                                 var user = db.FindUserByUsername(username);
+                                byte[] ack;
                                 if (db.PasswordConfirmed(user, password))
                                 {
                                     db.UpdateUserEmail(username, newEmail);
-                                    byte[] ack;
-                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Email changed successfully");
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Email changed successfully!");
                                     networkStream.Write(ack, 0, ack.Length);
                                 }
                                 else
                                 {
-                                    byte[] ack;
-                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Invalid Password");
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Invalid Password!");
                                     networkStream.Write(ack, 0, ack.Length);
                                 }
                             }
