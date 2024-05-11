@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PRIMA
 {
@@ -30,6 +31,14 @@ namespace PRIMA
             // TODO: Implement password encryption
             string data = $"{username}|{name}|{email}|{password}";
             string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_2, data);
+
+            return response;
+        }
+
+        public string ChangeEmail(string password, string newEmail)
+        {
+            string data = password + "|" + newEmail;
+            string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_3, data);
 
             return response;
         }
