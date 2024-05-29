@@ -42,5 +42,10 @@ namespace PRIMA
             FormEmailChange formEmailChange = new FormEmailChange(userServiceInstance);
             formEmailChange.Show();
         }
+        public void OpenFormChangePassword()
+        {
+            FormPasswordChange formPasswordChange = new FormPasswordChange(userServiceInstance);
+            formPasswordChange.Show();
+        }
     }
 }

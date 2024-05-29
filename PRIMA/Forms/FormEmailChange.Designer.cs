@@ -122,7 +122,7 @@
             this.PasswordTextBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PasswordTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.PasswordTextBox.Depth = 0;
-            this.PasswordTextBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.PasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.PasswordTextBox.HideSelection = true;
             this.PasswordTextBox.LeadingIcon = null;
             this.PasswordTextBox.Location = new System.Drawing.Point(86, 189);
@@ -151,7 +151,7 @@
             this.NewEmailTextBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.NewEmailTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.NewEmailTextBox.Depth = 0;
-            this.NewEmailTextBox.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.NewEmailTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.NewEmailTextBox.HideSelection = true;
             this.NewEmailTextBox.LeadingIcon = null;
             this.NewEmailTextBox.Location = new System.Drawing.Point(86, 278);
