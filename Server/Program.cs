@@ -185,6 +185,33 @@ namespace Server
                         }
                         break;
 
+                    case ProtocolSICmdType.USER_OPTION_4: //USER_OPTION_4 == Change Password
+
+                        string oldPasswordAttempt = splited[0];
+                        string newPassword = splited[1];
+                        string currentUsername = clients[client];
+
+                        using (var db = new UserContext())
+                        {
+                            if (db.IfUserExists(currentUsername))
+                            {
+                                var user = db.FindUserByUsername(currentUsername);
+                                byte[] ack;
+                                if(db.PasswordConfirmed(user, oldPasswordAttempt))
+                                {
+                                    db.UpdateUserPassword(currentUsername, newPassword);
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Password changed successfully!");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                                else
+                                {
+                                    ack = protocolSI.Make(ProtocolSICmdType.ACK, "Invalid Password!");
+                                    networkStream.Write(ack, 0, ack.Length);
+                                }
+                            }
+                        }
+                        break;
+
 
                     case ProtocolSICmdType.DATA:
 

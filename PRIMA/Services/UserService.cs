@@ -42,5 +42,15 @@ namespace PRIMA
 
             return response;
         }
+
+        public string ChangePass(string oldPasswordAttempt, string newPassword)
+        {
+            string data = oldPasswordAttempt + "|" + newPassword;
+            string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_4, data);
+
+            return response;
+
+           
+        }
     }
 }

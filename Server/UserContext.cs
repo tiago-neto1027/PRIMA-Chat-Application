@@ -39,10 +39,16 @@ namespace Server
             return false;
         }
 
-        public void UpdateUserEmail(string username,  string newemail)
+        public void UpdateUserEmail(string username,  string newEmail)
         {
             var user = FindUserByUsername(username);
-            user.Email = newemail;
+            user.Email = newEmail;
+            SaveChanges();
+        }
+        public void UpdateUserPassword(string username, string newPassword)
+        {
+            var user = FindUserByUsername(username);
+            user.HashedPassword = newPassword;
             SaveChanges();
         }
 

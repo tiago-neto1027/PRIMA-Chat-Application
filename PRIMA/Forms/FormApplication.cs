@@ -224,7 +224,7 @@ namespace PRIMA
         // Changes the user password
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
-            
+            formFactory.OpenFormChangePassword();
         }
     }
 }
