@@ -43,6 +43,11 @@ namespace PRIMA.Forms
                 return;
             }
 
+            if (CheckSpecialCharacters(password))
+            {
+                MessageBox.Show("The password can't contain special characters");
+            }
+
             if (!Regex.IsMatch(newEmail, emailPattern))
             {
                 MessageBox.Show("The email is not valid");

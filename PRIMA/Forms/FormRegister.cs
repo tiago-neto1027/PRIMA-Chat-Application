@@ -76,6 +76,18 @@ namespace PRIMA
                 return;
             }
 
+            if (CheckSpecialCharacters(registryTBoxUserName.Text))
+            {
+                MessageBox.Show("Username can't have special characters");
+                return;
+            }
+            if (CheckSpecialCharacters(registryTBoxName.Text))
+            {
+                MessageBox.Show("Name can't have special characters");
+                return;
+            }
+
+
             if (!Regex.IsMatch(registryTBoxPassword.Text, passwordPattern))
             {
                 MessageBox.Show("The password must be 8 to 20 characters long and contain only letters and numbers");
