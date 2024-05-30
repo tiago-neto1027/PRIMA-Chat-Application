@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using MaterialSkin;
 using PRIMA.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.RegularExpressions;
 
 namespace PRIMA
 {
@@ -36,6 +37,16 @@ namespace PRIMA
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
+        }
+
+        // Returns true if it has special characters
+        public bool CheckSpecialCharacters(string content)
+        {
+            string pattern = "^[a-zA-Z0-9 ]*$";
+
+            if (Regex.IsMatch(content, pattern))
+                return false;
+            return true;
         }
     }
 }

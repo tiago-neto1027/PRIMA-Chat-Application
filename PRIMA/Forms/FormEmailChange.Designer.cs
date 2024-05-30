@@ -32,10 +32,10 @@
             this.PasswordLabel = new MaterialSkin.Controls.MaterialLabel();
             this.NewEmailLabel = new MaterialSkin.Controls.MaterialLabel();
             this.OldEmailLabel = new MaterialSkin.Controls.MaterialLabel();
-            this.OldEmailLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.PasswordTextBox = new MaterialSkin.Controls.MaterialTextBox2();
             this.NewEmailTextBox = new MaterialSkin.Controls.MaterialTextBox2();
             this.leaveEmailChangeButton = new MaterialSkin.Controls.MaterialButton();
+            this.OldEmailBox = new MaterialSkin.Controls.MaterialTextBox2();
             this.SuspendLayout();
             // 
             // ChangeEmailButton
@@ -101,20 +101,6 @@
             this.OldEmailLabel.Size = new System.Drawing.Size(69, 19);
             this.OldEmailLabel.TabIndex = 5;
             this.OldEmailLabel.Text = "Old Email";
-            // 
-            // OldEmailLabel2
-            // 
-            this.OldEmailLabel2.AutoSize = true;
-            this.OldEmailLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.OldEmailLabel2.Depth = 0;
-            this.OldEmailLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.OldEmailLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.OldEmailLabel2.Location = new System.Drawing.Point(83, 113);
-            this.OldEmailLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.OldEmailLabel2.Name = "OldEmailLabel2";
-            this.OldEmailLabel2.Size = new System.Drawing.Size(69, 19);
-            this.OldEmailLabel2.TabIndex = 6;
-            this.OldEmailLabel2.Text = "Old Email";
             // 
             // PasswordTextBox
             // 
@@ -195,6 +181,34 @@
             this.leaveEmailChangeButton.UseAccentColor = false;
             this.leaveEmailChangeButton.UseVisualStyleBackColor = false;
             this.leaveEmailChangeButton.Click += new System.EventHandler(this.leaveEmailChangeButton_Click);
+            // OldEmailBox
+            // 
+            this.OldEmailBox.AnimateReadOnly = false;
+            this.OldEmailBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.OldEmailBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.OldEmailBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.OldEmailBox.Depth = 0;
+            this.OldEmailBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.OldEmailBox.HideSelection = true;
+            this.OldEmailBox.LeadingIcon = null;
+            this.OldEmailBox.Location = new System.Drawing.Point(86, 104);
+            this.OldEmailBox.MaxLength = 32767;
+            this.OldEmailBox.MouseState = MaterialSkin.MouseState.OUT;
+            this.OldEmailBox.Name = "OldEmailBox";
+            this.OldEmailBox.PasswordChar = '\0';
+            this.OldEmailBox.PrefixSuffixText = null;
+            this.OldEmailBox.ReadOnly = false;
+            this.OldEmailBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.OldEmailBox.SelectedText = "";
+            this.OldEmailBox.SelectionLength = 0;
+            this.OldEmailBox.SelectionStart = 0;
+            this.OldEmailBox.ShortcutsEnabled = true;
+            this.OldEmailBox.Size = new System.Drawing.Size(189, 48);
+            this.OldEmailBox.TabIndex = 9;
+            this.OldEmailBox.TabStop = false;
+            this.OldEmailBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.OldEmailBox.TrailingIcon = null;
+            this.OldEmailBox.UseSystemPasswordChar = false;
             // 
             // FormEmailChange
             // 
@@ -202,9 +216,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 414);
             this.Controls.Add(this.leaveEmailChangeButton);
+            this.Controls.Add(this.OldEmailBox);
             this.Controls.Add(this.NewEmailTextBox);
             this.Controls.Add(this.PasswordTextBox);
-            this.Controls.Add(this.OldEmailLabel2);
             this.Controls.Add(this.OldEmailLabel);
             this.Controls.Add(this.NewEmailLabel);
             this.Controls.Add(this.PasswordLabel);
@@ -223,9 +237,9 @@
         private MaterialSkin.Controls.MaterialLabel PasswordLabel;
         private MaterialSkin.Controls.MaterialLabel NewEmailLabel;
         private MaterialSkin.Controls.MaterialLabel OldEmailLabel;
-        private MaterialSkin.Controls.MaterialLabel OldEmailLabel2;
         private MaterialSkin.Controls.MaterialTextBox2 PasswordTextBox;
         private MaterialSkin.Controls.MaterialTextBox2 NewEmailTextBox;
         private MaterialSkin.Controls.MaterialButton leaveEmailChangeButton;
+        private MaterialSkin.Controls.MaterialTextBox2 OldEmailBox;
     }
 }

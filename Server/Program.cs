@@ -212,6 +212,31 @@ namespace Server
                         }
                         break;
 
+                    case ProtocolSICmdType.USER_OPTION_9: //USER_OPTION_9 == GET OLD INFO
+                        string type = splited[0];
+                        string usernam = clients[client];
+                        using (var db = new UserContext())
+                        {
+                            if (db.IfUserExists(usernam))
+                            {
+                                var user = db.FindUserByUsername(usernam);
+                                byte[] ack;
+                                switch (type)
+                                {
+                                    case "OldMail":
+                                        string oldMail = db.ReturnOldEmail(user);
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, oldMail);
+                                        networkStream.Write(ack, 0, ack.Length);
+                                        break;
+                                    case "Username":
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, usernam);
+                                        networkStream.Write(ack, 0, ack.Length);
+                                        break;
+                                }
+                            }
+                        }
+                        break;
+
 
                     case ProtocolSICmdType.DATA:
 
