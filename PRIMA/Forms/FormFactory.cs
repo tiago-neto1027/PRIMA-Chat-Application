@@ -47,5 +47,6 @@ namespace PRIMA
             FormPasswordChange formPasswordChange = new FormPasswordChange(userServiceInstance);
             formPasswordChange.Show();
         }
+
     }
 }
