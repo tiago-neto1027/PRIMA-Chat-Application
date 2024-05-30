@@ -52,7 +52,7 @@ namespace PRIMA
             chatsListBox.SelectedIndex = 0;
 
             //shows logged in username on screen
-
+            usernameDisplay.Text = "User: " + userService.GetUsername();
         }
 
         // This method merely sets the component colors to the right colors depending on the theme

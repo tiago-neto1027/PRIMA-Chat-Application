@@ -47,7 +47,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.optionsLogoutButton = new MaterialSkin.Controls.MaterialButton();
             this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.usernameDisplay = new System.Windows.Forms.Label();
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).BeginInit();
             this.panel1.SuspendLayout();
@@ -305,22 +305,22 @@
             this.settingsMenuTimer.Interval = 10;
             this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
             // 
-            // label1
+            // usernameDisplay
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(258, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 18);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "User:";
+            this.usernameDisplay.AutoSize = true;
+            this.usernameDisplay.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameDisplay.Location = new System.Drawing.Point(258, 67);
+            this.usernameDisplay.Name = "usernameDisplay";
+            this.usernameDisplay.Size = new System.Drawing.Size(46, 18);
+            this.usernameDisplay.TabIndex = 15;
+            this.usernameDisplay.Text = "User:";
             // 
             // FormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.usernameDisplay);
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.chatsListBox);
             this.Controls.Add(this.btnWhisper);
@@ -363,6 +363,6 @@
         private MaterialSkin.Controls.MaterialButton optionsLogoutButton;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label usernameDisplay;
     }
 }
