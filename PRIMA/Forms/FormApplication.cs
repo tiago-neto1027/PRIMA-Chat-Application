@@ -95,6 +95,7 @@ namespace PRIMA
         private void btnSend_Click(object sender, EventArgs e)
         {
             string message = messageTBox.Text;
+            message = message.Replace("|", "");
             string chat = selectedChat;
             messageService.SendMessage(chat, message);
             messageTBox.Clear();
