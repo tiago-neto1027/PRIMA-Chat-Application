@@ -43,13 +43,17 @@
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonChangeEmail = new System.Windows.Forms.Button();
-            this.buttonChangeImage = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.optionsLogoutButton = new MaterialSkin.Controls.MaterialButton();
             this.settingsMenuTimer = new System.Windows.Forms.Timer(this.components);
+            this.usernameDisplay = new System.Windows.Forms.Label();
             this.settingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.settingsButton)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSend
@@ -112,12 +116,12 @@
             this.messagesListBox.BorderColor = System.Drawing.Color.LightGray;
             this.messagesListBox.Depth = 0;
             this.messagesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.messagesListBox.Location = new System.Drawing.Point(259, 67);
+            this.messagesListBox.Location = new System.Drawing.Point(259, 88);
             this.messagesListBox.MouseState = MaterialSkin.MouseState.HOVER;
             this.messagesListBox.Name = "messagesListBox";
             this.messagesListBox.SelectedIndex = -1;
             this.messagesListBox.SelectedItem = null;
-            this.messagesListBox.Size = new System.Drawing.Size(534, 320);
+            this.messagesListBox.Size = new System.Drawing.Size(534, 299);
             this.messagesListBox.TabIndex = 3;
             // 
             // btnWhisper
@@ -164,7 +168,8 @@
             this.settingsPanel.Controls.Add(this.panel1);
             this.settingsPanel.Controls.Add(this.panel2);
             this.settingsPanel.Controls.Add(this.panel3);
-            this.settingsPanel.Controls.Add(this.buttonChangeImage);
+            this.settingsPanel.Controls.Add(this.panel4);
+            this.settingsPanel.Controls.Add(this.panel5);
             this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.settingsPanel.Location = new System.Drawing.Point(3, 64);
             this.settingsPanel.MaximumSize = new System.Drawing.Size(235, 0);
@@ -247,7 +252,7 @@
             this.buttonChangeEmail.BackColor = System.Drawing.Color.Transparent;
             this.buttonChangeEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonChangeEmail.Font = new System.Drawing.Font("Arial", 11.12727F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonChangeEmail.Location = new System.Drawing.Point(-15, -19);
+            this.buttonChangeEmail.Location = new System.Drawing.Point(-14, -16);
             this.buttonChangeEmail.Name = "buttonChangeEmail";
             this.buttonChangeEmail.Padding = new System.Windows.Forms.Padding(66, 0, 0, 0);
             this.buttonChangeEmail.Size = new System.Drawing.Size(261, 83);
@@ -257,32 +262,65 @@
             this.buttonChangeEmail.UseVisualStyleBackColor = false;
             this.buttonChangeEmail.Click += new System.EventHandler(this.buttonChangeEmail_Click);
             // 
-            // buttonChangeImage
+            // panel4
             // 
-            this.buttonChangeImage.BackColor = System.Drawing.Color.Transparent;
-            this.buttonChangeImage.FlatAppearance.BorderSize = 0;
-            this.buttonChangeImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonChangeImage.Font = new System.Drawing.Font("Arial", 11.12727F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonChangeImage.Location = new System.Drawing.Point(3, 227);
-            this.buttonChangeImage.Name = "buttonChangeImage";
-            this.buttonChangeImage.Padding = new System.Windows.Forms.Padding(66, 0, 0, 0);
-            this.buttonChangeImage.Size = new System.Drawing.Size(247, 83);
-            this.buttonChangeImage.TabIndex = 15;
-            this.buttonChangeImage.Text = "Change Image";
-            this.buttonChangeImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonChangeImage.UseVisualStyleBackColor = false;
-            this.buttonChangeImage.Click += new System.EventHandler(this.buttonChangeImage_Click);
+            this.panel4.Location = new System.Drawing.Point(3, 227);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(232, 93);
+            this.panel4.TabIndex = 17;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.optionsLogoutButton);
+            this.panel5.Location = new System.Drawing.Point(3, 326);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(232, 54);
+            this.panel5.TabIndex = 18;
+            // 
+            // optionsLogoutButton
+            // 
+            this.optionsLogoutButton.AutoSize = false;
+            this.optionsLogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.optionsLogoutButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.optionsLogoutButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.optionsLogoutButton.Depth = 0;
+            this.optionsLogoutButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.optionsLogoutButton.HighEmphasis = true;
+            this.optionsLogoutButton.Icon = null;
+            this.optionsLogoutButton.Location = new System.Drawing.Point(78, 3);
+            this.optionsLogoutButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.optionsLogoutButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.optionsLogoutButton.Name = "optionsLogoutButton";
+            this.optionsLogoutButton.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.optionsLogoutButton.Size = new System.Drawing.Size(72, 48);
+            this.optionsLogoutButton.TabIndex = 15;
+            this.optionsLogoutButton.Text = "Log Out";
+            this.optionsLogoutButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.optionsLogoutButton.UseAccentColor = false;
+            this.optionsLogoutButton.UseVisualStyleBackColor = false;
+            this.optionsLogoutButton.Click += new System.EventHandler(this.optionsLogoutButton_Click);
             // 
             // settingsMenuTimer
             // 
             this.settingsMenuTimer.Interval = 10;
             this.settingsMenuTimer.Tick += new System.EventHandler(this.settingsMenuTimer_Tick);
             // 
+            // usernameDisplay
+            // 
+            this.usernameDisplay.AutoSize = true;
+            this.usernameDisplay.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameDisplay.Location = new System.Drawing.Point(258, 67);
+            this.usernameDisplay.Name = "usernameDisplay";
+            this.usernameDisplay.Size = new System.Drawing.Size(46, 18);
+            this.usernameDisplay.TabIndex = 15;
+            this.usernameDisplay.Text = "User:";
+            // 
             // FormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.usernameDisplay);
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.chatsListBox);
             this.Controls.Add(this.btnWhisper);
@@ -299,7 +337,9 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -320,6 +360,9 @@
         private System.Windows.Forms.Button buttonChangePassword;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buttonChangeEmail;
-        private System.Windows.Forms.Button buttonChangeImage;
+        private MaterialSkin.Controls.MaterialButton optionsLogoutButton;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label usernameDisplay;
     }
 }

@@ -56,6 +56,11 @@ namespace PRIMA.Forms
                 this.Close();
         }
 
+        private void leavePasswordChangeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         /*
          * The following event happens when the Form Button is Pressed
          * 

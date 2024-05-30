@@ -35,6 +35,7 @@
             this.NewPasswordLabel = new MaterialSkin.Controls.MaterialLabel();
             this.ConfirmPasswordTextBox = new MaterialSkin.Controls.MaterialTextBox2();
             this.ConfirmPasswordLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.leavePasswordChangeButton = new MaterialSkin.Controls.MaterialButton();
             this.SuspendLayout();
             // 
             // OldPasswordTextBox
@@ -89,7 +90,7 @@
             this.ChangePasswordButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ChangePasswordButton.HighEmphasis = true;
             this.ChangePasswordButton.Icon = null;
-            this.ChangePasswordButton.Location = new System.Drawing.Point(142, 351);
+            this.ChangePasswordButton.Location = new System.Drawing.Point(114, 351);
             this.ChangePasswordButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ChangePasswordButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.ChangePasswordButton.Name = "ChangePasswordButton";
@@ -188,11 +189,35 @@
             this.ConfirmPasswordLabel.TabIndex = 13;
             this.ConfirmPasswordLabel.Text = "Confirm Password";
             // 
+            // leavePasswordChangeButton
+            // 
+            this.leavePasswordChangeButton.AutoSize = false;
+            this.leavePasswordChangeButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.leavePasswordChangeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.leavePasswordChangeButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.leavePasswordChangeButton.Depth = 0;
+            this.leavePasswordChangeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.leavePasswordChangeButton.HighEmphasis = true;
+            this.leavePasswordChangeButton.Icon = null;
+            this.leavePasswordChangeButton.Location = new System.Drawing.Point(202, 351);
+            this.leavePasswordChangeButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.leavePasswordChangeButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.leavePasswordChangeButton.Name = "leavePasswordChangeButton";
+            this.leavePasswordChangeButton.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.leavePasswordChangeButton.Size = new System.Drawing.Size(80, 36);
+            this.leavePasswordChangeButton.TabIndex = 15;
+            this.leavePasswordChangeButton.Text = "Leave";
+            this.leavePasswordChangeButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.leavePasswordChangeButton.UseAccentColor = false;
+            this.leavePasswordChangeButton.UseVisualStyleBackColor = false;
+            this.leavePasswordChangeButton.Click += new System.EventHandler(this.leavePasswordChangeButton_Click);
+            // 
             // FormPasswordChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 414);
+            this.Controls.Add(this.leavePasswordChangeButton);
             this.Controls.Add(this.ConfirmPasswordTextBox);
             this.Controls.Add(this.ConfirmPasswordLabel);
             this.Controls.Add(this.NewPasswordTextBox);
@@ -201,6 +226,7 @@
             this.Controls.Add(this.OldPasswordLabel);
             this.Controls.Add(this.ChangePasswordButton);
             this.Name = "FormPasswordChange";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormPasswordChange";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -216,5 +242,6 @@
         private MaterialSkin.Controls.MaterialLabel NewPasswordLabel;
         private MaterialSkin.Controls.MaterialTextBox2 ConfirmPasswordTextBox;
         private MaterialSkin.Controls.MaterialLabel ConfirmPasswordLabel;
+        private MaterialSkin.Controls.MaterialButton leavePasswordChangeButton;
     }
 }

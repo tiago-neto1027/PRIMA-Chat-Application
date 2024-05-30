@@ -34,7 +34,7 @@ namespace PRIMA
         }
         public void OpenFormApplication()
         {
-            FormApplication formApplication = new FormApplication(messageServiceInstance, clientServiceInstance);
+            FormApplication formApplication = new FormApplication(messageServiceInstance, clientServiceInstance, userServiceInstance);
             formApplication.ShowDialog();
         }
         public void OpenFormChangeEmail()
@@ -47,5 +47,6 @@ namespace PRIMA
             FormPasswordChange formPasswordChange = new FormPasswordChange(userServiceInstance);
             formPasswordChange.Show();
         }
+
     }
 }

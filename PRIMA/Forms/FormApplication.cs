@@ -26,6 +26,7 @@ namespace PRIMA
     {
         protected readonly IMessageService messageService;
         protected readonly IClientService clientService;
+        protected readonly IUserService userService;
         FormFactory formFactory = new FormFactory();
 
         bool settingsExpand;
@@ -34,13 +35,14 @@ namespace PRIMA
         Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
         private string selectedChat = "General";
 
-        public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance) : base()
+        public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance, IUserService userServiceInstance) : base()
         {
             InitializeComponent();
             SetComponentColors(config.Theme);
 
             clientService = clientServiceInstance;
             messageService = messageServerInstance;
+            userService = userServiceInstance;
             messageService.MessageReceived += MessageService_MessageReceived; //subscribes to an event in the MessageService
             messageService.StartReceivingMessages();
 
@@ -48,6 +50,9 @@ namespace PRIMA
             Chats.Add("General", new List<string>());
             UpdateChatsList();
             chatsListBox.SelectedIndex = 0;
+
+            //shows logged in username on screen
+            usernameDisplay.Text = "User: " + userService.GetUsername();
         }
 
         // This method merely sets the component colors to the right colors depending on the theme
@@ -211,11 +216,6 @@ namespace PRIMA
             ConfigManager.SaveConfig(config);
         }
 
-        // Changes the user Image
-        private void buttonChangeImage_Click(object sender, EventArgs e)
-        {
-
-        }
         // Changes the user email
 
         private void buttonChangeEmail_Click(object sender, EventArgs e)
@@ -226,6 +226,11 @@ namespace PRIMA
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
             formFactory.OpenFormChangePassword();
+        }
+
+        private void optionsLogoutButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
