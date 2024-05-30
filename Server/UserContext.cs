@@ -51,6 +51,14 @@ namespace Server
             user.HashedPassword = newPassword;
             SaveChanges();
         }
+        public string ReturnOldEmail(User user)
+        {
+            if (IfUserExists(user.Username))
+            {
+                return user.Email;
+            }
+            return "not found";
+        }
 
         public void InitializeDatabase()
         {

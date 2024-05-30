@@ -151,3 +151,4 @@ C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\obj\Debug\PRI
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.csproj.Up2Date
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.exe
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.pdb
+C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.Forms.FormPasswordChange.resources

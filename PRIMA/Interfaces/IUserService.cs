@@ -12,5 +12,6 @@ namespace PRIMA.Interfaces
         string RegisterUser(string username, string name, string email, string password);
         string ChangeEmail(string password, string newEmail);
         string ChangePass(string oldPasswordAttempt, string newPassword);
+        string ReturnOldMail();
     }
 }

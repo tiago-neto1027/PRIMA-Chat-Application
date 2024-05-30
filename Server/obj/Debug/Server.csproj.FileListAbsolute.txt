@@ -63,3 +63,4 @@ C:\Users\PmsSo\Documents\Projetos\PRIMA-Chat-Application\Server\obj\Debug\Server
 C:\Users\PmsSo\Documents\Projetos\PRIMA-Chat-Application\Server\obj\Debug\Server.exe
 C:\Users\PmsSo\Documents\Projetos\PRIMA-Chat-Application\Server\obj\Debug\Server.pdb
 C:\Users\PmsSo\Documents\Projetos\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.GeneralChatMessages.resources
+C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.GeneralChatMessages.resources

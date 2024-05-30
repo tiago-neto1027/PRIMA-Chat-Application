@@ -49,8 +49,19 @@ namespace PRIMA
             string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_4, data);
 
             return response;
+        }
+        public string ReturnOldMail()
+        {
+            string data = "OldMail";
+            string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_9, data);
+            return response;
+        }
 
-           
+        public string GetUsername()
+        {
+            string data = "Username";
+            string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_9, data);
+            return response;
         }
     }
 }
