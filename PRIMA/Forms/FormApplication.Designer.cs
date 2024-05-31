@@ -116,12 +116,12 @@
             this.messagesListBox.BorderColor = System.Drawing.Color.LightGray;
             this.messagesListBox.Depth = 0;
             this.messagesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.messagesListBox.Location = new System.Drawing.Point(259, 88);
+            this.messagesListBox.Location = new System.Drawing.Point(258, 67);
             this.messagesListBox.MouseState = MaterialSkin.MouseState.HOVER;
             this.messagesListBox.Name = "messagesListBox";
             this.messagesListBox.SelectedIndex = -1;
             this.messagesListBox.SelectedItem = null;
-            this.messagesListBox.Size = new System.Drawing.Size(534, 299);
+            this.messagesListBox.Size = new System.Drawing.Size(534, 320);
             this.messagesListBox.TabIndex = 3;
             // 
             // btnWhisper
@@ -308,10 +308,12 @@
             // usernameDisplay
             // 
             this.usernameDisplay.AutoSize = true;
+            this.usernameDisplay.BackColor = System.Drawing.Color.Transparent;
             this.usernameDisplay.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameDisplay.Location = new System.Drawing.Point(258, 67);
+            this.usernameDisplay.ForeColor = System.Drawing.Color.White;
+            this.usernameDisplay.Location = new System.Drawing.Point(254, 43);
             this.usernameDisplay.Name = "usernameDisplay";
-            this.usernameDisplay.Size = new System.Drawing.Size(46, 18);
+            this.usernameDisplay.Size = new System.Drawing.Size(58, 21);
             this.usernameDisplay.TabIndex = 15;
             this.usernameDisplay.Text = "User:";
             // 

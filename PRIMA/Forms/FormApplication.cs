@@ -135,14 +135,21 @@ namespace PRIMA
         //This function updates the messages in the right list box
         private void UpdateMessagesList()
         {
-            messagesListBox.Items.Clear();
-
-            if (Chats.ContainsKey(selectedChat))
+            if (messagesListBox.InvokeRequired)
             {
-                foreach (var message in Chats[selectedChat])
+                messagesListBox.Invoke(new Action(UpdateMessagesList));
+            }
+            else
+            {
+                messagesListBox.Items.Clear();
+
+                if (Chats.ContainsKey(selectedChat))
                 {
-                    MaterialListBoxItem item = new MaterialListBoxItem(message);
-                    messagesListBox.Items.Add(item);
+                    foreach (var message in Chats[selectedChat])
+                    {
+                        MaterialListBoxItem item = new MaterialListBoxItem(message);
+                        messagesListBox.Items.Add(item);
+                    }
                 }
             }
         }
