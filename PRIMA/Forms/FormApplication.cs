@@ -190,12 +190,14 @@ namespace PRIMA
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
                 settingsPanel.BackColor = Color.Gray;
                 config.Theme = "Dark";
+                DarkTheme();
             }
             else
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
                 settingsPanel.BackColor = Color.White;
                 config.Theme = "Light";
+                DefaultTheme();
             }
 
             ConfigManager.SaveConfig(config);

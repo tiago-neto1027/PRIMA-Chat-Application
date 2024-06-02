@@ -163,7 +163,9 @@
             this.Controls.Add(this.labelUserName);
             this.Controls.Add(this.loginTBoxPassword);
             this.Controls.Add(this.loginTBoxUser);
+            this.MaximizeBox = false;
             this.Name = "FormLogin";
+            this.Sizable = false;
             this.Text = "PRIMA Login";
             this.ResumeLayout(false);
             this.PerformLayout();

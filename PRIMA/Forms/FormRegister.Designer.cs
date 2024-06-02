@@ -241,7 +241,10 @@
             this.Controls.Add(this.registryTBoxPassword);
             this.Controls.Add(this.registryTBoxEmail);
             this.Controls.Add(this.registryTBoxUserName);
+            this.MaximizeBox = false;
             this.Name = "FormRegister";
+            this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PRIMA Register";
             this.ResumeLayout(false);
             this.PerformLayout();
