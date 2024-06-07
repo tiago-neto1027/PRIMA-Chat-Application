@@ -56,38 +56,8 @@ namespace PRIMA
             string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";  //Change the password parameters here
             string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|pt)$"; //Change the email parameters here
 
-            if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text))
-            {
-                MessageBox.Show("Username is empty!");
-                return;
-            }
-            if(string.IsNullOrWhiteSpace(registryTBoxName.Text))
-            {
-                MessageBox.Show("Name is empty!");
-                return;
-            }
-            if(string.IsNullOrWhiteSpace(registryTBoxEmail.Text))
-            {
-                MessageBox.Show("Email is empty!");
-                return;
-            }
-            if(string.IsNullOrWhiteSpace(registryTBoxPassword.Text))
-            {
-                MessageBox.Show("Password is empty!");
-                return;
-            }
-
-            if (CheckSpecialCharacters(registryTBoxUserName.Text))
-            {
-                MessageBox.Show("Username can't have special characters");
-                return;
-            }
-            if (CheckSpecialCharacters(registryTBoxName.Text))
-            {
-                MessageBox.Show("Name can't have special characters");
-                return;
-            }
-
+            CheckIfFieldsEmpty();
+            CheckIfSpecialChars();
 
             if (!Regex.IsMatch(registryTBoxPassword.Text, passwordPattern))
             {
@@ -128,6 +98,44 @@ namespace PRIMA
             if (response != "Success")
             {
                 MessageBox.Show(response);
+            }
+        }
+
+        private void CheckIfSpecialChars()
+        {
+            if (CheckSpecialCharacters(registryTBoxUserName.Text))
+            {
+                MessageBox.Show("Username can't have special characters");
+                return;
+            }
+            if (CheckSpecialCharacters(registryTBoxName.Text))
+            {
+                MessageBox.Show("Name can't have special characters");
+                return;
+            }
+        }
+
+        private void CheckIfFieldsEmpty()
+        {
+            if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text))
+            {
+                MessageBox.Show("Username is empty!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(registryTBoxName.Text))
+            {
+                MessageBox.Show("Name is empty!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(registryTBoxEmail.Text))
+            {
+                MessageBox.Show("Email is empty!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(registryTBoxPassword.Text))
+            {
+                MessageBox.Show("Password is empty!");
+                return;
             }
         }
 
