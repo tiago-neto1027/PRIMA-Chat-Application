@@ -110,7 +110,11 @@ namespace Server
                             {
                                 var user = db.Users.First(u => u.Username == usernameLogin);
 
-                                if (passwordLogin != user.HashedPassword)
+                                byte[] saltBytes = Convert.FromBase64String(user.Salt);
+                                byte[] hashedPasswordWithSalt = SecurityUtils.GenerateSaltedHash(passwordLogin, saltBytes);
+                                byte[] storedHashedPassword = Convert.FromBase64String(user.HashedPassword);
+
+                                if (!hashedPasswordWithSalt.SequenceEqual(storedHashedPassword))
                                 {
                                     byte[] ackLogin;
                                     ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The credentials are incorrect!");
@@ -134,7 +138,8 @@ namespace Server
                         string usernameRegister = splited[0];
                         string name = splited[1];
                         string email = splited[2];
-                        string passwordRegister = splited[3];
+                        string saltRegister = splited[3];
+                        string passwordRegister = splited[4];
 
                         using (var db = new UserContext())
                         {
@@ -146,7 +151,7 @@ namespace Server
                             }
                             else
                             {
-                                var user = new User(usernameRegister, name, passwordRegister, email);
+                                var user = new User(usernameRegister, name, saltRegister, passwordRegister, email);
                                 db.Users.Add(user);
                                 db.SaveChanges();
 
@@ -170,7 +175,7 @@ namespace Server
                             {
                                 var user = db.FindUserByUsername(username);
                                 byte[] ack;
-                                if (db.PasswordConfirmed(user, password))
+                                if (db.PasswordConfirmed(user, password, user.Salt))
                                 {
                                     db.UpdateUserEmail(username, newEmail);
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Email changed successfully!");
@@ -189,6 +194,7 @@ namespace Server
 
                         string oldPasswordAttempt = splited[0];
                         string newPassword = splited[1];
+                        string newSalt = splited[2];
                         string currentUsername = clients[client];
 
                         using (var db = new UserContext())
@@ -197,9 +203,9 @@ namespace Server
                             {
                                 var user = db.FindUserByUsername(currentUsername);
                                 byte[] ack;
-                                if(db.PasswordConfirmed(user, oldPasswordAttempt))
+                                if(db.PasswordConfirmed(user, oldPasswordAttempt, user.Salt))
                                 {
-                                    db.UpdateUserPassword(currentUsername, newPassword);
+                                    db.UpdateUserPassword(currentUsername, newPassword, newSalt);
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Password changed successfully!");
                                     networkStream.Write(ack, 0, ack.Length);
                                 }

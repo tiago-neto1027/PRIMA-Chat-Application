@@ -111,6 +111,7 @@
     <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IMessageService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="SecurityUtils.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\MessageService.cs" />

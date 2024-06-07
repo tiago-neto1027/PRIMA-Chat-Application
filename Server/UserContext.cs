@@ -23,20 +23,10 @@ namespace Server
             return Users.Any(u => u.Username == username);
         }
 
-        public void UpdateUserProfilePic(string username, byte[] newProfilePic)
+        public bool PasswordConfirmed(User user, string password, string salt)
         {
-            var user = Users.FirstOrDefault(u => u.Username == username);
-            user.ProfilePic = newProfilePic;
-            SaveChanges();
-        }
-
-        public bool PasswordConfirmed(User user,string password)
-        {
-            if(user.HashedPassword == password)
-            {
-                return true;
-            }
-            return false;
+            var hashedPassword = SecurityUtils.GenerateSaltedHash(password, Convert.FromBase64String(user.Salt));
+            return user.HashedPassword == Convert.ToBase64String(hashedPassword);
         }
 
         public void UpdateUserEmail(string username,  string newEmail)
@@ -45,10 +35,11 @@ namespace Server
             user.Email = newEmail;
             SaveChanges();
         }
-        public void UpdateUserPassword(string username, string newPassword)
+        public void UpdateUserPassword(string username, string newPassword, string newSalt)
         {
             var user = FindUserByUsername(username);
             user.HashedPassword = newPassword;
+            user.Salt = newSalt;
             SaveChanges();
         }
         public string ReturnOldEmail(User user)
@@ -69,7 +60,7 @@ namespace Server
                 Users.Any(u => u.ID == 0);
             } catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
         }
     }

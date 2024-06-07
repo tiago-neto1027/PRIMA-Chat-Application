@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace PRIMA
 {
@@ -105,7 +106,15 @@ namespace PRIMA
             string email = registryTBoxEmail.Text;
             string password = registryTBoxPassword.Text;
 
-            string response = userService.RegisterUser(username, name, email, password);
+            password = SecurityUtils.HashPassword(password);
+
+            byte[] salt = SecurityUtils.GenerateSalt();
+            byte[] saltedHash = SecurityUtils.GenerateSaltedHash(password, salt);
+
+            string saltString = Convert.ToBase64String(salt);
+            string saltedHashString = Convert.ToBase64String(saltedHash);
+
+            string response = userService.RegisterUser(username, name, email, saltString, saltedHashString);
 
             if(response == "Success")
             {

@@ -69,9 +69,14 @@
     <Compile Include="Migrations\202405152012082_GeneralChatMessages.Designer.cs">
       <DependentUpon>202405152012082_GeneralChatMessages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406070652047_Added Salt.cs" />
+    <Compile Include="Migrations\202406070652047_Added Salt.Designer.cs">
+      <DependentUpon>202406070652047_Added Salt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityUtils.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>
@@ -88,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405152012082_GeneralChatMessages.resx">
       <DependentUpon>202405152012082_GeneralChatMessages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406070652047_Added Salt.resx">
+      <DependentUpon>202406070652047_Added Salt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
