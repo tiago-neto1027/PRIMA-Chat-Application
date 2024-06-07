@@ -313,7 +313,7 @@
             this.usernameDisplay.ForeColor = System.Drawing.Color.White;
             this.usernameDisplay.Location = new System.Drawing.Point(254, 43);
             this.usernameDisplay.Name = "usernameDisplay";
-            this.usernameDisplay.Size = new System.Drawing.Size(58, 21);
+            this.usernameDisplay.Size = new System.Drawing.Size(46, 18);
             this.usernameDisplay.TabIndex = 15;
             this.usernameDisplay.Text = "User:";
             // 
@@ -330,7 +330,9 @@
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.messageTBox);
             this.Controls.Add(this.btnSend);
+            this.MaximizeBox = false;
             this.Name = "FormApplication";
+            this.Sizable = false;
             this.Text = "PRIMA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormApplication_FormClosing);
             this.settingsPanel.ResumeLayout(false);

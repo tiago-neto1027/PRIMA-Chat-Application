@@ -20,9 +20,8 @@ namespace PRIMA.Forms
         {
             userService = userServiceInstance;
             InitializeComponent();
-            // TODO: Update the Old Email Label on opening
-            OldEmailBox.Text = userService.ReturnOldMail();
 
+            OldEmailBox.Text = userService.ReturnOldMail();
         }
 
         /*

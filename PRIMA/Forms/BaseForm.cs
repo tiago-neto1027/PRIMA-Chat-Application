@@ -36,8 +36,40 @@ namespace PRIMA
             if (config.Theme == "Dark")
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+                DarkTheme();
             }
         }
+       
+        public void DefaultTheme()
+        {
+            if(config.Theme == "Light")
+            {
+                materialSkinManager.ColorScheme = new ColorScheme(
+                    Primary.Indigo500, 
+                    Primary.Indigo700, 
+                    Primary.Indigo100, 
+                    Accent.Pink200, 
+                    TextShade.WHITE
+                    );
+            }
+
+        }
+
+        public void DarkTheme()
+        {
+            if(config.Theme == "Dark")
+            {
+                materialSkinManager.ColorScheme = new ColorScheme(
+                    Primary.BlueGrey800, 
+                    Primary.BlueGrey900, 
+                    Primary.BlueGrey500, 
+                    Accent.LightBlue200, 
+                    TextShade.WHITE
+                    );
+            }
+
+        }
+        
 
         // Returns true if it has special characters
         public bool CheckSpecialCharacters(string content)

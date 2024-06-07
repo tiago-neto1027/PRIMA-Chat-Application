@@ -225,7 +225,9 @@
             this.Controls.Add(this.OldPasswordTextBox);
             this.Controls.Add(this.OldPasswordLabel);
             this.Controls.Add(this.ChangePasswordButton);
+            this.MaximizeBox = false;
             this.Name = "FormPasswordChange";
+            this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormPasswordChange";
             this.ResumeLayout(false);

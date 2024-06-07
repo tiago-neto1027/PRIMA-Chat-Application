@@ -181,6 +181,7 @@
             this.leaveEmailChangeButton.UseAccentColor = false;
             this.leaveEmailChangeButton.UseVisualStyleBackColor = false;
             this.leaveEmailChangeButton.Click += new System.EventHandler(this.leaveEmailChangeButton_Click);
+            // 
             // OldEmailBox
             // 
             this.OldEmailBox.AnimateReadOnly = false;
@@ -223,7 +224,9 @@
             this.Controls.Add(this.NewEmailLabel);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.ChangeEmailButton);
+            this.MaximizeBox = false;
             this.Name = "FormEmailChange";
+            this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Email Change";
             this.ResumeLayout(false);
