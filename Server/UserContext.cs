@@ -23,10 +23,12 @@ namespace Server
             return Users.Any(u => u.Username == username);
         }
 
-        public bool PasswordConfirmed(User user, string password, string salt)
+        public bool PasswordConfirmed(User user, string password)
         {
-            var hashedPassword = SecurityUtils.GenerateSaltedHash(password, Convert.FromBase64String(user.Salt));
-            return user.HashedPassword == Convert.ToBase64String(hashedPassword);
+            byte[] saltBytes = Convert.FromBase64String(user.Salt);
+            byte[] hashedPasswordWithSalt = SecurityUtils.GenerateSaltedHash(password, saltBytes);
+            byte[] storedHashedPassword = Convert.FromBase64String(user.HashedPassword);
+            return hashedPasswordWithSalt.SequenceEqual(storedHashedPassword);
         }
 
         public void UpdateUserEmail(string username,  string newEmail)

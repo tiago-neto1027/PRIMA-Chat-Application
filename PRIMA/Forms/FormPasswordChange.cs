@@ -27,7 +27,7 @@ namespace PRIMA.Forms
         {
             string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";
 
-            string oldPassword = OldPasswordTextBox.Text;
+            string oldPassword = SecurityUtils.HashPassword(OldPasswordTextBox.Text);
             string newPassword = NewPasswordTextBox.Text;
             string confirmPassword = ConfirmPasswordTextBox.Text;
 
@@ -50,7 +50,15 @@ namespace PRIMA.Forms
                 return;
             }
 
-            string response = userService.ChangePass(oldPassword, newPassword);
+            newPassword = SecurityUtils.HashPassword(newPassword);
+
+            byte[] newSalt = SecurityUtils.GenerateSalt();
+            byte[] saltedHash = SecurityUtils.GenerateSaltedHash(newPassword, newSalt);
+
+            string saltString = Convert.ToBase64String(newSalt);
+            string saltedHashString = Convert.ToBase64String(saltedHash);
+
+            string response = userService.ChangePass(oldPassword, saltedHashString, saltString);
             MessageBox.Show(response);
             if (response == "Success!")
                 this.Close();
@@ -60,12 +68,5 @@ namespace PRIMA.Forms
         {
             this.Close();
         }
-
-        /*
-         * The following event happens when the Form Button is Pressed
-         * 
-         * 
-        */
-
     }
 }

@@ -110,11 +110,7 @@ namespace Server
                             {
                                 var user = db.Users.First(u => u.Username == usernameLogin);
 
-                                byte[] saltBytes = Convert.FromBase64String(user.Salt);
-                                byte[] hashedPasswordWithSalt = SecurityUtils.GenerateSaltedHash(passwordLogin, saltBytes);
-                                byte[] storedHashedPassword = Convert.FromBase64String(user.HashedPassword);
-
-                                if (!hashedPasswordWithSalt.SequenceEqual(storedHashedPassword))
+                                if (!db.PasswordConfirmed(user, passwordLogin))
                                 {
                                     byte[] ackLogin;
                                     ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The credentials are incorrect!");
@@ -168,6 +164,8 @@ namespace Server
                         string password = splited[0];
                         string newEmail = splited[1];
                         string username = clients[client];
+
+
                         using (var db = new UserContext())
                         {
 
@@ -175,7 +173,7 @@ namespace Server
                             {
                                 var user = db.FindUserByUsername(username);
                                 byte[] ack;
-                                if (db.PasswordConfirmed(user, password, user.Salt))
+                                if (db.PasswordConfirmed(user, password))
                                 {
                                     db.UpdateUserEmail(username, newEmail);
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Email changed successfully!");
@@ -203,7 +201,7 @@ namespace Server
                             {
                                 var user = db.FindUserByUsername(currentUsername);
                                 byte[] ack;
-                                if(db.PasswordConfirmed(user, oldPasswordAttempt, user.Salt))
+                                if(db.PasswordConfirmed(user, oldPasswordAttempt))
                                 {
                                     db.UpdateUserPassword(currentUsername, newPassword, newSalt);
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Password changed successfully!");
