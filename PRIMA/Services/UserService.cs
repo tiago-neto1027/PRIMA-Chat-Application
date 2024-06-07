@@ -26,10 +26,9 @@ namespace PRIMA
             return response;
         }
 
-        public string RegisterUser(string username, string name, string email, string password)
+        public string RegisterUser(string username, string name, string email, string salt, string saltedHash)
         {
-            // TODO: Implement password encryption
-            string data = $"{username}|{name}|{email}|{password}";
+            string data = $"{username}|{name}|{email}|{salt}|{saltedHash}";
             string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_2, data);
 
             return response;
@@ -43,9 +42,9 @@ namespace PRIMA
             return response;
         }
 
-        public string ChangePass(string oldPasswordAttempt, string newPassword)
+        public string ChangePass(string oldPasswordAttempt, string newPassword, string newSalt)
         {
-            string data = oldPasswordAttempt + "|" + newPassword;
+            string data = oldPasswordAttempt + "|" + newPassword + "|" + newSalt;
             string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_4, data);
 
             return response;

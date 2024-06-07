@@ -35,7 +35,7 @@ namespace PRIMA.Forms
         {
 
             string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|pt)$"; //Change the email verification parameters here
-            string password = PasswordTextBox.Text;
+            string password = SecurityUtils.HashPassword(PasswordTextBox.Text);
             string newEmail = NewEmailTextBox.Text;
 
             if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(newEmail))

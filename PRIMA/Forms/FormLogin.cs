@@ -54,6 +54,7 @@ namespace PRIMA
                 return;
             }
 
+            password = SecurityUtils.HashPassword(password);
             string response = userService.LogInUser(username, password);
 
             if(response == "Success")
