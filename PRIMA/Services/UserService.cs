@@ -23,9 +23,9 @@ namespace PRIMA
             client.SendDATA(ProtocolSICmdType.USER_OPTION_5, username);
         }
 
-        public void SendPublicKey(string publicKey)
+        public string SendPublicKey(string publicKey)
         {
-            client.SendDATA(ProtocolSICmdType.PUBLIC_KEY, publicKey);
+            return client.SendDATA(ProtocolSICmdType.PUBLIC_KEY, publicKey);
         }
 
         public string LogInUser(string username, string password)

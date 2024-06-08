@@ -28,6 +28,8 @@ namespace PRIMA
         public string PublicKey {  get; private set; }
         public string PrivateKey { get; private set; }
 
+        public byte[] SymmetricKey { get; set; }
+
         public static Client Instance
         {
             get

@@ -12,6 +12,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace PRIMA
 {
@@ -57,7 +58,20 @@ namespace PRIMA
 
             //Send Username and public key to the server
             userService.SendUsername(username);
-            userService.SendPublicKey(publicKey);
+            string encryptedSymmetricKey = userService.SendPublicKey(publicKey);
+
+            //Decrypt the symmetric key using the client's private key
+            byte[] encryptedSymmetricKeyBytes = Convert.FromBase64String(encryptedSymmetricKey);
+            byte[] decryptedSymmetricKeyBytes = null;
+
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(Client.Instance.PrivateKey);
+                decryptedSymmetricKeyBytes = rsa.Decrypt(encryptedSymmetricKeyBytes, RSAEncryptionPadding.Pkcs1);
+            }
+
+            //Store the symmetricKey in the Client Class
+            Client.Instance.SymmetricKey = decryptedSymmetricKeyBytes;
 
             string saltString = userService.GetSalt();
             byte[] salt = Convert.FromBase64String(saltString);
@@ -79,7 +93,7 @@ namespace PRIMA
                 MessageBox.Show(response);
             }
         }
-
+        
         /* This allows the user to log in by pressing the "Enter" Key */
         private void loginTBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {

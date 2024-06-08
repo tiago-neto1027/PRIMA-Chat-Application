@@ -9,6 +9,7 @@ using EI.SI;
 using System.Threading;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Security.Cryptography;
 
 namespace Server
 {
@@ -35,6 +36,7 @@ namespace Server
 
             Dictionary<TcpClient, string> clients = new Dictionary<TcpClient, string>();
             Dictionary<TcpClient, string> clientPublicKeys = new Dictionary<TcpClient, string>();
+            Dictionary<TcpClient, byte[]> clientSymmetricKeys = new Dictionary<TcpClient, byte[]>();
 
             while (true)
             {
@@ -42,7 +44,7 @@ namespace Server
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine("New application connected");
 
-                ClientHandler clientHandler = new ClientHandler(client, clients, clientPublicKeys, null);
+                ClientHandler clientHandler = new ClientHandler(client, clients, clientPublicKeys, clientSymmetricKeys ,null);
                 clientHandler.Handle();
             }
         }
@@ -53,13 +55,20 @@ namespace Server
         private TcpClient client;
         private Dictionary<TcpClient, string> clients;
         private Dictionary<TcpClient, string> clientPublicKeys;
+        private Dictionary<TcpClient, byte[]> clientSymmetricKeys;
         private string username;
 
-        public ClientHandler(TcpClient client, Dictionary<TcpClient, string> clients, Dictionary<TcpClient, string> clientPublicKeys, string username)
+        public ClientHandler(
+            TcpClient client,
+            Dictionary<TcpClient, string> clients,
+            Dictionary<TcpClient, string> clientPublicKeys,
+            Dictionary<TcpClient, byte[]> clientSymmetricKeys,
+            string username)
         {
             this.client = client;
             this.clients = clients;
             this.clientPublicKeys = clientPublicKeys;
+            this.clientSymmetricKeys = clientSymmetricKeys;
             this.username = username;
         }
 
@@ -100,10 +109,21 @@ namespace Server
                         string publicKey = splited[0];
                         clientPublicKeys[client] = publicKey;
 
-                        byte[] ackPublicKey = protocolSI.Make(ProtocolSICmdType.ACK);
-                        networkStream.Write(ackPublicKey, 0, ackPublicKey.Length);
+                        using (Aes aes = Aes.Create())
+                        {
+                            aes.GenerateKey();
+                            clientSymmetricKeys[client] = aes.Key;
+                        }
 
-                        Console.WriteLine(clientPublicKeys[client]);
+                        using (RSA rsa = RSA.Create())
+                        {
+                            rsa.FromXmlString(publicKey);
+                            byte[] encryptedSymmetricKey = rsa.Encrypt(clientSymmetricKeys[client], RSAEncryptionPadding.Pkcs1);
+
+                            byte[] ackPublicKey = protocolSI.Make(ProtocolSICmdType.ACK, Convert.ToBase64String(encryptedSymmetricKey));
+                            networkStream.Write(ackPublicKey, 0, ackPublicKey.Length);
+                        }
+
                         break;
 
                     case ProtocolSICmdType.USER_OPTION_1: //USER_OPTION_1 == Login
