@@ -241,5 +241,32 @@ namespace PRIMA
         {
             this.Close();
         }
+
+        //Hover for the buttons
+        private void buttonChangePassword_MouseEnter(object sender, EventArgs e)
+        {
+            if(materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
+            {
+                buttonChangePassword.BackColor = Color.Gray;
+            }
+        }
+
+        private void buttonChangePassword_MouseLeave(object sender, EventArgs e)
+        {
+            buttonChangePassword.BackColor = Color.Transparent;
+        }
+
+        private void buttonChangeEmail_MouseEnter(object sender, EventArgs e)
+        {
+            if (materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
+            {
+                buttonChangeEmail.BackColor = Color.Gray;
+            }
+        }
+
+        private void buttonChangeEmail_MouseLeave(object sender, EventArgs e)
+        {
+            buttonChangeEmail.BackColor = Color.Transparent;
+        }
     }
 }

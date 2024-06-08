@@ -238,6 +238,8 @@
             this.buttonChangePassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonChangePassword.UseVisualStyleBackColor = false;
             this.buttonChangePassword.Click += new System.EventHandler(this.buttonChangePassword_Click);
+            this.buttonChangePassword.MouseEnter += new System.EventHandler(this.buttonChangePassword_MouseEnter);
+            this.buttonChangePassword.MouseLeave += new System.EventHandler(this.buttonChangePassword_MouseLeave);
             // 
             // panel3
             // 
@@ -261,6 +263,8 @@
             this.buttonChangeEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonChangeEmail.UseVisualStyleBackColor = false;
             this.buttonChangeEmail.Click += new System.EventHandler(this.buttonChangeEmail_Click);
+            this.buttonChangeEmail.MouseEnter += new System.EventHandler(this.buttonChangeEmail_MouseEnter);
+            this.buttonChangeEmail.MouseLeave += new System.EventHandler(this.buttonChangeEmail_MouseLeave);
             // 
             // panel4
             // 
