@@ -34,6 +34,7 @@ namespace Server
             Console.WriteLine("SERVER READY");
 
             Dictionary<TcpClient, string> clients = new Dictionary<TcpClient, string>();
+            Dictionary<TcpClient, string> clientPublicKeys = new Dictionary<TcpClient, string>();
 
             while (true)
             {
@@ -41,7 +42,7 @@ namespace Server
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine("New application connected");
 
-                ClientHandler clientHandler = new ClientHandler(client, clients, null);
+                ClientHandler clientHandler = new ClientHandler(client, clients, clientPublicKeys, null);
                 clientHandler.Handle();
             }
         }
@@ -51,12 +52,14 @@ namespace Server
     {
         private TcpClient client;
         private Dictionary<TcpClient, string> clients;
+        private Dictionary<TcpClient, string> clientPublicKeys;
         private string username;
 
-        public ClientHandler(TcpClient client, Dictionary<TcpClient, string> clients, string username)
+        public ClientHandler(TcpClient client, Dictionary<TcpClient, string> clients, Dictionary<TcpClient, string> clientPublicKeys, string username)
         {
             this.client = client;
             this.clients = clients;
+            this.clientPublicKeys = clientPublicKeys;
             this.username = username;
         }
 
@@ -93,6 +96,16 @@ namespace Server
 
                 switch (protocolSI.GetCmdType())
                 {
+                    case ProtocolSICmdType.PUBLIC_KEY:
+                        string publicKey = splited[0];
+                        clientPublicKeys[client] = publicKey;
+
+                        byte[] ackPublicKey = protocolSI.Make(ProtocolSICmdType.ACK);
+                        networkStream.Write(ackPublicKey, 0, ackPublicKey.Length);
+
+                        Console.WriteLine(clientPublicKeys[client]);
+                        break;
+
                     case ProtocolSICmdType.USER_OPTION_1: //USER_OPTION_1 == Login
 
                         string usernameLogin = splited[0];

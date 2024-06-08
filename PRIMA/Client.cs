@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using PRIMA.Interfaces;
+using System.Security.Cryptography;
 
 namespace PRIMA
 {
@@ -23,6 +24,9 @@ namespace PRIMA
         protected NetworkStream networkStream;
         protected TcpClient tcpClient;
         protected ProtocolSI protocolSI;
+
+        public string PublicKey {  get; private set; }
+        public string PrivateKey { get; private set; }
 
         public static Client Instance
         {
@@ -43,6 +47,17 @@ namespace PRIMA
             tcpClient.Connect(endPoint);
             networkStream = tcpClient.GetStream();
             protocolSI = new ProtocolSI();
+
+            GenerateKeys();
+        }
+
+        private void GenerateKeys()
+        {
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                PublicKey = rsa.ToXmlString(false);
+                PrivateKey = rsa.ToXmlString(true);
+            }
         }
 
         /* The following Method closes a client.

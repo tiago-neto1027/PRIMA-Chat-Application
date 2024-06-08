@@ -40,6 +40,7 @@ namespace PRIMA
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = loginTBoxUser.Text;
+            string publicKey = Client.Instance.PublicKey;
             string password = loginTBoxPassword.Text;
 
             if (CheckSpecialCharacters(username))
@@ -53,7 +54,10 @@ namespace PRIMA
                 MessageBox.Show("The password can't have special characters");
                 return;
             }
+
+            //Send Username and public key to the server
             userService.SendUsername(username);
+            userService.SendPublicKey(publicKey);
 
             string saltString = userService.GetSalt();
             byte[] salt = Convert.FromBase64String(saltString);
