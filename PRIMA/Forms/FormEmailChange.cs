@@ -35,7 +35,7 @@ namespace PRIMA.Forms
         {
 
             string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|pt)$"; //Change the email verification parameters here
-            string password = SecurityUtils.HashPassword(PasswordTextBox.Text);
+            string password = PasswordTextBox.Text;
             string newEmail = NewEmailTextBox.Text;
 
             if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(newEmail))
@@ -51,7 +51,13 @@ namespace PRIMA.Forms
             }
             else
             {
-                string response = userService.ChangeEmail(password, newEmail);
+                string saltString = userService.GetSalt();
+                byte[] salt = Convert.FromBase64String(saltString);
+
+                byte[] hashedPassword = SecurityUtils.GenerateSaltedHash(password, salt);
+                string hashedPasswordString = Convert.ToBase64String(hashedPassword);
+
+                string response = userService.ChangeEmail(hashedPasswordString, newEmail);
                 MessageBox.Show(response);
                 if (response == "Email changed successfully!")
                 {

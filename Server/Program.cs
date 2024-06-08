@@ -216,6 +216,18 @@ namespace Server
                         }
                         break;
 
+                    case ProtocolSICmdType.USER_OPTION_5: //USER_OPTION_5 == RECEIVES THE CLIENT USERNAME
+
+                        string updateUsername = splited[0];
+
+                        this.username = updateUsername;
+                        clients[client] = updateUsername;
+
+                        byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK);
+                        networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+
+                        break;
+
                     case ProtocolSICmdType.USER_OPTION_9: //USER_OPTION_9 == GET OLD INFO
                         string type = splited[0];
                         string usernam = clients[client];
@@ -228,12 +240,15 @@ namespace Server
                                 switch (type)
                                 {
                                     case "OldMail":
-                                        string oldMail = db.ReturnOldEmail(user);
-                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, oldMail);
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, user.Email);
                                         networkStream.Write(ack, 0, ack.Length);
                                         break;
                                     case "Username":
                                         ack = protocolSI.Make(ProtocolSICmdType.ACK, usernam);
+                                        networkStream.Write(ack, 0, ack.Length);
+                                        break;
+                                    case "Salt":
+                                        ack = protocolSI.Make(ProtocolSICmdType.ACK, user.Salt);
                                         networkStream.Write(ack, 0, ack.Length);
                                         break;
                                 }

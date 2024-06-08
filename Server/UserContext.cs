@@ -25,10 +25,9 @@ namespace Server
 
         public bool PasswordConfirmed(User user, string password)
         {
-            byte[] saltBytes = Convert.FromBase64String(user.Salt);
-            byte[] hashedPasswordWithSalt = SecurityUtils.GenerateSaltedHash(password, saltBytes);
-            byte[] storedHashedPassword = Convert.FromBase64String(user.HashedPassword);
-            return hashedPasswordWithSalt.SequenceEqual(storedHashedPassword);
+            if (user.HashedPassword == password)
+                return true;
+            return false;
         }
 
         public void UpdateUserEmail(string username,  string newEmail)
@@ -43,14 +42,6 @@ namespace Server
             user.HashedPassword = newPassword;
             user.Salt = newSalt;
             SaveChanges();
-        }
-        public string ReturnOldEmail(User user)
-        {
-            if (IfUserExists(user.Username))
-            {
-                return user.Email;
-            }
-            return "not found";
         }
 
         public void InitializeDatabase()

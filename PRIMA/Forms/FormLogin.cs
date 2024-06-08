@@ -53,9 +53,15 @@ namespace PRIMA
                 MessageBox.Show("The password can't have special characters");
                 return;
             }
+            userService.SendUsername(username);
 
-            password = SecurityUtils.HashPassword(password);
-            string response = userService.LogInUser(username, password);
+            string saltString = userService.GetSalt();
+            byte[] salt = Convert.FromBase64String(saltString);
+
+            byte[] hashedPassword = SecurityUtils.GenerateSaltedHash(password, salt);
+            string hashedPasswordString = Convert.ToBase64String(hashedPassword);
+
+            string response = userService.LogInUser(username, hashedPasswordString);
 
             if(response == "Success")
             {
