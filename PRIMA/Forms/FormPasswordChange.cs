@@ -68,5 +68,15 @@ namespace PRIMA.Forms
         {
             this.Close();
         }
+
+        private void ConfirmPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                ChangePasswordButton_Click(sender, e);
+            }
+        }
     }
 }

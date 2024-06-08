@@ -53,7 +53,7 @@
             this.ChangeEmailButton.Name = "ChangeEmailButton";
             this.ChangeEmailButton.NoAccentTextColor = System.Drawing.Color.Empty;
             this.ChangeEmailButton.Size = new System.Drawing.Size(80, 36);
-            this.ChangeEmailButton.TabIndex = 0;
+            this.ChangeEmailButton.TabIndex = 2;
             this.ChangeEmailButton.Text = "Change";
             this.ChangeEmailButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ChangeEmailButton.UseAccentColor = false;
@@ -125,7 +125,7 @@
             this.PasswordTextBox.SelectionStart = 0;
             this.PasswordTextBox.ShortcutsEnabled = true;
             this.PasswordTextBox.Size = new System.Drawing.Size(189, 48);
-            this.PasswordTextBox.TabIndex = 7;
+            this.PasswordTextBox.TabIndex = 0;
             this.PasswordTextBox.TabStop = false;
             this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.PasswordTextBox.TrailingIcon = null;
@@ -154,11 +154,12 @@
             this.NewEmailTextBox.SelectionStart = 0;
             this.NewEmailTextBox.ShortcutsEnabled = true;
             this.NewEmailTextBox.Size = new System.Drawing.Size(189, 48);
-            this.NewEmailTextBox.TabIndex = 8;
+            this.NewEmailTextBox.TabIndex = 1;
             this.NewEmailTextBox.TabStop = false;
             this.NewEmailTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.NewEmailTextBox.TrailingIcon = null;
             this.NewEmailTextBox.UseSystemPasswordChar = false;
+            this.NewEmailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NewEmailTextBox_KeyDown);
             // 
             // leaveEmailChangeButton
             // 
@@ -175,7 +176,7 @@
             this.leaveEmailChangeButton.Name = "leaveEmailChangeButton";
             this.leaveEmailChangeButton.NoAccentTextColor = System.Drawing.Color.Empty;
             this.leaveEmailChangeButton.Size = new System.Drawing.Size(65, 36);
-            this.leaveEmailChangeButton.TabIndex = 16;
+            this.leaveEmailChangeButton.TabIndex = 3;
             this.leaveEmailChangeButton.Text = "Leave";
             this.leaveEmailChangeButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.leaveEmailChangeButton.UseAccentColor = false;
@@ -224,7 +225,6 @@
             this.Controls.Add(this.NewEmailLabel);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.ChangeEmailButton);
-            this.MaximizeBox = false;
             this.Name = "FormEmailChange";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -64,5 +64,15 @@ namespace PRIMA.Forms
         {
             this.Close();
         }
+
+        private void NewEmailTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                ChangeEmailButton_Click(sender, e);
+            }
+        }
     }
 }

@@ -61,7 +61,7 @@
             this.OldPasswordTextBox.SelectionStart = 0;
             this.OldPasswordTextBox.ShortcutsEnabled = true;
             this.OldPasswordTextBox.Size = new System.Drawing.Size(189, 48);
-            this.OldPasswordTextBox.TabIndex = 10;
+            this.OldPasswordTextBox.TabIndex = 0;
             this.OldPasswordTextBox.TabStop = false;
             this.OldPasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.OldPasswordTextBox.TrailingIcon = null;
@@ -96,7 +96,7 @@
             this.ChangePasswordButton.Name = "ChangePasswordButton";
             this.ChangePasswordButton.NoAccentTextColor = System.Drawing.Color.Empty;
             this.ChangePasswordButton.Size = new System.Drawing.Size(80, 36);
-            this.ChangePasswordButton.TabIndex = 8;
+            this.ChangePasswordButton.TabIndex = 3;
             this.ChangePasswordButton.Text = "Change";
             this.ChangePasswordButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ChangePasswordButton.UseAccentColor = false;
@@ -126,7 +126,7 @@
             this.NewPasswordTextBox.SelectionStart = 0;
             this.NewPasswordTextBox.ShortcutsEnabled = true;
             this.NewPasswordTextBox.Size = new System.Drawing.Size(189, 48);
-            this.NewPasswordTextBox.TabIndex = 12;
+            this.NewPasswordTextBox.TabIndex = 1;
             this.NewPasswordTextBox.TabStop = false;
             this.NewPasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.NewPasswordTextBox.TrailingIcon = null;
@@ -169,11 +169,12 @@
             this.ConfirmPasswordTextBox.SelectionStart = 0;
             this.ConfirmPasswordTextBox.ShortcutsEnabled = true;
             this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(189, 48);
-            this.ConfirmPasswordTextBox.TabIndex = 14;
+            this.ConfirmPasswordTextBox.TabIndex = 2;
             this.ConfirmPasswordTextBox.TabStop = false;
             this.ConfirmPasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.ConfirmPasswordTextBox.TrailingIcon = null;
             this.ConfirmPasswordTextBox.UseSystemPasswordChar = true;
+            this.ConfirmPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConfirmPasswordTextBox_KeyDown);
             // 
             // ConfirmPasswordLabel
             // 
@@ -205,7 +206,7 @@
             this.leavePasswordChangeButton.Name = "leavePasswordChangeButton";
             this.leavePasswordChangeButton.NoAccentTextColor = System.Drawing.Color.Empty;
             this.leavePasswordChangeButton.Size = new System.Drawing.Size(80, 36);
-            this.leavePasswordChangeButton.TabIndex = 15;
+            this.leavePasswordChangeButton.TabIndex = 4;
             this.leavePasswordChangeButton.Text = "Leave";
             this.leavePasswordChangeButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.leavePasswordChangeButton.UseAccentColor = false;
@@ -225,7 +226,6 @@
             this.Controls.Add(this.OldPasswordTextBox);
             this.Controls.Add(this.OldPasswordLabel);
             this.Controls.Add(this.ChangePasswordButton);
-            this.MaximizeBox = false;
             this.Name = "FormPasswordChange";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
