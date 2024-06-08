@@ -18,6 +18,11 @@ namespace PRIMA
             client = clientInstance;
         }
 
+        public void SendUsername(string username)
+        {
+            string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_5, username);
+        }
+
         public string LogInUser(string username, string password)
         {
             string data = username + "|" + password;
@@ -59,6 +64,13 @@ namespace PRIMA
         public string GetUsername()
         {
             string data = "Username";
+            string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_9, data);
+            return response;
+        }
+
+        public string GetSalt()
+        {
+            string data = "Salt";
             string response = client.SendDATA(ProtocolSICmdType.USER_OPTION_9, data);
             return response;
         }

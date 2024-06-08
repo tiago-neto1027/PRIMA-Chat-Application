@@ -76,8 +76,6 @@ namespace PRIMA
             string email = registryTBoxEmail.Text;
             string password = registryTBoxPassword.Text;
 
-            password = SecurityUtils.HashPassword(password);
-
             byte[] salt = SecurityUtils.GenerateSalt();
             byte[] saltedHash = SecurityUtils.GenerateSaltedHash(password, salt);
 

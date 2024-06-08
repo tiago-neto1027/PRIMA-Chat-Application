@@ -27,7 +27,7 @@ namespace PRIMA.Forms
         {
             string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";
 
-            string oldPassword = SecurityUtils.HashPassword(OldPasswordTextBox.Text);
+            string oldPassword = OldPasswordTextBox.Text;
             string newPassword = NewPasswordTextBox.Text;
             string confirmPassword = ConfirmPasswordTextBox.Text;
 
@@ -50,15 +50,22 @@ namespace PRIMA.Forms
                 return;
             }
 
-            newPassword = SecurityUtils.HashPassword(newPassword);
+            //Generates the old password hash to send to the server and confirm the passwords
 
+            string oldSaltString = userService.GetSalt();
+            byte[] oldSalt = Convert.FromBase64String(oldSaltString);
+
+            byte[] oldHashedPassword = SecurityUtils.GenerateSaltedHash(oldPassword, oldSalt);
+            string oldHashedPasswordString = Convert.ToBase64String(oldHashedPassword);
+
+            //Generates the new salt and hashes the new password
             byte[] newSalt = SecurityUtils.GenerateSalt();
             byte[] saltedHash = SecurityUtils.GenerateSaltedHash(newPassword, newSalt);
 
             string saltString = Convert.ToBase64String(newSalt);
             string saltedHashString = Convert.ToBase64String(saltedHash);
 
-            string response = userService.ChangePass(oldPassword, saltedHashString, saltString);
+            string response = userService.ChangePass(oldHashedPasswordString, saltedHashString, saltString);
             MessageBox.Show(response);
             if (response == "Success!")
                 this.Close();
