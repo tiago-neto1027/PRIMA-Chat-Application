@@ -103,7 +103,7 @@ namespace Server
 
                 string msg = protocolSI.GetStringFromData();
 
-                if (protocolSI.GetCmdType() != ProtocolSICmdType.PUBLIC_KEY)
+                if (protocolSI.GetCmdType() != ProtocolSICmdType.PUBLIC_KEY && protocolSI.GetCmdType() != ProtocolSICmdType.EOT)
                 {
                     byte[] combinedData;
 
@@ -114,12 +114,6 @@ namespace Server
                     catch (FormatException)
                     {
                         Console.WriteLine("Invalid Base64 string");
-                        return;
-                    }
-
-                    if (combinedData.Length < 16)
-                    {
-                        Console.WriteLine("Invalid data length");
                         return;
                     }
 
