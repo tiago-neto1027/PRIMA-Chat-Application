@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using PRIMA.Interfaces;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.IO;
 
 namespace PRIMA
 {
@@ -153,6 +154,38 @@ namespace PRIMA
                 if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
                 {
                     string receivedDATA = protocolSI.GetStringFromData();
+
+                    byte[] combinedData;
+
+                    combinedData = Convert.FromBase64String(receivedDATA);
+
+                    using (Aes aes = Aes.Create())
+                    {
+                        combinedData = Convert.FromBase64String(receivedDATA);
+
+                        byte[] iv = new byte[aes.BlockSize / 8];
+                        Buffer.BlockCopy(combinedData, combinedData.Length - iv.Length, iv, 0, iv.Length);
+
+                        byte[] encryptedData = new byte[combinedData.Length - iv.Length];
+                        Buffer.BlockCopy(combinedData, 0, encryptedData, 0, encryptedData.Length);
+
+                        aes.Key = SymmetricKey;
+                        aes.IV = iv;
+
+                        ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
+                            {
+                                cs.Write(encryptedData, 0, encryptedData.Length);
+                                cs.FlushFinalBlock();
+                            }
+                            byte[] decryptedBytes = ms.ToArray();
+                            receivedDATA = System.Text.Encoding.UTF8.GetString(decryptedBytes);
+                        }
+                    }
+
                     return receivedDATA;
                 }
             }

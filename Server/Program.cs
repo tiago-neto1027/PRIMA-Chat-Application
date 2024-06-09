@@ -127,11 +127,9 @@ namespace Server
                     {
                         combinedData = Convert.FromBase64String(msg);
 
-                        // Extract the IV (the first 16 bytes)
-                        byte[] iv = new byte[aes.BlockSize / 8]; // AES block size is 16 bytes (128 bits)
+                        byte[] iv = new byte[aes.BlockSize / 8];
                         Buffer.BlockCopy(combinedData, combinedData.Length - iv.Length, iv, 0, iv.Length);
 
-                        // Extract the encrypted data (the remaining bytes)
                         byte[] encryptedData = new byte[combinedData.Length - iv.Length];
                         Buffer.BlockCopy(combinedData, 0, encryptedData, 0, encryptedData.Length);
 
@@ -145,10 +143,10 @@ namespace Server
                             using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
                             {
                                 cs.Write(encryptedData, 0, encryptedData.Length);
-                                cs.FlushFinalBlock(); // Ensure all data is written to the stream
+                                cs.FlushFinalBlock();
                             }
                             byte[] decryptedBytes = ms.ToArray();
-                            msg = System.Text.Encoding.UTF8.GetString(decryptedBytes); // Convert bytes to string
+                            msg = System.Text.Encoding.UTF8.GetString(decryptedBytes);
                         }
                     }
                 }
@@ -404,16 +402,46 @@ namespace Server
         }
 
         //This functions sends the message received to all the clients connected to the database
-        private void SendMessageToAllClients(string message)
+        private void SendMessageToAllClients(string data)
         {
             ProtocolSI protocolSI = new ProtocolSI();
-            byte[] data = protocolSI.Make(ProtocolSICmdType.DATA, message);
 
+            //Encriptaçao
+            byte[] packet;
+            byte[] iv;
+            byte[] encryptedData;
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = clientSymmetricKeys[client];
+                aes.GenerateIV();
+                iv = aes.IV;
+
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+                using (var ms = new System.IO.MemoryStream())
+                {
+                    using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (var sw = new System.IO.StreamWriter(cs))
+                        {
+                            sw.Write(data);
+                        }
+                        encryptedData = ms.ToArray();
+                    }
+                }
+
+                byte[] encryptedDataAndIv = new byte[encryptedData.Length + iv.Length];
+                Buffer.BlockCopy(encryptedData, 0, encryptedDataAndIv, 0, encryptedData.Length);
+                Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
+
+                packet = protocolSI.Make(ProtocolSICmdType.DATA, Convert.ToBase64String(encryptedDataAndIv));
+            }
+
+            //Envia para cada Cliente
             foreach (var entry in clients)
             {
                 TcpClient client = entry.Key;
                 NetworkStream stream = client.GetStream();
-                stream.Write(data, 0, data.Length);
+                stream.Write(packet, 0, packet.Length);
             }
         }
     }
