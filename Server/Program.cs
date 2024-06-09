@@ -406,41 +406,40 @@ namespace Server
         {
             ProtocolSI protocolSI = new ProtocolSI();
 
-            //Encriptaçao
-            byte[] packet;
-            byte[] iv;
-            byte[] encryptedData;
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = clientSymmetricKeys[client];
-                aes.GenerateIV();
-                iv = aes.IV;
-
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-                using (var ms = new System.IO.MemoryStream())
-                {
-                    using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (var sw = new System.IO.StreamWriter(cs))
-                        {
-                            sw.Write(data);
-                        }
-                        encryptedData = ms.ToArray();
-                    }
-                }
-
-                byte[] encryptedDataAndIv = new byte[encryptedData.Length + iv.Length];
-                Buffer.BlockCopy(encryptedData, 0, encryptedDataAndIv, 0, encryptedData.Length);
-                Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
-
-                packet = protocolSI.Make(ProtocolSICmdType.DATA, Convert.ToBase64String(encryptedDataAndIv));
-            }
-
-            //Envia para cada Cliente
             foreach (var entry in clients)
             {
-                TcpClient client = entry.Key;
-                NetworkStream stream = client.GetStream();
+                TcpClient recipientClient = entry.Key;
+                byte[] symmetricKey = clientSymmetricKeys[recipientClient];
+
+                // Encrypt the message for the current client
+                byte[] packet;
+                using (Aes aes = Aes.Create())
+                {
+                    aes.Key = symmetricKey;
+                    aes.GenerateIV();
+                    byte[] iv = aes.IV;
+
+                    byte[] encryptedData;
+                    using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                    using (var ms = new MemoryStream())
+                    using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    using (var sw = new StreamWriter(cs))
+                    {
+                        sw.Write(data);
+                        sw.Flush();
+                        cs.FlushFinalBlock();
+                        encryptedData = ms.ToArray();
+                    }
+
+                    byte[] encryptedDataAndIv = new byte[encryptedData.Length + iv.Length];
+                    Buffer.BlockCopy(encryptedData, 0, encryptedDataAndIv, 0, encryptedData.Length);
+                    Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
+
+                    packet = protocolSI.Make(ProtocolSICmdType.DATA, Convert.ToBase64String(encryptedDataAndIv));
+                }
+
+                // Send the encrypted message to the current client
+                NetworkStream stream = recipientClient.GetStream();
                 stream.Write(packet, 0, packet.Length);
             }
         }
