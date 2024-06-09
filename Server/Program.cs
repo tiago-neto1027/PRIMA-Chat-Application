@@ -10,6 +10,7 @@ using System.Threading;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace Server
 {
@@ -101,6 +102,57 @@ namespace Server
                 int bytesRead = networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
 
                 string msg = protocolSI.GetStringFromData();
+
+                if (protocolSI.GetCmdType() != ProtocolSICmdType.PUBLIC_KEY)
+                {
+                    byte[] combinedData;
+
+                    try
+                    {
+                        combinedData = Convert.FromBase64String(msg);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid Base64 string");
+                        return;
+                    }
+
+                    if (combinedData.Length < 16)
+                    {
+                        Console.WriteLine("Invalid data length");
+                        return;
+                    }
+
+                    using (Aes aes = Aes.Create())
+                    {
+                        combinedData = Convert.FromBase64String(msg);
+
+                        // Extract the IV (the first 16 bytes)
+                        byte[] iv = new byte[aes.BlockSize / 8]; // AES block size is 16 bytes (128 bits)
+                        Buffer.BlockCopy(combinedData, combinedData.Length - iv.Length, iv, 0, iv.Length);
+
+                        // Extract the encrypted data (the remaining bytes)
+                        byte[] encryptedData = new byte[combinedData.Length - iv.Length];
+                        Buffer.BlockCopy(combinedData, 0, encryptedData, 0, encryptedData.Length);
+
+                        aes.Key = clientSymmetricKeys[client];
+                        aes.IV = iv;
+
+                        ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
+                            {
+                                cs.Write(encryptedData, 0, encryptedData.Length);
+                                cs.FlushFinalBlock(); // Ensure all data is written to the stream
+                            }
+                            byte[] decryptedBytes = ms.ToArray();
+                            msg = System.Text.Encoding.UTF8.GetString(decryptedBytes); // Convert bytes to string
+                        }
+                    }
+                }
+
                 string[] splited = msg.Split('|');
 
                 switch (protocolSI.GetCmdType())
@@ -253,15 +305,25 @@ namespace Server
 
                         string updateUsername = splited[0];
 
-                        this.username = updateUsername;
-                        clients[client] = updateUsername;
-
-                        byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK);
-                        networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+                        using (var db = new UserContext())
+                        {
+                            if (db.IfUserExists(updateUsername))
+                            {
+                                this.username = updateUsername;
+                                clients[client] = updateUsername;
+                                byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK);
+                                networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+                            }
+                            else
+                            {
+                                byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK, "Error");
+                                networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+                            }
+                        }
 
                         break;
 
-                    case ProtocolSICmdType.USER_OPTION_9: //USER_OPTION_9 == GET OLD INFO
+                    case ProtocolSICmdType.USER_OPTION_9: //USER_OPTION_9 == GET INFO
                         string type = splited[0];
                         string usernam = clients[client];
                         using (var db = new UserContext())

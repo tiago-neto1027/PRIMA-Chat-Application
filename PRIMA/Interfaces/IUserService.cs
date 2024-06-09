@@ -8,7 +8,7 @@ namespace PRIMA.Interfaces
 {
     public interface IUserService
     {
-        void SendUsername(string username);
+        string SendUsername(string username);
         string SendPublicKey(string publicKey);
         string LogInUser(string username, string password);
         string RegisterUser(string username, string name, string email, string salt, string saltedHash);

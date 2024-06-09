@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PRIMA
 {
@@ -25,6 +26,22 @@ namespace PRIMA
         {
             InitializeComponent();
             userService = userServiceInstance;
+
+            string publicKey = Client.Instance.PublicKey;
+            string encryptedSymmetricKey = userService.SendPublicKey(publicKey);
+
+            //Decrypt the symmetric key using the client's private key
+            byte[] encryptedSymmetricKeyBytes = Convert.FromBase64String(encryptedSymmetricKey);
+            byte[] decryptedSymmetricKeyBytes = null;
+
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(Client.Instance.PrivateKey);
+                decryptedSymmetricKeyBytes = rsa.Decrypt(encryptedSymmetricKeyBytes, RSAEncryptionPadding.Pkcs1);
+            }
+
+            //Store the symmetricKey in the Client Class
+            Client.Instance.SymmetricKey = decryptedSymmetricKeyBytes;
         }
 
         /* This closes the form and opens the FormRegister */
@@ -41,7 +58,6 @@ namespace PRIMA
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = loginTBoxUser.Text;
-            string publicKey = Client.Instance.PublicKey;
             string password = loginTBoxPassword.Text;
 
             if (CheckSpecialCharacters(username))
@@ -56,22 +72,11 @@ namespace PRIMA
                 return;
             }
 
-            //Send Username and public key to the server
-            userService.SendUsername(username);
-            string encryptedSymmetricKey = userService.SendPublicKey(publicKey);
-
-            //Decrypt the symmetric key using the client's private key
-            byte[] encryptedSymmetricKeyBytes = Convert.FromBase64String(encryptedSymmetricKey);
-            byte[] decryptedSymmetricKeyBytes = null;
-
-            using (var rsa = new RSACryptoServiceProvider())
+            if(userService.SendUsername(username) == "Error")
             {
-                rsa.FromXmlString(Client.Instance.PrivateKey);
-                decryptedSymmetricKeyBytes = rsa.Decrypt(encryptedSymmetricKeyBytes, RSAEncryptionPadding.Pkcs1);
+                MessageBox.Show("The username doesn't exist");
+                return;
             }
-
-            //Store the symmetricKey in the Client Class
-            Client.Instance.SymmetricKey = decryptedSymmetricKeyBytes;
 
             string saltString = userService.GetSalt();
             byte[] salt = Convert.FromBase64String(saltString);
