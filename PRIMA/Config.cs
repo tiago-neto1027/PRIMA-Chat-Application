@@ -4,19 +4,26 @@ using System.IO;
 
 namespace PRIMA
 {
+    /// <summary>
+    /// Represents configuration settings.
+    /// </summary>
     [Serializable]
     public class Config
     {
         public string Theme { get; set; }
     }
 
-    // This class uses the above to config the .cfg file
+    /// <summary>
+    /// Manages saving and loading configuration settings to and from a .cfg file.
+    /// </summary>
     public static class ConfigManager
     {
         private static readonly string configFilePath = "settings.cfg";
 
-        // This method saves the .cfg File
-        // Receives an object of the Config Class
+        /// <summary>
+        /// Saves the configuration settings to a .cfg file.
+        /// </summary>
+        /// <param name="config">The configuration settings to save.</param>
         public static void SaveConfig(Config config)
         {
             List<string> lines = new List<string>
@@ -26,12 +33,13 @@ namespace PRIMA
             File.WriteAllLines(configFilePath, lines);
         }
 
-        // This method loads the .cfg file
-        // Returns a Config class object
+        /// <summary>
+        /// Loads the configuration settings from a .cfg file.
+        /// If the file does not exist, returns a Config object with default values.
+        /// </summary>
+        /// <returns>A Config object with the loaded or default settings.</returns>
         public static Config LoadConfig()
         {
-            // If the application can't load from a file then it retrieves a Class Config with it's default values
-            // This ensures that the application doesn't crash if there isn't a .cfg file
             if (!File.Exists(configFilePath))
                 return new Config();
 
