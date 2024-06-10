@@ -1,14 +1,13 @@
 ﻿using EI.SI;
 using System;
 using PRIMA.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PRIMA
 {
+    /// <summary>
+    /// Service for handling messages.
+    /// </summary>
     public class MessageService : IMessageService
     {
         private readonly IClient client;
@@ -21,13 +20,20 @@ namespace PRIMA
             client = clientInstance;
         }
 
+        /// <summary>
+        /// Sends a message to the specified chat.
+        /// </summary>
+        /// <param name="chat">The chat identifier.</param>
+        /// <param name="message">The message content.</param>
         public void SendMessage(string chat, string message) {
 
             string data = chat + "|" + message;
             client.SendDATA(ProtocolSICmdType.DATA, data);
         }
 
-        // Starts a new thread to continuously call ReceiveMessages()
+        /// <summary>
+        /// Starts a new thread to continuously call ReceiveMessages().
+        /// </summary>
         public void StartReceivingMessages()
         {
             Thread receiveThread = new Thread(ReceiveMessages);
@@ -35,12 +41,17 @@ namespace PRIMA
             receiveThread.Start();
         }
 
-        // This is necessary in order for the Forms subscribing the event to turn off the ReceiveMessages Method
+        /// <summary>
+        /// Stops the message receiving process.
+        /// </summary>
         public void StopReceivingMessages()
         {
             stopReceivingMessages = true;
         }
 
+        /// <summary>
+        /// Continuously receives messages in a loop until stopped.
+        /// </summary>
         private void ReceiveMessages()
         {
             while (!stopReceivingMessages)
@@ -64,14 +75,20 @@ namespace PRIMA
         }
 
 
-        // Triggers the MessageReceived event creating a new object with the necessary arguments and notifies the form that a message was received
+        /// <summary>
+        /// Triggers the MessageReceived event.
+        /// </summary>
+        /// <param name="chat">The chat identifier.</param>
+        /// <param name="message">The message content.</param>
         private void OnMessageReceived(string chat, string message)
         {
             MessageReceived?.Invoke(this, new MessageReceivedEventArgs(chat, message));
         }
 
 
-        // Event class with the necessary arguments for the event
+        /// <summary>
+        /// Event arguments for the MessageReceived event.
+        /// </summary>
         public class MessageReceivedEventArgs : EventArgs
         {
             public string Chat { get; }

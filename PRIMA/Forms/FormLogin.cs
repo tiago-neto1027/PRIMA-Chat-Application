@@ -1,27 +1,22 @@
-﻿using EI.SI;
-using MaterialSkin.Controls;
-using PRIMA.Services;
-using PRIMA.Interfaces;
+﻿using PRIMA.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PRIMA
 {
+    /// <summary>
+    /// Represents the login form of the application.
+    /// </summary>
     public partial class FormLogin : BaseForm
     {
         private readonly IUserService userService;
         FormFactory formFactory = new FormFactory();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormLogin"/> class.
+        /// </summary>
+        /// <param name="userServiceInstance">An instance of the IUserService interface.</param>
         public FormLogin(IUserService userServiceInstance)
         {
             InitializeComponent();
@@ -44,7 +39,10 @@ namespace PRIMA
             Client.Instance.SymmetricKey = decryptedSymmetricKeyBytes;
         }
 
-        /* This closes the form and opens the FormRegister */
+        /// <summary>
+        /// Handles the Click event of the btnRegistry control.
+        /// Closes the current form and opens the registration form.
+        /// </summary>
         private void btnRegistry_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -52,39 +50,19 @@ namespace PRIMA
             this.Close();
         }
 
-        /* Tries to Log In the User
-         * If the user was Logged In, it closes the Form and opens the Application
-         * If the Log In fails, it shows the user why it failed */
+        /// <summary>
+        /// Handles the Click event of the btnLogin control.
+        /// Tries to log in the user and displays appropriate messages based on the outcome.
+        /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if(!ValidateFields())
+                return;
+
             string username = loginTBoxUser.Text;
-            string password = loginTBoxPassword.Text;
+            string hashedPassword = GenerateHashedPassword();
 
-            if (CheckSpecialCharacters(username))
-            {
-                MessageBox.Show("The username can't have special characters");
-                return;
-            }
-
-            if (CheckSpecialCharacters(password))
-            {
-                MessageBox.Show("The password can't have special characters");
-                return;
-            }
-
-            if(userService.SendUsername(username) == "Error")
-            {
-                MessageBox.Show("The username doesn't exist");
-                return;
-            }
-
-            string saltString = userService.GetSalt();
-            byte[] salt = Convert.FromBase64String(saltString);
-
-            byte[] hashedPassword = SecurityUtils.GenerateSaltedHash(password, salt);
-            string hashedPasswordString = Convert.ToBase64String(hashedPassword);
-
-            string response = userService.LogInUser(username, hashedPasswordString);
+            string response = userService.LogInUser(username, hashedPassword);
 
             if(response == "Success")
             {
@@ -98,8 +76,56 @@ namespace PRIMA
                 MessageBox.Show(response);
             }
         }
-        
-        /* This allows the user to log in by pressing the "Enter" Key */
+
+        /// <summary>
+        /// Validates whether the password and the username fields are valid.
+        /// </summary>
+        /// <returns>True if all conditions are met; otherwise, false.</returns>
+        private bool ValidateFields()
+        {
+            string username = loginTBoxUser.Text;
+            string password = loginTBoxPassword.Text;
+
+            if (ContainsSpecialCharacters(username))
+            {
+                MessageBox.Show("The username can't have special characters");
+                return false;
+            }
+
+            if (ContainsSpecialCharacters(password))
+            {
+                MessageBox.Show("The password can't have special characters");
+                return false;
+            }
+
+            if (userService.SendUsername(username) == "Error")
+            {
+                MessageBox.Show("The username doesn't exist");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Generates the salted hash of the user's password using the salt retrieved from the user service.
+        /// </summary>
+        /// <returns>The base64-encoded string representation of the hashed password.</returns>
+        private string GenerateHashedPassword()
+        {
+            string password = loginTBoxPassword.Text;
+            string saltString = userService.GetSalt();
+
+            byte[] salt = Convert.FromBase64String(saltString);
+            byte[] hashedPassword = SecurityUtils.GenerateSaltedHash(password, salt);
+
+            return Convert.ToBase64String(hashedPassword);
+        }
+
+        /// <summary>
+        /// Handles the KeyDown event of the loginTBoxPassword control.
+        /// Allows the user to log in by pressing the "Enter" key.
+        /// </summary>
         private void loginTBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

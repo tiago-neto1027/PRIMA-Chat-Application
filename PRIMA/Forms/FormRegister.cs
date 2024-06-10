@@ -1,34 +1,31 @@
-﻿using EI.SI;
-using MaterialSkin.Controls;
-using PRIMA.Services;
-using System;
+﻿using System;
 using PRIMA.Interfaces;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Security.Cryptography;
 
 namespace PRIMA
 {
+    /// <summary>
+    /// Handles the user registration process, including validation and interaction with the IUserService.
+    /// </summary>
     public partial class FormRegister : BaseForm
     {
         protected readonly IUserService userService;
         FormFactory formFactory = new FormFactory();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormRegister"/> class.
+        /// </summary>
+        /// <param name="userServiceInstance">The user service instance.</param>
         public FormRegister(IUserService userServiceInstance)
         {
             InitializeComponent();
             userService = userServiceInstance;
         }
 
-        /* Sends the user back to the FormLogin */
+        /// <summary>
+        /// Handles the login button click event to open the login form.
+        /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -36,114 +33,170 @@ namespace PRIMA
             this.Close();
         }
 
+        /// <summary>
+        /// Handles the register button click event to register the user.
+        /// </summary>
         private void btnRegister_Click(object sender, EventArgs e)
         {
             RegisterUser();
         }
 
-
-        /*
-         * This function verifies if all the TextBoxes have been filled
-         * Then it checks if the password follows the criteria passed in the variable 'pattern' following
-         * System.Text.RegularExpressions
-         * 
-         * If everything is according to necessary then it sends all the data to the server and awaits the ACK signal
-         * Depending on the server response it either shows an error message and clears the buffer or registers the user and goes back
-         * to the log in screen
-        */
+        /// <summary>
+        /// Registers the user.
+        /// </summary>
         private void RegisterUser()
-        {            
-            string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";  //Change the password parameters here
-            string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|pt)$"; //Change the email parameters here
-
-            CheckIfFieldsEmpty();
-            CheckIfSpecialChars();
-
-            if (!Regex.IsMatch(registryTBoxPassword.Text, passwordPattern))
-            {
-                MessageBox.Show("The password must be 8 to 20 characters long and contain only letters and numbers");
+        {
+            if (!AreFieldsValid())
                 return;
-            }
-
-            if(!Regex.IsMatch(registryTBoxEmail.Text, emailPattern))
-            {
-                MessageBox.Show("The email is not valid");
-                return;
-            }
 
             string username = registryTBoxUserName.Text;
             string name = registryTBoxName.Text;
             string email = registryTBoxEmail.Text;
             string password = registryTBoxPassword.Text;
 
+            var (saltString, saltedHashString) = GenerateSaltAndHash(password);
+
+            string response = userService.RegisterUser(username, name, email, saltString, saltedHashString);
+
+            HandleRegistrationResponse(response);
+        }
+
+        /// <summary>
+        /// Validates the input fields.
+        /// </summary>
+        /// <returns>True if all fields are valid; otherwise, false.</returns>
+        private bool AreFieldsValid()
+        {
+            return !AreFieldsEmpty() && !DoFieldsContainSpecialChars() && IsPasswordValid() && IsEmailValid();
+        }
+
+        /// <summary>
+        /// Checks if the input fields are empty and shows a message if they are.
+        /// </summary>
+        /// <returns>True if any field is empty; otherwise, false.</returns>
+        private bool AreFieldsEmpty()
+        {
+            if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text))
+            {
+                MessageBox.Show("Username is empty!");
+                return true;
+            }
+            if (string.IsNullOrWhiteSpace(registryTBoxName.Text))
+            {
+                MessageBox.Show("Name is empty!");
+                return true;
+            }
+            if (string.IsNullOrWhiteSpace(registryTBoxEmail.Text))
+            {
+                MessageBox.Show("Email is empty!");
+                return true;
+            }
+            if (string.IsNullOrWhiteSpace(registryTBoxPassword.Text))
+            {
+                MessageBox.Show("Password is empty!");
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if the input fields contain special characters and shows a message if they do.
+        /// </summary>
+        /// <returns>True if any field contains special characters; otherwise, false.</returns>
+        private bool DoFieldsContainSpecialChars()
+        {
+            if (ContainsSpecialCharacters(registryTBoxUserName.Text))
+            {
+                MessageBox.Show("Username can't have special characters");
+                return true;
+            }
+            if (ContainsSpecialCharacters(registryTBoxName.Text))
+            {
+                MessageBox.Show("Name can't have special characters");
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Validates the password format.
+        /// </summary>
+        /// <returns>True if the password format is valid; otherwise, false.</returns>
+        private bool IsPasswordValid()
+        {
+            string passwordPattern = @"^[a-zA-Z0-9]{8,20}$";  // Password must be 8 to 20 characters long and contain only letters and numbers.
+
+            if (!Regex.IsMatch(registryTBoxPassword.Text, passwordPattern))
+            {
+                MessageBox.Show("The password must be 8 to 20 characters long and contain only letters and numbers");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Validates the email format.
+        /// </summary>
+        /// <returns>True if the email format is valid; otherwise, false.</returns>
+        private bool IsEmailValid()
+        {
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov|pt)$"; // Valid email pattern.
+
+            if (!Regex.IsMatch(registryTBoxEmail.Text, emailPattern))
+            {
+                MessageBox.Show("The email is not valid");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Generates the salt and salted hash for the given password.
+        /// </summary>
+        /// <param name="password">The password.</param>
+        /// <returns>A tuple containing the salt and salted hash as strings.</returns>
+        private (string saltString, string saltedHashString) GenerateSaltAndHash(string password)
+        {
             byte[] salt = SecurityUtils.GenerateSalt();
             byte[] saltedHash = SecurityUtils.GenerateSaltedHash(password, salt);
 
             string saltString = Convert.ToBase64String(salt);
             string saltedHashString = Convert.ToBase64String(saltedHash);
 
-            string response = userService.RegisterUser(username, name, email, saltString, saltedHashString);
+            return (saltString, saltedHashString);
+        }
 
-            if(response == "Success")
+        /// <summary>
+        /// Handles the registration response from the server.
+        /// </summary>
+        /// <param name="response">The response from the server.</param>
+        private void HandleRegistrationResponse(string response)
+        {
+            if (response == "Success")
             {
                 MessageBox.Show("User registered successfully");
-
                 this.Hide();
                 formFactory.OpenFormLogin();
                 this.Close();
             }
-
-            if (response != "Success")
+            else
             {
                 MessageBox.Show(response);
             }
         }
 
-        private void CheckIfSpecialChars()
-        {
-            if (CheckSpecialCharacters(registryTBoxUserName.Text))
-            {
-                MessageBox.Show("Username can't have special characters");
-                return;
-            }
-            if (CheckSpecialCharacters(registryTBoxName.Text))
-            {
-                MessageBox.Show("Name can't have special characters");
-                return;
-            }
-        }
-
-        private void CheckIfFieldsEmpty()
-        {
-            if (string.IsNullOrWhiteSpace(registryTBoxUserName.Text))
-            {
-                MessageBox.Show("Username is empty!");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(registryTBoxName.Text))
-            {
-                MessageBox.Show("Name is empty!");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(registryTBoxEmail.Text))
-            {
-                MessageBox.Show("Email is empty!");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(registryTBoxPassword.Text))
-            {
-                MessageBox.Show("Password is empty!");
-                return;
-            }
-        }
-
-        /* This allows the user to Register by pressing the "Enter" Key */
+        /// <summary>
+        /// Allows the user to register by pressing the "Enter" key.
+        /// </summary>
         private void registryTBoxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-
                 btnRegister_Click(sender, e);
             }
         }

@@ -1,37 +1,34 @@
 ﻿using EI.SI;
-using MaterialSkin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using PRIMA.Interfaces;
 using System.Security.Cryptography;
-using System.Windows.Forms;
 using System.IO;
 
 namespace PRIMA
 {
-    /*
-     * This is the Base Client class of the application
-     * The class manages everything a client can and must do
-     * The class is a Singleton, meaning that can only be one instance of a Client running per application.
-     */
+    /// <summary>
+    /// This is the Base Client class of the application.
+    /// The class manages everything a client can and must do.
+    /// The class is a Singleton, meaning that there can only be one instance of a Client running per application.
+    /// </summary>
     public class Client : IClient
     {
-        protected const int PORT = 4500;
+        private const int PORT = 4500;
         private static Client instance;
-        protected NetworkStream networkStream;
-        protected TcpClient tcpClient;
-        protected ProtocolSI protocolSI;
+        private readonly NetworkStream networkStream;
+        private readonly TcpClient tcpClient;
+        private readonly ProtocolSI protocolSI;
 
         public string PublicKey {  get; private set; }
         public string PrivateKey { get; private set; }
-
         public byte[] SymmetricKey { get; set; }
 
+        /// <summary>
+        /// Gets the singleton instance of the Client class.
+        /// </summary>
         public static Client Instance
         {
             get
@@ -44,6 +41,13 @@ namespace PRIMA
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Client"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor establishes a connection to the server, generates RSA key pairs for encryption,
+        /// and initializes network streams and protocol handlers.
+        /// </remarks>
         private Client()
         {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, PORT);
@@ -64,64 +68,42 @@ namespace PRIMA
             }
         }
 
-        /* The following Method closes a client.
-         * 
-         * The method sends an EOT signal through the stream signalizing the end of transmission
-         * It waits for the signal to be acknowledged by the server and then closes the stream and the client
-        */
+        /// <summary>
+        /// Closes the client connection.
+        /// </summary>
         public void Close()
         {
-            byte[] eot = protocolSI.Make(ProtocolSICmdType.EOT);
-            networkStream.Write(eot, 0, eot.Length);
-            while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
+            try
             {
-                networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+                byte[] eot = protocolSI.Make(ProtocolSICmdType.EOT);
+                networkStream.Write(eot, 0, eot.Length);
+
+                while (protocolSI.GetCmdType() != ProtocolSICmdType.ACK)
+                {
+                    networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
+                }
             }
-            networkStream.Close();
-            tcpClient.Close();
+            finally
+            {
+                networkStream.Close();
+                tcpClient.Close();
+            }
         }
 
-        /* The following methond sends a DATA packet
-         * 
-         * This method recieves 2 string type parameters, one with the type of the message(login, message, register...) and the other one with the data contained in it
-         * 
-         * The data is concatenated and sent via the stream then an ACK signal is awaited before proceeding
-         * If there is any information to retrieve from the ACK signal it retrieves and returns the information
-        */
+        /// <summary>
+        /// Sends a DATA packet to the server.
+        /// </summary>
+        /// <param name="CmdType">The type of the message (e.g., login, data, register).</param>
+        /// <param name="data">The data contained in the message.</param>
+        /// <returns>The response received from the server.</returns>
         public string SendDATA(ProtocolSICmdType CmdType, string data)
         {
             byte[] packet;
-            //Encrypts the data only if the cmd type is not public key, since the public key is sent in the login
-            //and is needed to receive the symmetric key to encrypt everything else
+
             if (CmdType != ProtocolSICmdType.PUBLIC_KEY)
             {
-                byte[] iv;
-                byte[] encryptedData;
-                using (Aes aes = Aes.Create())
-                {
-                    aes.Key = SymmetricKey;
-                    aes.GenerateIV();
-                    iv = aes.IV;
-
-                    ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-                    using (var ms = new System.IO.MemoryStream())
-                    {
-                        using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                        {
-                            using (var sw = new System.IO.StreamWriter(cs))
-                            {
-                                sw.Write(data);
-                            }
-                            encryptedData = ms.ToArray();
-                        }
-                    }
-
-                    byte[] encryptedDataAndIv = new byte[encryptedData.Length + iv.Length];
-                    Buffer.BlockCopy(encryptedData, 0, encryptedDataAndIv, 0, encryptedData.Length);
-                    Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
-
-                    packet = protocolSI.Make(CmdType, Convert.ToBase64String(encryptedDataAndIv));
-                }
+                data = EncryptData(data);
+                packet = protocolSI.Make(CmdType, data);
             }
             else
             {
@@ -141,10 +123,46 @@ namespace PRIMA
             return response;
         }
 
-        /* The following methond receives a DATA packet if it exists
-         * 
-         * This function simply reads the data that is available in the stream, if there is any and returns it
-        */
+        /// <summary>
+        /// Encrypts the provided data using AES encryption with the current symmetric key.
+        /// </summary>
+        /// <param name="data">The data to encrypt.</param>
+        /// <returns>The encrypted data as a Base64-encoded string.</returns>
+        private string EncryptData(string data)
+        {
+            byte[] iv;
+            byte[] encryptedData;
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = SymmetricKey;
+                aes.GenerateIV();
+                iv = aes.IV;
+
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+                using (var ms = new System.IO.MemoryStream())
+                {
+                    using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (var sw = new System.IO.StreamWriter(cs))
+                        {
+                            sw.Write(data);
+                        }
+                        encryptedData = ms.ToArray();
+                    }
+                }
+
+                byte[] encryptedDataAndIv = new byte[encryptedData.Length + iv.Length];
+                Buffer.BlockCopy(encryptedData, 0, encryptedDataAndIv, 0, encryptedData.Length);
+                Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
+
+                return Convert.ToBase64String(encryptedDataAndIv);
+            }
+        }
+
+        /// <summary>
+        /// Receives a DATA packet from the server.
+        /// </summary>
+        /// <returns>The received data.</returns>
         public string ReceiveDATA()
         {
             if (networkStream.DataAvailable)
@@ -154,43 +172,49 @@ namespace PRIMA
                 if (protocolSI.GetCmdType() == ProtocolSICmdType.DATA)
                 {
                     string receivedDATA = protocolSI.GetStringFromData();
+                    string decryptedDATA = DecryptData(receivedDATA);
 
-                    byte[] combinedData;
-
-                    combinedData = Convert.FromBase64String(receivedDATA);
-
-                    using (Aes aes = Aes.Create())
-                    {
-                        combinedData = Convert.FromBase64String(receivedDATA);
-
-                        byte[] iv = new byte[aes.BlockSize / 8];
-                        Buffer.BlockCopy(combinedData, combinedData.Length - iv.Length, iv, 0, iv.Length);
-
-                        byte[] encryptedData = new byte[combinedData.Length - iv.Length];
-                        Buffer.BlockCopy(combinedData, 0, encryptedData, 0, encryptedData.Length);
-
-                        aes.Key = SymmetricKey;
-                        aes.IV = iv;
-
-                        ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
-                            {
-                                cs.Write(encryptedData, 0, encryptedData.Length);
-                                cs.FlushFinalBlock();
-                            }
-                            byte[] decryptedBytes = ms.ToArray();
-                            receivedDATA = System.Text.Encoding.UTF8.GetString(decryptedBytes);
-                        }
-                    }
-
-                    return receivedDATA;
+                    return decryptedDATA;
                 }
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Decrypts the provided data using AES decryption with the current symmetric key.
+        /// </summary>
+        /// <param name="data">The encrypted data as a Base64-encoded string.</param>
+        /// <returns>The decrypted data.</returns>
+        private string DecryptData(string data)
+        {
+
+            using (Aes aes = Aes.Create())
+            {
+                byte[] combinedData = Convert.FromBase64String(data);
+
+                byte[] iv = new byte[aes.BlockSize / 8];
+                Buffer.BlockCopy(combinedData, combinedData.Length - iv.Length, iv, 0, iv.Length);
+
+                byte[] encryptedData = new byte[combinedData.Length - iv.Length];
+                Buffer.BlockCopy(combinedData, 0, encryptedData, 0, encryptedData.Length);
+
+                aes.Key = SymmetricKey;
+                aes.IV = iv;
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
+                    {
+                        cs.Write(encryptedData, 0, encryptedData.Length);
+                        cs.FlushFinalBlock();
+                    }
+                    byte[] decryptedBytes = ms.ToArray();
+                    return Encoding.UTF8.GetString(decryptedBytes);
+                }
+            }
         }
     }
 }
