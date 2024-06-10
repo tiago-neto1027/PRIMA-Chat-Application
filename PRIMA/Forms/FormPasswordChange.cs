@@ -67,7 +67,7 @@ namespace PRIMA.Forms
 
             string response = userService.ChangePass(oldHashedPasswordString, saltedHashString, saltString);
             MessageBox.Show(response);
-            if (response == "Success!")
+            if (response == "Password changed successfully!")
                 this.Close();
         }
 

@@ -60,13 +60,13 @@ namespace PRIMA
             string username = loginTBoxUser.Text;
             string password = loginTBoxPassword.Text;
 
-            if (CheckSpecialCharacters(username))
+            if (ContainsSpecialCharacters(username))
             {
                 MessageBox.Show("The username can't have special characters");
                 return;
             }
 
-            if (CheckSpecialCharacters(password))
+            if (ContainsSpecialCharacters(password))
             {
                 MessageBox.Show("The password can't have special characters");
                 return;

@@ -1,84 +1,105 @@
-﻿using EI.SI;
-using MaterialSkin;
-using MaterialSkin.Controls;
-using PRIMA.Services;
+﻿using MaterialSkin;
 using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static PRIMA.MessageService;
-using PRIMA.Forms;
 
 namespace PRIMA
 {
+    /// <summary>
+    /// The main application Form
+    /// </summary>
     public partial class FormApplication : BaseForm
     {
-        protected readonly IMessageService messageService;
-        protected readonly IClientService clientService;
-        protected readonly IUserService userService;
-        FormFactory formFactory = new FormFactory();
+        private readonly IMessageService messageService;
+        private readonly IClientService clientService;
+        private readonly IUserService userService;
+        private readonly FormFactory formFactory = new FormFactory();
+
+        private readonly Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
+        private string selectedChat = "General";
 
         bool settingsExpand;
 
-        //This creates a dictionary to store all the chats the user has open
-        Dictionary<string, List<string>> Chats = new Dictionary<string, List<string>>();
-        private string selectedChat = "General";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormApplication"/> class.
+        /// Sets up the initial configuration, event handlers, and the default chat.
+        /// </summary>
         public FormApplication(IMessageService messageServerInstance, IClientService clientServiceInstance, IUserService userServiceInstance) : base()
         {
             InitializeComponent();
-            SetComponentColors(config.Theme);
 
             clientService = clientServiceInstance;
             messageService = messageServerInstance;
             userService = userServiceInstance;
-            messageService.MessageReceived += MessageService_MessageReceived; //subscribes to an event in the MessageService
-            messageService.StartReceivingMessages();
 
-            //When initializing the app it always creates a General Chat that is the default chat of the application and selects it
-            Chats.Add("General", new List<string>());
-            UpdateChatsList();
-            chatsListBox.SelectedIndex = 0;
-
-            //shows logged in username on screen
-            usernameDisplay.Text = "User: " + userService.GetUsername();
+            InitializeApplication();
         }
 
-        // This method merely sets the component colors to the right colors depending on the theme
+        /// <summary>
+        /// Initializes the application settings, event subscriptions, chats, and username display.
+        /// </summary>
+        private void InitializeApplication()
+        {
+            SetComponentColors(config.Theme);
+            SubscribeToEvents();
+            InitializeChats();
+            UpdateUsernameDisplay();
+        }
+
+        /// <summary>
+        /// Sets the component colors based on the theme.
+        /// </summary>
         private void SetComponentColors(string theme)
         {
             if (theme == "Dark")
             {
                 settingsPanel.BackColor = Color.Gray;
             }
+            else if (theme == "Light")
+            {
+                settingsPanel.BackColor = Color.White;
+            }
         }
-        /*
-         * When a message is received the vent is activated
-         * 
-         * The forms retrieves the arguments from the event and
-         * Checks if the chat dictionary contains the chat, if it does
-         * A new message is added to the chat, if it does not
-         * A new chat is added with the message received
-         * 
-         * Finally, If the chatUsed is the same as the selected, it is updated
-        */
+
+        /// <summary>
+        /// Subscribes to necessary events.
+        /// </summary>
+        private void SubscribeToEvents()
+        {
+            messageService.MessageReceived += MessageService_MessageReceived;
+            messageService.StartReceivingMessages();
+        }
+
+        /// <summary>
+        /// Initializes the default chats.
+        /// </summary>
+        private void InitializeChats()
+        {
+            Chats.Add("General", new List<string>());
+            UpdateChatsList();
+            chatsListBox.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Updates the username display with the logged-in user's name.
+        /// </summary>
+        private void UpdateUsernameDisplay()
+        {
+            usernameDisplay.Text = "User: " + userService.GetUsername();
+        }
+
+        /// <summary>
+        /// Handles the event when a message is received.
+        /// Adds the message to the appropriate chat and updates the messages list if necessary.
+        /// </summary>
         private void MessageService_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
             string chatUsed = e.Chat;
             string receivedMessage = e.Message;
 
-            // Add the message to the dictionary in the correct chat
             if (Chats.ContainsKey(chatUsed))
             {
                 Chats[chatUsed].Add(receivedMessage);
@@ -89,28 +110,27 @@ namespace PRIMA
                 Chats[chatUsed].Add(receivedMessage);
             }
 
-            // Updates the form only if the received message is for the currently selected chat
             if (chatUsed == selectedChat)
             {
                 UpdateMessagesList();
             }
         }
 
-        // When the send button is pressed the message is sent declaring the content of the message and the chat used and the text box is cleared
+        /// <summary>
+        /// Handles the event when the send button is clicked.
+        /// Sends the message and clears the text box.
+        /// </summary>
         private void btnSend_Click(object sender, EventArgs e)
         {
-            string message = messageTBox.Text;
-            message = message.Replace("|", "");
-            string chat = selectedChat;
-            messageService.SendMessage(chat, message);
+            string message = messageTBox.Text.Replace("|", "");
+            messageService.SendMessage(selectedChat, message);
             messageTBox.Clear();
         }
 
-        /*
-         * This event is activated whenever the user selects a chat, or changes the chat that was selected
-         * 
-         * When the event is activated it changes the variable that stores the chat name
-        */ 
+        /// <summary>
+        /// Handles the event when a different chat is selected.
+        /// Updates the selected chat and refreshes the messages list.
+        /// </summary>
         private void chatsListBox_SelectedIndexChanged(object sender, MaterialSkin.MaterialListBoxItem selectedItem)
         {
             if(chatsListBox.SelectedItem != null)
@@ -120,19 +140,27 @@ namespace PRIMA
             }
         }
 
-        //This function updates the chats in the left list box
+        /// <summary>
+        /// Updates the list of chats displayed in the chat list box.
+        /// </summary>
         private void UpdateChatsList()
         {
             chatsListBox.Items.Clear();
 
             foreach (var chat in Chats.Keys)
             {
-                MaterialListBoxItem item = new MaterialListBoxItem(chat);
-                chatsListBox.AddItem(item);
+                chatsListBox.AddItem(new MaterialListBoxItem(chat));
             }
         }
 
-        //This function updates the messages in the right list box
+        /// <summary>
+        /// Updates the list of messages displayed in the messages list box.
+        /// </summary>
+        /// Why is this written this way?
+        /// Windows Forms controls can only be updated from the thread that created them.
+        /// 
+        /// The check for InvokeRequired ensures that if the method is called from a
+        /// different thread it is sent back onto the UI thread using Invoke.
         private void UpdateMessagesList()
         {
             if (messagesListBox.InvokeRequired)
@@ -147,20 +175,29 @@ namespace PRIMA
                 {
                     foreach (var message in Chats[selectedChat])
                     {
-                        MaterialListBoxItem item = new MaterialListBoxItem(message);
-                        messagesListBox.Items.Add(item);
+                        messagesListBox.Items.Add(new MaterialListBoxItem(message));
                     }
                 }
             }
         }
 
-        //Settings Menu
+        /// <summary>
+        /// Starts the settings menu timer to toggle the settings panel.
+        /// </summary>
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            settingsMenuTimer.Start();
+        }
+
+        /// <summary>
+        /// Toggles the settings menu expansion.
+        /// </summary>
         private void settingsMenuTimer_Tick(object sender, EventArgs e)
         {
             if (settingsExpand)
             {
                 settingsPanel.Width -= 10;
-                if(settingsPanel.Width <= settingsPanel.MinimumSize.Width)
+                if (settingsPanel.Width <= settingsPanel.MinimumSize.Width)
                 {
                     settingsExpand = false;
                     settingsMenuTimer.Stop();
@@ -169,7 +206,7 @@ namespace PRIMA
             else
             {
                 settingsPanel.Width += 10;
-                if(settingsPanel.Width >= settingsPanel.MaximumSize.Width)
+                if (settingsPanel.Width >= settingsPanel.MaximumSize.Width)
                 {
                     settingsExpand = true;
                     settingsMenuTimer.Stop();
@@ -177,36 +214,33 @@ namespace PRIMA
             }
         }
 
-        private void settingsButton_Click(object sender, EventArgs e)
-        {
-            settingsMenuTimer.Start();
-        }
-
-        //Light/Dark mode
+        /// <summary>
+        /// Toggles between light and dark mode.
+        /// </summary>
         private void darkModeSwitch_CheckedChanged(object sender, EventArgs e)
         {
             if (config.Theme=="Light")
             {
-                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-                settingsPanel.BackColor = Color.Gray;
                 config.Theme = "Dark";
-                DarkTheme();
             }
             else
             {
-                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                settingsPanel.BackColor = Color.White;
                 config.Theme = "Light";
-                DefaultTheme();
             }
 
             ConfigManager.SaveConfig(config);
+
+            SetComponentColors(config.Theme);
+            ApplyTheme();
+
             Invalidate(true);
             Update();
         }
 
 
-        //This allows the user to send a message with the "Enter" key instead of pressing the button
+        /// <summary>
+        /// Allows the user to send a message by pressing the "Enter" key.
+        /// </summary>
         private void messageTBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -217,7 +251,9 @@ namespace PRIMA
             }
         }
 
-        // When the application is closed it closes the client and saves the .cfg file
+        /// <summary>
+        /// Handles the form closing event to clean up resources.
+        /// </summary>
         private void FormApplication_FormClosing(object sender, FormClosingEventArgs e)
         {
             clientService.CloseClient();
@@ -225,24 +261,33 @@ namespace PRIMA
             ConfigManager.SaveConfig(config);
         }
 
-        // Changes the user email
-
+        /// <summary>
+        /// Opens the form to change the user email.
+        /// </summary>
         private void buttonChangeEmail_Click(object sender, EventArgs e)
         {
             formFactory.OpenFormChangeEmail();
         }
-        // Changes the user password
+
+        /// <summary>
+        /// Opens the form to change the user password.
+        /// </summary>
         private void buttonChangePassword_Click(object sender, EventArgs e)
         {
             formFactory.OpenFormChangePassword();
         }
 
+        /// <summary>
+        /// Closes the application on logout.
+        /// </summary>
         private void optionsLogoutButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        //Hover for the buttons
+        /// <summary>
+        /// Changes the button background color on hover.
+        /// </summary>
         private void buttonChangePassword_MouseEnter(object sender, EventArgs e)
         {
             if(materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
@@ -250,12 +295,10 @@ namespace PRIMA
                 buttonChangePassword.BackColor = Color.Gray;
             }
         }
-
         private void buttonChangePassword_MouseLeave(object sender, EventArgs e)
         {
             buttonChangePassword.BackColor = Color.Transparent;
         }
-
         private void buttonChangeEmail_MouseEnter(object sender, EventArgs e)
         {
             if (materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
@@ -263,7 +306,6 @@ namespace PRIMA
                 buttonChangeEmail.BackColor = Color.Gray;
             }
         }
-
         private void buttonChangeEmail_MouseLeave(object sender, EventArgs e)
         {
             buttonChangeEmail.BackColor = Color.Transparent;

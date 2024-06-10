@@ -101,12 +101,12 @@ namespace PRIMA
 
         private void CheckIfSpecialChars()
         {
-            if (CheckSpecialCharacters(registryTBoxUserName.Text))
+            if (ContainsSpecialCharacters(registryTBoxUserName.Text))
             {
                 MessageBox.Show("Username can't have special characters");
                 return;
             }
-            if (CheckSpecialCharacters(registryTBoxName.Text))
+            if (ContainsSpecialCharacters(registryTBoxName.Text))
             {
                 MessageBox.Show("Name can't have special characters");
                 return;
