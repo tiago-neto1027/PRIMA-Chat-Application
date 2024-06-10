@@ -352,15 +352,41 @@ namespace Server
                         string message = splited[1];
                         string senderUsername = clients[client];
 
+                        byte[] encryptedMessage;
+                        byte[] iv;
+                        using (Aes aes = Aes.Create())
+                        {
+                            aes.Key = RetrieveKey();
+                            aes.GenerateIV();
+                            iv = aes.IV;
+
+                            using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                            using (var ms = new MemoryStream())
+                            using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                            using (var sw = new StreamWriter(cs))
+                            {
+                                sw.Write(message);
+                                sw.Flush();
+                                cs.FlushFinalBlock();
+                                encryptedMessage = ms.ToArray();
+                            }
+                        }
+
                         if (chatUsed == "General")
                         {
                             using (var db = new UserContext())
                             {
                                 var user = db.FindUserByUsername(senderUsername);
 
-                                if(user != null)
+                                if (user != null)
                                 {
-                                    var generalChatMessage = new GeneralChatMessage(message, user.ID);
+                                    var generalChatMessage = new GeneralChatMessage
+                                    {
+                                        Content = Convert.ToBase64String(encryptedMessage),
+                                        SenderID = user.ID,
+                                        IV = Convert.ToBase64String(iv),
+                                        Timestamp = DateTime.Now
+                                    };
                                     db.GeneralChatMessages.Add(generalChatMessage);
                                     db.SaveChanges();
                                 }
