@@ -1,19 +1,7 @@
-﻿using EI.SI;
-using MaterialSkin.Controls;
-using PRIMA.Services;
-using PRIMA.Interfaces;
+﻿using PRIMA.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PRIMA
 {
