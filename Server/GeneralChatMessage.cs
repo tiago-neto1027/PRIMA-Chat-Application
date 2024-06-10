@@ -11,6 +11,7 @@ namespace Server
         public int ID {  get; set; }
         public string Content { get; set; }
         public int SenderID { get; set; }
+        public string IV { get; set; }
         public DateTime Timestamp { get; set; }
 
         //Parameterless Constructor (Required by EntityFramework)
@@ -19,10 +20,11 @@ namespace Server
 
         }
 
-        public GeneralChatMessage(string content, int senderID)
+        public GeneralChatMessage(string content, int senderID, string iv)
         {
             this.Content = content;
             this.SenderID = senderID;
+            this.IV = iv;
             this.Timestamp = DateTime.Now;
         }
 

@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -73,6 +74,10 @@
     <Compile Include="Migrations\202406070652047_Added Salt.Designer.cs">
       <DependentUpon>202406070652047_Added Salt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406101727523_Messages Encrypted.cs" />
+    <Compile Include="Migrations\202406101727523_Messages Encrypted.Designer.cs">
+      <DependentUpon>202406101727523_Messages Encrypted.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406070652047_Added Salt.resx">
       <DependentUpon>202406070652047_Added Salt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406101727523_Messages Encrypted.resx">
+      <DependentUpon>202406101727523_Messages Encrypted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -82,3 +82,4 @@ C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Se
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.exe
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.pdb
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.AddedSalt.resources
+C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.MessagesEncrypted.resources

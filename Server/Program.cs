@@ -11,6 +11,8 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Security.Cryptography;
 using System.IO;
+using Server.Migrations;
+using System.Configuration;
 
 namespace Server
 {
@@ -350,15 +352,41 @@ namespace Server
                         string message = splited[1];
                         string senderUsername = clients[client];
 
+                        byte[] encryptedMessage;
+                        byte[] iv;
+                        using (Aes aes = Aes.Create())
+                        {
+                            aes.Key = RetrieveKey();
+                            aes.GenerateIV();
+                            iv = aes.IV;
+
+                            using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                            using (var ms = new MemoryStream())
+                            using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                            using (var sw = new StreamWriter(cs))
+                            {
+                                sw.Write(message);
+                                sw.Flush();
+                                cs.FlushFinalBlock();
+                                encryptedMessage = ms.ToArray();
+                            }
+                        }
+
                         if (chatUsed == "General")
                         {
                             using (var db = new UserContext())
                             {
                                 var user = db.FindUserByUsername(senderUsername);
 
-                                if(user != null)
+                                if (user != null)
                                 {
-                                    var generalChatMessage = new GeneralChatMessage(message, user.ID);
+                                    var generalChatMessage = new GeneralChatMessage
+                                    {
+                                        Content = Convert.ToBase64String(encryptedMessage),
+                                        SenderID = user.ID,
+                                        IV = Convert.ToBase64String(iv),
+                                        Timestamp = DateTime.Now
+                                    };
                                     db.GeneralChatMessages.Add(generalChatMessage);
                                     db.SaveChanges();
                                 }
@@ -436,6 +464,34 @@ namespace Server
                 NetworkStream stream = recipientClient.GetStream();
                 stream.Write(packet, 0, packet.Length);
             }
+        }
+        public static void GenerateAndSaveKey()
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.GenerateKey();
+                string key = Convert.ToBase64String(aes.Key);
+
+                // Save key to configuration file
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings.Remove("SymmetricKey"); // Remove existing key if exists
+                config.AppSettings.Settings.Add("SymmetricKey", key);
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
+
+                Console.WriteLine("Symmetric key generated and saved to configuration file.");
+            }
+        }
+
+        //Retrieves the key used to encrypt messages to be saved on the database
+        public static byte[] RetrieveKey()
+        {
+            string key = ConfigurationManager.AppSettings["SymmetricKey"];
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new Exception("Symmetric key not found in configuration file.");
+            }
+            return Convert.FromBase64String(key);
         }
     }
 }
