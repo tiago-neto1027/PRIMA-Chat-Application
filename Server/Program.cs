@@ -9,6 +9,8 @@ using EI.SI;
 using System.Threading;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace Server
 {
@@ -34,6 +36,8 @@ namespace Server
             Console.WriteLine("SERVER READY");
 
             Dictionary<TcpClient, string> clients = new Dictionary<TcpClient, string>();
+            Dictionary<TcpClient, string> clientPublicKeys = new Dictionary<TcpClient, string>();
+            Dictionary<TcpClient, byte[]> clientSymmetricKeys = new Dictionary<TcpClient, byte[]>();
 
             while (true)
             {
@@ -41,7 +45,7 @@ namespace Server
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine("New application connected");
 
-                ClientHandler clientHandler = new ClientHandler(client, clients, null);
+                ClientHandler clientHandler = new ClientHandler(client, clients, clientPublicKeys, clientSymmetricKeys ,null);
                 clientHandler.Handle();
             }
         }
@@ -51,12 +55,21 @@ namespace Server
     {
         private TcpClient client;
         private Dictionary<TcpClient, string> clients;
+        private Dictionary<TcpClient, string> clientPublicKeys;
+        private Dictionary<TcpClient, byte[]> clientSymmetricKeys;
         private string username;
 
-        public ClientHandler(TcpClient client, Dictionary<TcpClient, string> clients, string username)
+        public ClientHandler(
+            TcpClient client,
+            Dictionary<TcpClient, string> clients,
+            Dictionary<TcpClient, string> clientPublicKeys,
+            Dictionary<TcpClient, byte[]> clientSymmetricKeys,
+            string username)
         {
             this.client = client;
             this.clients = clients;
+            this.clientPublicKeys = clientPublicKeys;
+            this.clientSymmetricKeys = clientSymmetricKeys;
             this.username = username;
         }
 
@@ -89,10 +102,74 @@ namespace Server
                 int bytesRead = networkStream.Read(protocolSI.Buffer, 0, protocolSI.Buffer.Length);
 
                 string msg = protocolSI.GetStringFromData();
+
+                if (protocolSI.GetCmdType() != ProtocolSICmdType.PUBLIC_KEY && protocolSI.GetCmdType() != ProtocolSICmdType.EOT)
+                {
+                    byte[] combinedData;
+
+                    try
+                    {
+                        combinedData = Convert.FromBase64String(msg);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid Base64 string");
+                        return;
+                    }
+
+                    using (Aes aes = Aes.Create())
+                    {
+                        combinedData = Convert.FromBase64String(msg);
+
+                        byte[] iv = new byte[aes.BlockSize / 8];
+                        Buffer.BlockCopy(combinedData, combinedData.Length - iv.Length, iv, 0, iv.Length);
+
+                        byte[] encryptedData = new byte[combinedData.Length - iv.Length];
+                        Buffer.BlockCopy(combinedData, 0, encryptedData, 0, encryptedData.Length);
+
+                        aes.Key = clientSymmetricKeys[client];
+                        aes.IV = iv;
+
+                        ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
+                            {
+                                cs.Write(encryptedData, 0, encryptedData.Length);
+                                cs.FlushFinalBlock();
+                            }
+                            byte[] decryptedBytes = ms.ToArray();
+                            msg = System.Text.Encoding.UTF8.GetString(decryptedBytes);
+                        }
+                    }
+                }
+
                 string[] splited = msg.Split('|');
 
                 switch (protocolSI.GetCmdType())
                 {
+                    case ProtocolSICmdType.PUBLIC_KEY:
+                        string publicKey = splited[0];
+                        clientPublicKeys[client] = publicKey;
+
+                        using (Aes aes = Aes.Create())
+                        {
+                            aes.GenerateKey();
+                            clientSymmetricKeys[client] = aes.Key;
+                        }
+
+                        using (RSA rsa = RSA.Create())
+                        {
+                            rsa.FromXmlString(publicKey);
+                            byte[] encryptedSymmetricKey = rsa.Encrypt(clientSymmetricKeys[client], RSAEncryptionPadding.Pkcs1);
+
+                            byte[] ackPublicKey = protocolSI.Make(ProtocolSICmdType.ACK, Convert.ToBase64String(encryptedSymmetricKey));
+                            networkStream.Write(ackPublicKey, 0, ackPublicKey.Length);
+                        }
+
+                        break;
+
                     case ProtocolSICmdType.USER_OPTION_1: //USER_OPTION_1 == Login
 
                         string usernameLogin = splited[0];
@@ -220,15 +297,25 @@ namespace Server
 
                         string updateUsername = splited[0];
 
-                        this.username = updateUsername;
-                        clients[client] = updateUsername;
-
-                        byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK);
-                        networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+                        using (var db = new UserContext())
+                        {
+                            if (db.IfUserExists(updateUsername))
+                            {
+                                this.username = updateUsername;
+                                clients[client] = updateUsername;
+                                byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK);
+                                networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+                            }
+                            else
+                            {
+                                byte[] ackUpdateUsername = protocolSI.Make(ProtocolSICmdType.ACK, "Error");
+                                networkStream.Write(ackUpdateUsername, 0, ackUpdateUsername.Length);
+                            }
+                        }
 
                         break;
 
-                    case ProtocolSICmdType.USER_OPTION_9: //USER_OPTION_9 == GET OLD INFO
+                    case ProtocolSICmdType.USER_OPTION_9: //USER_OPTION_9 == GET INFO
                         string type = splited[0];
                         string usernam = clients[client];
                         using (var db = new UserContext())
@@ -309,16 +396,45 @@ namespace Server
         }
 
         //This functions sends the message received to all the clients connected to the database
-        private void SendMessageToAllClients(string message)
+        private void SendMessageToAllClients(string data)
         {
             ProtocolSI protocolSI = new ProtocolSI();
-            byte[] data = protocolSI.Make(ProtocolSICmdType.DATA, message);
 
             foreach (var entry in clients)
             {
-                TcpClient client = entry.Key;
-                NetworkStream stream = client.GetStream();
-                stream.Write(data, 0, data.Length);
+                TcpClient recipientClient = entry.Key;
+                byte[] symmetricKey = clientSymmetricKeys[recipientClient];
+
+                // Encrypt the message for the current client
+                byte[] packet;
+                using (Aes aes = Aes.Create())
+                {
+                    aes.Key = symmetricKey;
+                    aes.GenerateIV();
+                    byte[] iv = aes.IV;
+
+                    byte[] encryptedData;
+                    using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                    using (var ms = new MemoryStream())
+                    using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    using (var sw = new StreamWriter(cs))
+                    {
+                        sw.Write(data);
+                        sw.Flush();
+                        cs.FlushFinalBlock();
+                        encryptedData = ms.ToArray();
+                    }
+
+                    byte[] encryptedDataAndIv = new byte[encryptedData.Length + iv.Length];
+                    Buffer.BlockCopy(encryptedData, 0, encryptedDataAndIv, 0, encryptedData.Length);
+                    Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
+
+                    packet = protocolSI.Make(ProtocolSICmdType.DATA, Convert.ToBase64String(encryptedDataAndIv));
+                }
+
+                // Send the encrypted message to the current client
+                NetworkStream stream = recipientClient.GetStream();
+                stream.Write(packet, 0, packet.Length);
             }
         }
     }
