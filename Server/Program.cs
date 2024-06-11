@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.IO;
 using Server.Migrations;
 using System.Configuration;
+using Newtonsoft.Json;
 
 namespace Server
 {
@@ -107,6 +108,24 @@ namespace Server
 
                 if (protocolSI.GetCmdType() != ProtocolSICmdType.PUBLIC_KEY && protocolSI.GetCmdType() != ProtocolSICmdType.EOT)
                 {
+                    var message = JsonConvert.DeserializeObject<dynamic>(msg);
+                    msg = message.Data;
+                    string signature = message.Signature;
+
+                    if (signature != null)
+                    {
+                        bool isSignatureValid = VerifySignature(msg, signature, clientPublicKeys[client]);
+                        if (isSignatureValid)
+                        {
+                            Console.WriteLine("\nSignature accepted.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Signature rejected.");
+                            continue;
+                        }
+                    }
+
                     byte[] combinedData;
 
                     try
@@ -420,6 +439,17 @@ namespace Server
                 networkStream.Close();
                 clients.Remove(client);
                 client.Close();
+            }
+        }
+
+        private bool VerifySignature(string data, string signature, string publicKey)
+        {
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(publicKey);
+                byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+                byte[] signatureBytes = Convert.FromBase64String(signature);
+                return rsa.VerifyData(dataBytes, CryptoConfig.MapNameToOID("SHA256"), signatureBytes);
             }
         }
 

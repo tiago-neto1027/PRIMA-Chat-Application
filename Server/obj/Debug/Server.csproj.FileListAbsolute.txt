@@ -83,3 +83,5 @@ C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Se
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.pdb
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.AddedSalt.resources
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\obj\Debug\Server.Migrations.MessagesEncrypted.resources
+C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\bin\Debug\Newtonsoft.Json.dll
+C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\Server\bin\Debug\Newtonsoft.Json.xml

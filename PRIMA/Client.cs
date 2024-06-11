@@ -6,6 +6,7 @@ using System.Text;
 using PRIMA.Interfaces;
 using System.Security.Cryptography;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace PRIMA
 {
@@ -103,7 +104,12 @@ namespace PRIMA
             if (CmdType != ProtocolSICmdType.PUBLIC_KEY)
             {
                 data = EncryptData(data);
-                packet = protocolSI.Make(CmdType, data);
+
+                string signature = SignData(data);
+                var message = new { Data = data, Signature = signature };
+                string json = JsonConvert.SerializeObject(message);
+
+                packet = protocolSI.Make(CmdType, json);
             }
             else
             {
@@ -156,6 +162,18 @@ namespace PRIMA
                 Buffer.BlockCopy(iv, 0, encryptedDataAndIv, encryptedData.Length, iv.Length);
 
                 return Convert.ToBase64String(encryptedDataAndIv);
+            }
+        }
+
+        private string SignData(string data)
+        {
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                rsa.FromXmlString(PrivateKey);
+                var encoder = new UTF8Encoding();
+                byte[] dataBytes = encoder.GetBytes(data);
+                byte[] signatureBytes = rsa.SignData(dataBytes, CryptoConfig.MapNameToOID("SHA256"));
+                return Convert.ToBase64String(signatureBytes);
             }
         }
 
