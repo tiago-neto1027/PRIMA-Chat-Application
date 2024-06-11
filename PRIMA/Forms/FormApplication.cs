@@ -4,6 +4,7 @@ using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -113,6 +114,8 @@ namespace PRIMA
                 Chats[chatUsed].Add(receivedMessage);
             }
 
+            Logger.LogsWriter(chatUsed, userService.GetUsername(), receivedMessage, selectedChat);
+
             if (chatUsed == selectedChat)
             {
                 UpdateMessagesList();
@@ -128,6 +131,8 @@ namespace PRIMA
             string message = messageTBox.Text.Replace("|", "");
             messageService.SendMessage(selectedChat, message);
             messageTBox.Clear();
+
+            Logger.LogsWriter(selectedChat, userService.GetUsername(), message, userService.GetUsername());
         }
 
         /// <summary>
@@ -315,6 +320,40 @@ namespace PRIMA
         private void buttonChangeEmail_MouseLeave(object sender, EventArgs e)
         {
             buttonChangeEmail.BackColor = Color.Transparent;
+        }
+    }
+
+    public static class Logger
+    {
+        public static void LogsWriter(string chat, string username, string message, string sender)
+        {
+            string filepath = @"..\..\..\Logs\Clients\" + username + ".txt";
+
+            void WriteLog()
+            {
+                try
+                {
+                    using (TextWriter txtWriter = File.AppendText(filepath))
+                    {
+                        txtWriter.Write("\r\nLog Entry : ");
+                        txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
+                        txtWriter.WriteLine("  :",chat,sender);
+                        txtWriter.WriteLine("  :{0}", message);
+                        txtWriter.WriteLine("-------------------------------");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exception (e.g., log the error, show a message, etc.)
+                    Console.WriteLine("An error occurred while writing to the log file: " + ex.Message);
+                }
+            }
+
+            // Ensure the directory exists
+            Directory.CreateDirectory(Path.GetDirectoryName(filepath));
+
+            // Write log (File.AppendText creates the file if it doesn't exist)
+            WriteLog();
         }
     }
 }

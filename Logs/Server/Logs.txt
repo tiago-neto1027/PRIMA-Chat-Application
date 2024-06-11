@@ -1,0 +1,20 @@
+
+Log Entry : 20:09:41 11 de junho de 2024
+  :
+  :Server Started
+-------------------------------
+
+Log Entry : 20:09:46 11 de junho de 2024
+  :
+  :Database is open
+-------------------------------
+
+Log Entry : 20:09:46 11 de junho de 2024
+  :
+  :New application was connected
+-------------------------------
+
+Log Entry : 20:10:34 11 de junho de 2024
+  :
+  :Signature was accepted
+-------------------------------

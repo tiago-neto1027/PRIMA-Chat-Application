@@ -26,6 +26,8 @@ namespace Server
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, PORT);
             TcpListener listener = new TcpListener(endPoint);
 
+            Logger.LogsWriter("Server Started");
+
             listener.Start();
 
             // This simply opens the database when the server is started
@@ -35,6 +37,9 @@ namespace Server
             {
                 db.InitializeDatabase();
             }
+
+            Logger.LogsWriter("Database is open");
+
             Console.WriteLine("Database open");
             Console.WriteLine("SERVER READY");
 
@@ -46,6 +51,9 @@ namespace Server
             {
                 //Accepts the client connection and gets its stream
                 TcpClient client = listener.AcceptTcpClient();
+
+                Logger.LogsWriter("New application was connected");
+
                 Console.WriteLine("New application connected");
 
                 ClientHandler clientHandler = new ClientHandler(client, clients, clientPublicKeys, clientSymmetricKeys ,null);
@@ -117,10 +125,14 @@ namespace Server
                         bool isSignatureValid = VerifySignature(msg, signature, clientPublicKeys[client]);
                         if (isSignatureValid)
                         {
+                            Logger.LogsWriter("Signature was accepted");
+
                             Console.WriteLine("\nSignature accepted.");
                         }
                         else
                         {
+                            Logger.LogsWriter("Signature was rejected");
+
                             Console.WriteLine("Signature rejected.");
                             continue;
                         }
@@ -203,6 +215,8 @@ namespace Server
                                 byte[] ackLogin;
                                 ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The username doesn't exist!");
                                 networkStream.Write(ackLogin, 0, ackLogin.Length);
+
+                                Logger.LogsWriter("Log in atempt failed, invalid username");
                             }
                             else
                             {
@@ -213,6 +227,9 @@ namespace Server
                                     byte[] ackLogin;
                                     ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "The credentials are incorrect!");
                                     networkStream.Write(ackLogin, 0, ackLogin.Length);
+
+                                    Logger.LogsWriter("Log in atempt failed, incorrect credentials");
+
                                 }
                                 else
                                 {
@@ -222,6 +239,9 @@ namespace Server
                                     byte[] ackLogin;
                                     ackLogin = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
                                     networkStream.Write(ackLogin, 0, ackLogin.Length);
+
+                                    Logger.LogsWriter("Login was successfull");
+                                    Logger.LogsWriter(usernameLogin + " logged in successfully");
                                 }
                             }
                         }
@@ -242,6 +262,8 @@ namespace Server
                                 byte[] ackRegister;
                                 ackRegister = protocolSI.Make(ProtocolSICmdType.ACK, "This username is already registered.");
                                 networkStream.Write(ackRegister, 0, ackRegister.Length);
+
+                                Logger.LogsWriter("Registry attempt failed, username already exists");
                             }
                             else
                             {
@@ -252,13 +274,16 @@ namespace Server
                                 byte[] ackRegister;
                                 ackRegister = protocolSI.Make(ProtocolSICmdType.ACK, "Success");
                                 networkStream.Write(ackRegister, 0, ackRegister.Length);
+
+                                Logger.LogsWriter("Registry attempt was successfull");
+                                Logger.LogsWriter(usernameRegister + " was registered successfully\"");
                             }
                         }
 
                         break;
 
                     case ProtocolSICmdType.USER_OPTION_3: //USER_OPTION_3 == Change Email
-                        
+
                         string password = splited[0];
                         string newEmail = splited[1];
                         string username = clients[client];
@@ -276,11 +301,16 @@ namespace Server
                                     db.UpdateUserEmail(username, newEmail);
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Email changed successfully!");
                                     networkStream.Write(ack, 0, ack.Length);
+
+                                    Logger.LogsWriter(username + "'s email was updated successfully");
+
                                 }
                                 else
                                 {
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Invalid Password!");
                                     networkStream.Write(ack, 0, ack.Length);
+
+                                    Logger.LogsWriter(username + " failed to update his/hers email");
                                 }
                             }
                         }
@@ -299,16 +329,21 @@ namespace Server
                             {
                                 var user = db.FindUserByUsername(currentUsername);
                                 byte[] ack;
-                                if(db.PasswordConfirmed(user, oldPasswordAttempt))
+                                if (db.PasswordConfirmed(user, oldPasswordAttempt))
                                 {
                                     db.UpdateUserPassword(currentUsername, newPassword, newSalt);
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Password changed successfully!");
                                     networkStream.Write(ack, 0, ack.Length);
+
+                                    Logger.LogsWriter(currentUsername + "'s password was updated successfully");
                                 }
                                 else
                                 {
                                     ack = protocolSI.Make(ProtocolSICmdType.ACK, "Invalid Password!");
                                     networkStream.Write(ack, 0, ack.Length);
+
+                                    Logger.LogsWriter(currentUsername + " failed to update his/hers password");
+
                                 }
                             }
                         }
@@ -416,6 +451,8 @@ namespace Server
                         Console.WriteLine("Chat: " + chatUsed);
                         Console.WriteLine(senderUsername + ": " + message);
 
+                        Logger.LogsWriter("[" + chatUsed + "]" + senderUsername + ": " + message);
+
                         byte[] ackMessage;
                         ackMessage = protocolSI.Make(ProtocolSICmdType.ACK);
                         networkStream.Write(ackMessage, 0, ackMessage.Length);
@@ -426,12 +463,15 @@ namespace Server
 
                         break;
                 }
+
             }
 
             //If the signal recieved is an EOT signal, then and only then is the Thread and Client Closed
             if (protocolSI.GetCmdType() == ProtocolSICmdType.EOT)
             {
                 Console.WriteLine("Ending Thread from Client");
+
+                Logger.LogsWriter(username + " logged off");
 
                 byte[] ackEOT;
                 ackEOT = protocolSI.Make(ProtocolSICmdType.ACK);
@@ -510,6 +550,8 @@ namespace Server
                 ConfigurationManager.RefreshSection("appSettings");
 
                 Console.WriteLine("Symmetric key generated and saved to configuration file.");
+
+                Logger.LogsWriter("Symmetric key generated and saved to configuration file.");
             }
         }
 
@@ -519,9 +561,46 @@ namespace Server
             string key = ConfigurationManager.AppSettings["SymmetricKey"];
             if (string.IsNullOrEmpty(key))
             {
+                Logger.LogsWriter("Failure to retrieve symmetric key");
+
                 throw new Exception("Symmetric key not found in configuration file.");
             }
             return Convert.FromBase64String(key);
         }
     }
+    public static class Logger
+    {
+        public static void LogsWriter(string message)
+        {
+            string filepath = @"..\..\..\Logs\Server\Logs.txt";
+
+            void WriteLog()
+            {
+                try
+                {
+                    using (TextWriter txtWriter = File.AppendText(filepath))
+                    {
+                        txtWriter.Write("\r\nLog Entry : ");
+                        txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
+                        txtWriter.WriteLine("  :");
+                        txtWriter.WriteLine("  :{0}", message);
+                        txtWriter.WriteLine("-------------------------------");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exception (e.g., log the error, show a message, etc.)
+                    Console.WriteLine("An error occurred while writing to the log file: " + ex.Message);
+                }
+            }
+
+            // Ensure the directory exists
+            Directory.CreateDirectory(Path.GetDirectoryName(filepath));
+
+            // Write log (File.AppendText creates the file if it doesn't exist)
+            WriteLog();
+        }
+    }
+
 }
+    

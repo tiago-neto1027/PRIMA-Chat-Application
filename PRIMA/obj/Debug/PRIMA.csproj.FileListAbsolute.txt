@@ -154,3 +154,5 @@ C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\obj\Debug\PRI
 C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\obj\Debug\PRIMA.Forms.FormPasswordChange.resources
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\bin\Debug\Newtonsoft.Json.dll
 C:\Users\tiago\Documents\Faculdade\TS\PRIMA-Chat-Application\PRIMA\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gonçalo\Documents\GitHub\PRIMA-Chat-Application\PRIMA\bin\Debug\Newtonsoft.Json.xml
