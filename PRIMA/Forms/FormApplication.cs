@@ -1,8 +1,11 @@
 ﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using PRIMA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static PRIMA.MessageService;
 
@@ -173,7 +176,10 @@ namespace PRIMA
 
                 if (Chats.ContainsKey(selectedChat))
                 {
-                    foreach (var message in Chats[selectedChat])
+                    List<string> reversedMessages = new List<string>(Chats[selectedChat]);
+                    reversedMessages.Reverse();
+
+                    foreach (var message in reversedMessages)
                     {
                         messagesListBox.Items.Add(new MaterialListBoxItem(message));
                     }
