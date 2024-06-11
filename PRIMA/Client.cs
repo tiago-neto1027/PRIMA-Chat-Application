@@ -165,6 +165,11 @@ namespace PRIMA
             }
         }
 
+        /// <summary>
+        /// Signs the provided data using RSA with a SHA-256 hash algorithm.
+        /// </summary>
+        /// <param name="data">The data to be signed.</param>
+        /// <returns>A base64-encoded string representing the digital signature of the input data.</returns>
         private string SignData(string data)
         {
             using (var rsa = new RSACryptoServiceProvider(2048))
